@@ -135,17 +135,26 @@
               <!-- Add icons to the links using the .nav-icon class
                    with font-awesome or any other icon font library -->
               <li class="nav-header">{{ TextLayoutSidebar("overview") }}</li>
-              <li class="nav-item">
-                <a href="{{ route('admin.home') }}" class="nav-link {{ (Route::is('admin.home')) ? 'active' : '' }}">
-                  <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>
-                    {{ TextLayoutSidebar("dashboard") }}
-                  </p>
-                </a>
-              </li>
+                <li class="nav-item">
+                  <a href="{{ route('admin.home') }}" class="nav-link {{ (Route::is('admin.home')) ? 'active' : '' }} nav-link__js">
+                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <p>
+                      {{ TextLayoutSidebar("dashboard") }}
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{route('admin.logout')}}" class="nav-link nav-link__js">
+                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                    <p>
+                      {{ TextLayoutSidebar("logout") }}
+                    </p>
+                  </a>
+                </li>
             </ul>
           </nav>
           <!-- /.sidebar-menu -->
         </div>
         <!-- /.sidebar -->
       </aside>
+      @vite(['resources/admin/js/sidebar.js'])
