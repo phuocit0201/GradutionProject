@@ -35,5 +35,9 @@ interface BaseRepositoryInterface
     */
     public function update(Model $model, array $attributes): bool;
 
+    /**
+     * Get all of the users from the database
+     */
+    public function all();
 }
 ?>

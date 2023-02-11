@@ -85,5 +85,13 @@ class BaseRepository implements BaseRepositoryInterface
             return false;
         }
     }
+
+    /**
+     * Get all from the database
+     */
+    public function all()
+    {
+        return $this->model->all();
+    }
 }
 ?>
