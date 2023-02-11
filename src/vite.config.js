@@ -9,6 +9,8 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/common/css/loading.css',
                 'resources/admin/js/dashboard.js',
+                'resources/admin/js/sidebar.js',
+                'resources/common/js/validation.js',
             ],
             refresh: true,
         }),

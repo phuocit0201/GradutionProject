@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index(Request $request)
+    /**
+     * Displays a dashboard.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index()
     {
         $dataView = ['title' => TextLayoutTitle("dashboard")];
         return view('admin.dashboard.index', $dataView);
