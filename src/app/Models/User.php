@@ -66,9 +66,9 @@ class User extends Authenticatable
      *
      * @return void
      */
-    public function sendEmailVerificationNotification()
+    public function resendEmailVerificationNotification($token)
     {
-        $this->notify(new VerifyUser);
+        $this->notify(new VerifyUser($token));
     }
 
     /**
