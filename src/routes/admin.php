@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Auth\EmailVerificationPromptController as AdminEmailVerificationPromptController;
 use App\Http\Controllers\Admin\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -24,6 +25,7 @@ Route::middleware(['auth.admin'])->group(function () {
 
 Route::middleware(['auth.admin', 'admin.verified'])->group(function () {
     Route::get('/', [DashboardController::class, "index"])->name('admin.home');
+    Route::get('users', [UserController::class, "index"])->name('admin.users_index');
 });
 
 Route::middleware('guest:admin')->group(function () {

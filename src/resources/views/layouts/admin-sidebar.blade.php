@@ -144,6 +144,14 @@
                   </a>
                 </li>
                 <li class="nav-item">
+                  <a href="{{ route('admin.users_index') }}" class="nav-link {{ (Route::is('admin.users_index')) ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-users"></i>
+                    <p>
+                      {{ TextLayoutSidebar("customer") }}
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a href="{{route('admin.logout')}}" class="nav-link nav-link__js">
                     <i class="nav-icon fas fa-sign-out-alt"></i>
                     <p>
@@ -157,4 +165,4 @@
         </div>
         <!-- /.sidebar -->
       </aside>
-      @vite(['resources/admin/js/sidebar.js'])
+@vite(['resources/admin/js/sidebar.js'])

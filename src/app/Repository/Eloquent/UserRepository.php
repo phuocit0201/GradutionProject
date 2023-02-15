@@ -2,10 +2,9 @@
 
 namespace App\Repository\Eloquent;
 
+use App\Models\Role;
 use App\Models\User;
 use App\Repository\UserRepositoryInterface;
-use Exception;
-use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Class UserRepository
@@ -25,15 +24,13 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     /**
      * Get all of the users from the database
-     * @return Collection
      */
-    public function all(): ?Collection
+    public function all()
     {
-        try {
-            return $this->model->orderBy('id', 'DESC')->get();
-        } catch (Exception) {
-            return null;
-        }
+        return $this->model
+            ->where(['role_id' => Role::ROLE['user']])
+            ->orderBy('id', 'DESC')
+            ->get();
     }
 }
 
