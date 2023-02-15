@@ -15,6 +15,17 @@ class VerifyUser extends Notification
 {
     use Queueable;
 
+    protected $token;
+
+    /**
+     * Create a new notification instance.
+     *
+     * @return void
+     */
+    public function __construct($token)
+    {
+        $this->token = $token;
+    }
     /**
      * Get the notification's delivery channels.
      *
@@ -32,19 +43,10 @@ class VerifyUser extends Notification
      */
     public function toMail($notifiable)
     {
-        $token = Str::random(64);
-        $time = \Illuminate\Support\Facades\Config::get('auth.verification.expire.resend', 60);
-        UserVerify::updateOrCreate(
-            ['user_id' => Auth::guard('admin')->user()->id],
-            [
-                'token' => $token,
-                'expires_at' => Carbon::now()->addMinutes($time),
-            ]
-        );
         $verifyUrl = env('APP_URL')
             . '/admin/account/verify/'
             . $notifiable->getKey()
-            . '?token=' . $token;
+            . '?token=' . $this->token;
         return (new MailMessage)
                     ->subject('[FLATSHOP] XÁC NHẬN TÀI KHOẢN')
                     ->line('--------------------------------')

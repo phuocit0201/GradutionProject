@@ -3,7 +3,6 @@
 namespace App\Repository\Eloquent;
 
 use App\Repository\BaseRepositoryInterface;
-use Exception;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -35,11 +34,7 @@ class BaseRepository implements BaseRepositoryInterface
      */
     public function create(array $attributes): Model
     {
-        try {
-            return $this->model->create($attributes);
-        } catch (Exception) {
-            return null;
-        }
+        return $this->model->create($attributes);
     }
 
     /** 
@@ -50,11 +45,7 @@ class BaseRepository implements BaseRepositoryInterface
      */
     public function update(Model $model, array $attributes): bool
     {
-        try {
-            return $model->update($attributes);
-        } catch (Exception) {
-            return false;
-        }
+        return $model->update($attributes);
     }
 
     /**
@@ -65,11 +56,7 @@ class BaseRepository implements BaseRepositoryInterface
      */
     public function find($id): ?Model
     {
-        try {
-            return $this->model->find($id);
-        } catch (Exception) {
-            return null;
-        }
+        return $this->model->find($id);
     }
 
     /**
@@ -79,11 +66,7 @@ class BaseRepository implements BaseRepositoryInterface
      */
     public function destroy($ids): int 
     {
-        try {
-            return $this->model->destroy($ids);
-        } catch (Exception) {
-            return false;
-        }
+        return $this->model->destroy($ids);
     }
 
     /**

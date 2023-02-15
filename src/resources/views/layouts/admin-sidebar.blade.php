@@ -144,7 +144,10 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ route('admin.users_index') }}" class="nav-link {{ (Route::is('admin.users_index')) ? 'active' : '' }}">
+                  @php
+                      $isRouteUser = request()->is('admin/users*');
+                  @endphp
+                  <a href="{{ route('admin.users_index') }}" class="nav-link {{ ($isRouteUser) ? 'active' : '' }} nav-link__js">
                     <i class="nav-icon fas fa-users"></i>
                     <p>
                       {{ TextLayoutSidebar("customer") }}

@@ -7,7 +7,8 @@
         <x-table-crud 
           :headers="$tableCrud['headers']" 
           :list="$tableCrud['list']" 
-          :actions="$tableCrud['actions']" 
+          :actions="$tableCrud['actions']"
+          :routes="$tableCrud['routes']" 
         />
         <!-- /.card -->
       </div>
@@ -17,5 +18,4 @@
   </div>
     <!-- /.container-fluid -->
 </section>
-/>
 @endsection

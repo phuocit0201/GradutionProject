@@ -42,6 +42,7 @@ if (!function_exists('TextLayoutTitle')) {
             "setting"               => "Cài Đặt Website",
             "banner"                => "Cài Đặt Banner",
             "reset"                 => "Làm Mới Website",
+            "create_user"           => "Thêm Mới Khách Hàng",
         ];
         return $const[$index];
     }

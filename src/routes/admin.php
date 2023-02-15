@@ -25,7 +25,11 @@ Route::middleware(['auth.admin'])->group(function () {
 
 Route::middleware(['auth.admin', 'admin.verified'])->group(function () {
     Route::get('/', [DashboardController::class, "index"])->name('admin.home');
-    Route::get('users', [UserController::class, "index"])->name('admin.users_index');
+    Route::group(['prefix' => 'users'], function(){
+        Route::get('/', [UserController::class, "index"])->name('admin.users_index');
+        Route::get('create', [UserController::class, "create"])->name('admin.users_create');
+        Route::post('create', [UserController::class, "store"])->name('admin.users_store');
+    });
 });
 
 Route::middleware('guest:admin')->group(function () {
