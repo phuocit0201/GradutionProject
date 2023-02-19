@@ -7,22 +7,6 @@ $(document).ready(function(){
         },
     });
 
-    // get list city
-    $.ajax({
-        type: 'GET',
-        url: 'https://online-gateway.ghn.vn/shiip/public-api/master-data/province'
-    }).done((respones) => {
-        let option = '';
-        let value = $('#city').val();
-        // add data to city select
-        respones.data.forEach(element => {
-            option = `<option value="${element.ProvinceID}">${element.NameExtension[1]}</option>`
-            $('#city').append(option);
-        });
-        //get list province
-        getProvind();
-    });
-
     $(document).on('change', '#city', function(){
         $('#district').html("");
         $('#ward').html("");

@@ -1,8 +1,8 @@
-@props(['route', 'fields', 'rules' => '', 'messages' => '', 'textSubmit' => 'Thêm Mới'])
+@props(['route', 'cancel', 'fields', 'rules' => '', 'messages' => '', 'textSubmit' => 'Thêm Mới'])
 
 <div id="form-data" hidden data-rules="{{ json_encode($rules) }}"
         data-messages="{{ json_encode($messages) }}"></div>
-<form action="{{route("$route")}}" method="POST" id="form__js" enctype="multipart/form-data">
+<form action="{{ $route }}" method="POST" id="form__js" enctype="multipart/form-data">
   @csrf
   <!-- /.card-header -->
   <div class="card-body">
@@ -12,17 +12,13 @@
         <select class="form-control" name="{{$field['attribute']}}" id="{{$field['attribute']}}">
           @if (isset($field['list']))
             @foreach ($field['list'] as $option)
-              @if (isset($field['selected']))
-                  @if ($option['value'] == $field['selected'])
-                    <option value="{{$option['value']}}" selected>{{$option['text']}}</option>
-                  @endif
-              @else
-                  @if ($option['value'] == old($field['attribute']))
-                    <option value="{{$option['value']}}" selected>{{$option['text']}}</option>
-                  @else
-                    <option value="{{$option['value']}}">{{$option['text']}}</option>
-                  @endif
-              @endif
+                <option value="{{$option['value']}}"
+                @if (old($field['attribute']))
+                  @php if (old($field['attribute']) == $option['value']) echo "selected"; @endphp
+                @elseif(isset($field['value']))
+                  @php if ($field['value'] == $option['value']) echo "selected"; @endphp
+                @endif
+                >{{$option['text']}}</option>
             @endforeach
           @endif
         </select>
@@ -56,7 +52,7 @@
   <!-- /.card-body -->
   <div class="card-header text-center">
     <button class="btn btn-success">{{$textSubmit}}</button>
-    <button class="btn btn-danger">Hủy</button>
+    <a href="{{ route($cancel) }}" class="btn btn-danger next-link__js">Hủy</a>
   </div>
 </form>
 @vite(['resources/common/js/form.js','resources/common/css/form.css'])

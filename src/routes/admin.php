@@ -29,6 +29,9 @@ Route::middleware(['auth.admin', 'admin.verified'])->group(function () {
         Route::get('/', [UserController::class, "index"])->name('admin.users_index');
         Route::get('create', [UserController::class, "create"])->name('admin.users_create');
         Route::post('create', [UserController::class, "store"])->name('admin.users_store');
+        Route::get('edit/{user}', [UserController::class, "edit"])->name('admin.users_edit');
+        Route::post('update/{user}', [UserController::class, "update"])->name('admin.users_update');
+        Route::post('delete', [UserController::class, "delete"])->name('admin.users_delete');
     });
 });
 

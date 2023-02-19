@@ -34,5 +34,4 @@
   </div>
   <!-- /.card -->
 </div>
-@vite(['resources/common/js/validation.js'])
 @endsection

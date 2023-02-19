@@ -76,5 +76,14 @@ class BaseRepository implements BaseRepositoryInterface
     {
         return $this->model->all();
     }
+
+     /**
+     * Delete the models for database.
+     * @return bool
+     */
+    public function delete(Model $model): bool 
+    {
+        return $model->delete();
+    }
 }
 ?>

@@ -14,7 +14,7 @@
             </div>
           </div>
           <!-- /.card-header -->
-          <x-form-crud route="{{ route('admin.users_store') }}" cancel="admin.users_index" :fields="$fields" :rules="$rules" :messages="$messages" />
+          <x-form-crud route="{{ route('admin.users_update', $user->id) }}" cancel="admin.users_index" :fields="$fields" :rules="$rules" :messages="$messages" textSubmit="Cập Nhật"/>
         </div>
       </div>
     </div>

@@ -25,7 +25,8 @@ $(document).ready(function(){
             element.closest('.form-group').append(error);
         },
     })
-    //check click btn login
+
+    // Display loading when submit login
     $(document).on('submit', '#login-form__js', function(){
         $('#loading__js').css('display', 'flex');
     });
