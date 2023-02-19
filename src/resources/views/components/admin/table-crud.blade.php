@@ -8,7 +8,7 @@
                 @if ($actions['create'])
                     <a 
                         href="{{ (isset($routes['create'])) ? route($routes['create']) : '#'}}" 
-                        class="btn btn-primary">
+                        class="btn btn-primary next-link__js">
                         Thêm Mới
                     </a>
                 @endif
@@ -31,14 +31,14 @@
                     @foreach ($headers as $header)
                         <th>{{ $header['text'] }}</th>
                     @endforeach
-                    @if($actions['viewDetail'] || $actions['edit'])
+                    @if($actions['viewDetail'] || $actions['edit'] || $actions['delete'])
                         <th>{{ $actions['text'] }}</th>
                     @endif
                 </tr>
             </thead>
             <tbody>
                 @foreach ($list as $item)
-                    <tr id="table-crud{{ $item->id }}">
+                    <tr id="{{ $item->id }}">
                         @foreach ($headers as $header)
                             <td>
                                 @if (! isset($header['status']))
@@ -57,12 +57,12 @@
                                 @endif
                             </td>
                         @endforeach
-                        @if($actions['viewDetail'] || $actions['edit'])
+                        @if($actions['viewDetail'] || $actions['edit'] || $actions['delete'])
                             <td>
                                 @if ($actions['edit'])
-                                    <button id="edit-customer" class="btn btn-primary">
+                                    <a href="{{ isset($routes['edit']) ? route($routes['edit'], $item->id) : '#' }}" id="edit-customer" class="btn btn-primary next-link__js">
                                         <i class="fas fa-edit"></i>
-                                    </button>
+                                    </a>
                                 @endif
                                 @if ($actions['viewDetail'])
                                     <button id="btn-table-view-detail__js" class="btn btn-info">
@@ -70,7 +70,11 @@
                                     </button>
                                 @endif
                                 @if ($actions['delete'])
-                                    <button id="delete-customer" class="btn btn-danger" data-toggle="modal" data-target="#modal-xl">
+                                    <form style="display: inline;" action="{{route($routes['delete'])}}" method="POST" id="form-delete__js">
+                                        @csrf
+                                        <input type="text" name="id" value="{{$item->id}}" hidden>
+                                    </form>
+                                    <button id="delete__js" class="btn btn-danger" url="{{route($routes['delete'])}}">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 @endif

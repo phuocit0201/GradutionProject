@@ -136,7 +136,7 @@
                    with font-awesome or any other icon font library -->
               <li class="nav-header">{{ TextLayoutSidebar("overview") }}</li>
                 <li class="nav-item">
-                  <a href="{{ route('admin.home') }}" class="nav-link {{ (Route::is('admin.home')) ? 'active' : '' }} nav-link__js">
+                  <a href="{{ route('admin.home') }}" class="nav-link {{ (Route::is('admin.home')) ? 'active' : '' }} next-link__js">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>
                       {{ TextLayoutSidebar("dashboard") }}
@@ -147,7 +147,7 @@
                   @php
                       $isRouteUser = request()->is('admin/users*');
                   @endphp
-                  <a href="{{ route('admin.users_index') }}" class="nav-link {{ ($isRouteUser) ? 'active' : '' }} nav-link__js">
+                  <a href="{{ route('admin.users_index') }}" class="nav-link {{ ($isRouteUser) ? 'active' : '' }} next-link__js">
                     <i class="nav-icon fas fa-users"></i>
                     <p>
                       {{ TextLayoutSidebar("customer") }}
@@ -155,7 +155,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{route('admin.logout')}}" class="nav-link nav-link__js">
+                  <a href="{{route('admin.logout')}}" class="nav-link next-link__js">
                     <i class="nav-icon fas fa-sign-out-alt"></i>
                     <p>
                       {{ TextLayoutSidebar("logout") }}
@@ -168,4 +168,3 @@
         </div>
         <!-- /.sidebar -->
       </aside>
-@vite(['resources/admin/js/sidebar.js'])

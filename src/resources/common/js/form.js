@@ -25,9 +25,11 @@ $(document).ready(function(){
         },
         submitHandler: (form) => {
             form.submit();
+            $('#loading__js').css('display', 'flex');
         },
     });
 
+    // Add name file to input file
     $(document).on('change', '.inputFile__js', function(){
         let nameFile = String($('.inputFile__js').val());
         if (nameFile == '' || nameFile == null) {

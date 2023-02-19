@@ -61,5 +61,6 @@
 <!-- Select2 -->
 <script src="{{ asset('asset/admin/plugins/select2/js/select2.full.min.js') }}"></script>
 <script src="{{ asset('asset/admin/plugins/jquery-validation/jquery.validate.js') }}"></script>
+@vite(['resources/admin/js/next-link.js'])
 </body>
 </html>

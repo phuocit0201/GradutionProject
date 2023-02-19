@@ -24,6 +24,8 @@ interface BaseRepositoryInterface
     public function find($id): ?Model;
 
    /**
+    * Destroy the models for the given IDs.
+    *
     * @param $id
     * @return int
     */
@@ -39,5 +41,13 @@ interface BaseRepositoryInterface
      * Get all of the users from the database
      */
     public function all();
+
+    /**
+     * Delete the models for the database.
+     *  
+     * @param Model
+     * @return bool
+     */
+    public function delete(Model $model): bool;
 }
 ?>
