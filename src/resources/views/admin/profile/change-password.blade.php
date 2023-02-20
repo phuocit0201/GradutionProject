@@ -28,5 +28,4 @@
   </div>
   <!-- /.container-fluid -->
 </section>
-@vite(['resources/admin/js/user-create.js'])
 @endsection
