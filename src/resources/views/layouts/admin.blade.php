@@ -20,4 +20,5 @@
     @yield('content')
 </div>
 <x-loading />
+@vite(['resources/admin/js/toast-message.js'])
 @include('layouts.admin-footer')
