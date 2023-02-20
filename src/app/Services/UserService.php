@@ -178,7 +178,6 @@ class UserService
                     'attribute' => 'phone_number',
                     'label' => 'Số Điện Thoại',
                     'type' => 'text',
-                    'autocomplete' => 'new-password',
                     'format_phone' => true,
                 ],
                 [
@@ -346,7 +345,7 @@ class UserService
         }
     }
 
-     /**
+    /**
      * Show the form for creating a new user.
      *
      * @return array
@@ -414,7 +413,6 @@ class UserService
                     'attribute' => 'phone_number',
                     'label' => 'Số Điện Thoại',
                     'type' => 'text',
-                    'autocomplete' => 'new-password',
                     'format_phone' => true,
                     'value' => $user->phone_number,
                 ],

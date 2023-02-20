@@ -19,7 +19,10 @@ if (!function_exists('TextLayoutSidebar')) {
             "setting"               => "Cài Đặt",
             "banner"                => "Banner",
             "reset"                 => "Reset",
-            "logout"                => "Đăng Xuất"
+            "logout"                => "Đăng Xuất",
+            "infomations"           => "Quản Lý Cá Nhân",
+            "profile"               => "Hồ Sơ",
+            "change_password"       => "Mật Khẩu",
         ];
         return $const[$key];
     }
@@ -44,6 +47,8 @@ if (!function_exists('TextLayoutTitle')) {
             "reset"                 => "Làm Mới Website",
             "create_user"           => "Thêm Mới Khách Hàng",
             "create_edit"           => "Chỉnh Sửa Khách Hàng",
+            "profile"               => "Hồ Sơ Cá Nhân",
+            "change_password"       => "Đổi Mật Khẩu",
         ];
         return $const[$index];
     }

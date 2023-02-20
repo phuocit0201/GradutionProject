@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Auth\EmailVerificationPromptController as AdminEmailVerificationPromptController;
 use App\Http\Controllers\Admin\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,12 @@ Route::middleware(['auth.admin', 'admin.verified'])->group(function () {
         Route::get('edit/{user}', [UserController::class, "edit"])->name('admin.users_edit');
         Route::post('update/{user}', [UserController::class, "update"])->name('admin.users_update');
         Route::post('delete', [UserController::class, "delete"])->name('admin.users_delete');
+    });
+    Route::group(['prefix' => 'profile'], function(){
+        Route::get('/change-profile', [ProfileController::class, "changeProfile"])->name('admin.profile_change-profile');
+        Route::post('/change-profile', [ProfileController::class, "updateProfile"])->name('admin.profile_update-profile');
+        Route::get('/change-password', [ProfileController::class, "changePassword"])->name('admin.profile_change-password');
+        Route::post('/change-password', [ProfileController::class, "updatePassword"])->name('admin.profile_update-password');
     });
 });
 

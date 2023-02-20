@@ -15,6 +15,7 @@ export default defineConfig({
                 'resources/admin/js/user-create.js',
                 'resources/common/js/form.js',
                 'resources/common/css/form.css',
+                'resources/admin/js/toast-message.js',
             ],
             refresh: true,
         }),

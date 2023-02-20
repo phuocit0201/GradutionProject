@@ -1,4 +1,4 @@
-@props(['route', 'cancel', 'fields', 'rules' => '', 'messages' => '', 'textSubmit' => 'Thêm Mới'])
+@props(['route', 'cancel', 'fields', 'rules' => '', 'messages' => '', 'textSubmit' => 'Thêm Mới', 'cancelBtn' => "true"])
 
 <div id="form-data" hidden data-rules="{{ json_encode($rules) }}"
         data-messages="{{ json_encode($messages) }}"></div>
@@ -52,7 +52,9 @@
   <!-- /.card-body -->
   <div class="card-header text-center">
     <button class="btn btn-success">{{$textSubmit}}</button>
-    <a href="{{ route($cancel) }}" class="btn btn-danger next-link__js">Hủy</a>
+    @if ($cancelBtn == "true")
+      <a href="{{ route($cancel) }}" class="btn btn-danger next-link__js">Hủy</a>
+    @endif
   </div>
 </form>
 @vite(['resources/common/js/form.js','resources/common/css/form.css'])
