@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Auth\EmailVerificationPromptController as AdminEmailVerificationPromptController;
@@ -33,6 +34,14 @@ Route::middleware(['auth.admin', 'admin.verified'])->group(function () {
         Route::get('edit/{user}', [UserController::class, "edit"])->name('admin.users_edit');
         Route::post('update/{user}', [UserController::class, "update"])->name('admin.users_update');
         Route::post('delete', [UserController::class, "delete"])->name('admin.users_delete');
+    });
+    Route::group(['prefix' => 'staffs'], function(){
+        Route::get('/', [AdminController::class, "index"])->name('admin.staffs_index');
+        Route::get('create', [AdminController::class, "create"])->name('admin.staffs_create');
+        Route::post('create', [AdminController::class, "store"])->name('admin.staffs_store');
+        Route::get('edit/{user}', [AdminController::class, "edit"])->name('admin.staffs_edit');
+        Route::post('update/{user}', [AdminController::class, "update"])->name('admin.staffs_update');
+        Route::post('delete', [AdminController::class, "delete"])->name('admin.staffs_delete');
     });
     Route::group(['prefix' => 'profile'], function(){
         Route::get('/change-profile', [ProfileController::class, "changeProfile"])->name('admin.profile_change-profile');

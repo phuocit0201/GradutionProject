@@ -49,5 +49,10 @@ interface BaseRepositoryInterface
      * @return bool
      */
     public function delete(Model $model): bool;
+
+    /**
+     * Get all of the users from the database
+     */
+    public function where($attributes);
 }
 ?>

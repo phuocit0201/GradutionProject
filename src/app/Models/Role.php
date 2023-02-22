@@ -16,12 +16,23 @@ class Role extends Model
     ];
 
     const ROLE_ADMIN = 'admin';
+
+    const STATUS = [
+        [
+            'value' => 1,
+            'text'  => 'Hoạt Động'
+        ],
+        [
+            'value' => 0,
+            'text'  => 'Vô Hiệu Hóa'
+        ],
+    ];
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'users';
+    protected $table = 'roles';
 
     /**
      * The attributes that are mass assignable.

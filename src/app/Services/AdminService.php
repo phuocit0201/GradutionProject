@@ -3,13 +3,16 @@
 namespace App\Services;
 
 use App\Helpers\TextSystemConst;
+use App\Http\Requests\Admin\StoreStaffRequest;
 use App\Http\Requests\Admin\StoreUserRequest;
+use App\Http\Requests\Admin\UpdateStaffRequest;
 use App\Http\Requests\Admin\UpdateUserRequest;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\UserVerify;
 use App\Notifications\VerifyUser;
 use App\Repository\Eloquent\AddressRepository;
+use App\Repository\Eloquent\AdminRepository;
 use App\Repository\Eloquent\UserRepository;
 use Carbon\Carbon;
 use Exception;
@@ -21,7 +24,7 @@ use Illuminate\Support\Str;
 use \Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 
-class UserService 
+class AdminService 
 {
     /**
      * @var UserRepository
@@ -29,19 +32,30 @@ class UserService
     private $userRepository;
 
     /**
+     * @var AdminRepository
+     */
+    private $adminRepository;
+
+    /**
      * @var AddressRepository
      */
     private $addressRepository;
 
     /**
-     * UserService constructor.
+     * AdminService constructor.
      *
      * @param UserRepository $userRepository
+     * @param AdminRepository $adminRepository
      * @param AddressRepository $addressRepository
      */
-    public function __construct(UserRepository $userRepository, AddressRepository $addressRepository)
+    public function __construct(
+        UserRepository $userRepository,
+        AdminRepository $adminRepository,
+        AddressRepository $addressRepository
+    )
     {
         $this->userRepository = $userRepository;
+        $this->adminRepository = $adminRepository;
         $this->addressRepository = $addressRepository;
     }
 
@@ -53,15 +67,17 @@ class UserService
     public function index()
     {
         // Get list customers
-        $list = $this->userRepository->all();
+        $list = $this->userRepository->where(function ($query) {
+            $query->where('role_id', '!=', Role::ROLE['user']);
+        },);
         $tableCrud = [
             'headers' => [
                 [
-                    'text' => 'Mã KH',
+                    'text' => 'Mã NV',
                     'key' => 'id',
                 ],
                 [
-                    'text' => 'Tên Khách Hàng',
+                    'text' => 'Họ Tên',
                     'key' => 'name',
                 ],
                 [
@@ -69,8 +85,17 @@ class UserService
                     'key' => 'email',
                 ],
                 [
-                    'text' => 'Số Điện Thoại',
-                    'key' => 'phone_number',
+                    'text' => 'Lương',
+                    'key' => 'admin.basic_salary',
+                    'format' => 'true',
+                ],
+                [
+                    'text' => 'Hệ Số Lương',
+                    'key' => 'admin.coefficients_salary',
+                ],
+                [
+                    'text' => 'Vai Trò',
+                    'key' => 'role.name',
                 ],
                 [
                     'text' => 'Trạng Thái',
@@ -99,15 +124,15 @@ class UserService
                 'viewDetail'    => true,
             ],
             'routes' => [
-                'create' => 'admin.users_create',
-                'delete' => 'admin.users_delete',
-                'edit' => 'admin.users_edit',
+                'create' => 'admin.staffs_create',
+                'delete' => 'admin.staffs_delete',
+                'edit' => 'admin.staffs_edit',
             ],
             'list' => $list,
         ];
 
         return [
-            'title' => TextLayoutTitle("customer"),
+            'title' => TextLayoutTitle("administrators"),
             'tableCrud' => $tableCrud,
         ];
     }
@@ -156,6 +181,7 @@ class UserService
                     'text' => $item['NameExtension'][0],
                 ];
             }
+            $roles = Role::select('id as value', 'name as text')->where('id', '!=', Role::ROLE['user'])->get()->toArray();
             // Fields form
             $fields = [
                 [
@@ -179,6 +205,27 @@ class UserService
                     'label' => 'Số Điện Thoại',
                     'type' => 'text',
                     'format_phone' => true,
+                ],
+                [
+                    'attribute' => 'basic_salary',
+                    'label' => 'Lương Cơ Bản',
+                    'type' => 'text',
+                ],
+                [
+                    'attribute' => 'coefficients_salary',
+                    'label' => 'Hệ Số Lương',
+                    'type' => 'text',
+                ],
+                [
+                    'attribute' => 'momo_number',
+                    'label' => 'Tài Khoản Momo',
+                    'type' => 'text',
+                ],
+                [
+                    'attribute' => 'role_id',
+                    'label' => 'Vai Trò',
+                    'type' => 'select',
+                    'list' => $roles,
                 ],
                 [
                     'attribute' => 'city',
@@ -242,6 +289,18 @@ class UserService
                     'minlength' => 12,
                     'maxlength' => 12,
                 ],
+                'basic_salary' => [
+                    'required' => true,
+                ],
+                'momo_number' => [
+                    'required' => true,
+                ],
+                'role_id' => [
+                    'required' => true,
+                ],
+                'coefficients_salary' => [
+                    'required' => true,
+                ],
             ];
     
             // Messages eror rules
@@ -281,10 +340,22 @@ class UserService
                 'apartment_number' => [
                     'required' =>  __('message.required', ['attribute' => 'số nhà']),
                 ],
+                'coefficients_salary' => [
+                    'required' => __('message.required', ['attribute' => 'hệ số lương']),
+                ],
+                'basic_salary' => [
+                    'required' => __('message.required', ['attribute' => 'lương cơ bản']),
+                ],
+                'momo_number' => [
+                    'required' => __('message.required', ['attribute' => 'tài khoản momo']),
+                ],
+                'role_id' => [
+                    'required' => __('message.required', ['attribute' => 'vai trò']),
+                ],
             ];
     
             return [
-                'title' => TextLayoutTitle("create_user"),
+                'title' => TextLayoutTitle("create_staff"),
                 'fields' => $fields,
                 'rules' => $rules,
                 'messages' => $messages,
@@ -296,11 +367,11 @@ class UserService
     }
 
     /** 
-     * store the user in the database.
-     * @param App\Http\Requests\Admin\StoreUserRequest $request
+     * store the admin in the database.
+     * @param App\Http\Requests\Admin\StoreStaffRequest $request
      * @return Illuminate\Http\RedirectResponse
      */
-    public function store(StoreUserRequest $request)
+    public function store(StoreStaffRequest $request)
     {
         try {
             $data = $request->validated();
@@ -310,7 +381,7 @@ class UserService
                 'email' => $data['email'],
                 'password' => $data['password'],
                 'phone_number' => $data['phone_number'],
-                'role_id' => Role::ROLE['user'],
+                'role_id' => $data['role_id'],
                 'created_by' => Auth::guard('admin')->user()->id,
             ];
             
@@ -320,6 +391,13 @@ class UserService
                 'district' => $data['district'],
                 'ward' => $data['ward'],
                 'apartment_number' => $data['apartment_number'],
+            ];
+
+            // admins data request
+            $adminData = [
+                'momo_number' => $data['momo_number'],
+                'basic_salary' => $data['basic_salary'],
+                'coefficients_salary' => $data['coefficients_salary'],
             ];
             
             $token = Str::random(64);
@@ -335,13 +413,15 @@ class UserService
             );
             $user->notify(new VerifyUser($token));
             $addressData['user_id'] = $user->id;
+            $adminData['user_id'] = $user->id;
             $this->addressRepository->updateOrCreate($addressData);
+            $this->adminRepository->create($adminData);
             DB::commit();
-            return redirect()->route('admin.users_index')->with('success', TextSystemConst::CREATE_SUCCESS);
+            return redirect()->route('admin.staffs_index')->with('success', TextSystemConst::CREATE_SUCCESS);
         } catch (Exception $e) {
             Log::error($e);
             DB::rollBack();
-            return redirect()->route('admin.users_index')->with('error', TextSystemConst::CREATE_FAILED);
+            return redirect()->route('admin.staffs_index')->with('error', TextSystemConst::CREATE_FAILED);
         }
     }
 
@@ -389,6 +469,7 @@ class UserService
                     'text' => $item['NameExtension'][0],
                 ];
             }
+            $roles = Role::select('id as value', 'name as text')->where('id', '!=', Role::ROLE['user'])->get()->toArray();
             // Fields form
             $fields = [
                 [
@@ -417,6 +498,31 @@ class UserService
                     'value' => $user->phone_number,
                 ],
                 [
+                    'attribute' => 'basic_salary',
+                    'label' => 'Lương Cơ Bản',
+                    'type' => 'text',
+                    'value' => $user->admin->basic_salary,
+                ],
+                [
+                    'attribute' => 'coefficients_salary',
+                    'label' => 'Hệ Số Lương',
+                    'type' => 'text',
+                    'value' => $user->admin->coefficients_salary,
+                ],
+                [
+                    'attribute' => 'momo_number',
+                    'label' => 'Tài Khoản Momo',
+                    'type' => 'text',
+                    'value' => $user->admin->momo_number,
+                ],
+                [
+                    'attribute' => 'role_id',
+                    'label' => 'Vai Trò',
+                    'type' => 'select',
+                    'list' => $roles,
+                    'value' => $user->role_id,
+                ],
+                [
                     'attribute' => 'city',
                     'label' => 'Tỉnh, Thành Phố',
                     'type' => 'select',
@@ -434,7 +540,7 @@ class UserService
                     'attribute' => 'ward',
                     'label' => 'Phường, Xã',
                     'type' => 'select',
-                    'list' =>  $wards,
+                    'list' => $wards,
                     'value' => old('ward') ?? $user->address->ward,
                 ],
                 [
@@ -442,6 +548,19 @@ class UserService
                     'label' => 'Số Nhà',
                     'type' => 'text',
                     'value' => $user->address->apartment_number,
+                ],
+                [
+                    'attribute' => 'active',
+                    'label' => 'Trạng Thái',
+                    'type' => 'select',
+                    'list' => Role::STATUS,
+                    'value' => $user->active,
+                ],
+                [
+                    'attribute' => 'disable_reason',
+                    'label' => 'Lý Do Khóa Tài Khoản',
+                    'type' => 'text',
+                    'value' => $user->disable_reason,
                 ],
             ];
     
@@ -481,6 +600,21 @@ class UserService
                     'minlength' => 12,
                     'maxlength' => 12,
                 ],
+                'basic_salary' => [
+                    'required' => true,
+                ],
+                'momo_number' => [
+                    'required' => true,
+                ],
+                'role_id' => [
+                    'required' => true,
+                ],
+                'coefficients_salary' => [
+                    'required' => true,
+                ],
+                'active' => [
+                    'required' => true,
+                ],
             ];
     
             // Messages eror rules
@@ -495,6 +629,7 @@ class UserService
                     'email' => __('message.email'),
                 ],
                 'password' => [
+                    'required' => __('message.required', ['attribute' => 'mật khẩu']),
                     'minlength' => __('message.min', ['attribute' => 'Mật khẩu', 'min' => 8]),
                     'maxlength' => __('message.max', ['attribute' => 'Mật khẩu', 'max' => 24]),
                     'checklower' => __('message.password.at_least_one_lowercase_letter_is_required'),
@@ -519,25 +654,40 @@ class UserService
                 'apartment_number' => [
                     'required' =>  __('message.required', ['attribute' => 'số nhà']),
                 ],
+                'coefficients_salary' => [
+                    'required' => __('message.required', ['attribute' => 'hệ số lương']),
+                ],
+                'basic_salary' => [
+                    'required' => __('message.required', ['attribute' => 'lương cơ bản']),
+                ],
+                'momo_number' => [
+                    'required' => __('message.required', ['attribute' => 'tài khoản momo']),
+                ],
+                'role_id' => [
+                    'required' => __('message.required', ['attribute' => 'vai trò']),
+                ],
+                'role_id' => [
+                    'required' => __('message.required', ['attribute' => 'trạng thái']),
+                ],
             ];
     
             return [
-                'title' => TextLayoutTitle("create_edit"),
+                'title' => TextLayoutTitle("create_staff"),
                 'fields' => $fields,
                 'rules' => $rules,
                 'messages' => $messages,
                 'user' => $user,
             ];
         } catch (Exception) {
-            return[];
+            return [];
         }
         
     }
 
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateStaffRequest $request, User $user)
     {
-        try {
-            if ($user->role_id != Role::ROLE['user']) {
+        // try {
+            if ($user->role_id == Role::ROLE['user']) {
                 return redirect()->route('admin.staffs_index')->with('error', TextSystemConst::UPDATE_FAILED);
             }
             $data = $request->validated();
@@ -547,9 +697,12 @@ class UserService
                 'email' => $data['email'],
                 'password' => $data['password'],
                 'phone_number' => $data['phone_number'],
-                'role_id' => Role::ROLE['user'],
+                'role_id' => $data['role_id'],
                 'updated_by' => Auth::guard('admin')->user()->id,
+                'active' => $data['active'],
+                'disable_reason' => $data['disable_reason'],
             ];
+            
             // address data request
             $addressData = [
                 'city' => $data['city'],
@@ -557,11 +710,21 @@ class UserService
                 'ward' => $data['ward'],
                 'apartment_number' => $data['apartment_number'],
             ];
-            $addressData['user_id'] = $user->id;
-            $this->addressRepository->update($user->address, $addressData);
 
+            // admins data request
+            $adminData = [
+                'momo_number' => $data['momo_number'],
+                'basic_salary' => $data['basic_salary'],
+                'coefficients_salary' => $data['coefficients_salary'],
+            ];
+            $addressData['user_id'] = $user->id;
+            $adminData['user_id'] = $user->id;
+            $this->addressRepository->update($user->address, $addressData);
+            $this->adminRepository->update($user->admin, $adminData);
             if (!isset($userData['password'])) {
                 unset($userData['password']);
+            } elseif (!isset($userData['disable_reason'])) {
+                unset($userData['disable_reason']);
             }
 
             DB::beginTransaction();
@@ -583,14 +746,13 @@ class UserService
             } else {
                 $this->userRepository->update($user, $userData);
             }
-            
             DB::commit();
-            return redirect()->route('admin.users_index')->with('success', TextSystemConst::UPDATE_SUCCESS);
-        } catch (Exception $e) {
-            Log::error($e);
-            DB::rollBack();
-            return redirect()->route('admin.users_index')->with('error', TextSystemConst::UPDATE_FAILED);
-        }
+            return redirect()->route('admin.staffs_index')->with('success', TextSystemConst::UPDATE_SUCCESS);
+        // } catch (Exception $e) {
+        //     Log::error($e);
+        //     DB::rollBack();
+        //     return redirect()->route('admin.staffs_index')->with('error', TextSystemConst::UPDATE_FAILED);
+        // }
     }
 
      /** 
@@ -606,7 +768,7 @@ class UserService
                 return response()->json(['status' => 'error', 'message' => TextSystemConst::SYSTEM_ERROR], 200);
             }
 
-            if($this->userRepository->delete($user)) {
+            if($this->userRepository->delete($user) && $this->adminRepository->delete($user->admin)) {
                 $this->userRepository->update(
                     $user, 
                     ['deleted_by' => Auth::guard('admin')->user()->id]
