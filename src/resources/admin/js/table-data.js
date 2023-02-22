@@ -10,6 +10,7 @@ $(document).ready(function(){
   // Remove colomn action
   columnsExport.pop();
 
+  toast = toast();
   table = $('#table-crud').DataTable({
     "paging": true,
     "lengthChange": false,
@@ -108,3 +109,38 @@ $(document).ready(function(){
     })
   });
 });
+
+// function init toast message
+function toast() 
+{
+  return Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  });
+}
+
+function fire(toast, type, message) 
+{
+  let background;
+  let icon;
+  if (type == 'success') {
+    background = 'rgba(40,167,69,.85)';
+    icon = 'success';
+  } else if (type == 'error') {
+    background = 'rgba(220,53,69,.85)';
+    icon = 'error';
+  }
+  toast.fire({
+    icon: icon,
+    title: message,
+    background: background,
+    color: '#fff',
+  })
+}

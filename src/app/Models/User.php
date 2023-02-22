@@ -30,6 +30,7 @@ class User extends Authenticatable
         'updated_by',
         'deleted_by',
         'active',
+        'disable_reason',
     ];
 
     /**
@@ -59,6 +60,11 @@ class User extends Authenticatable
     public function address()
     {
         return $this->belongsTo(Address::class, 'id', 'user_id')->setEagerLoads([]);
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id', 'id')->setEagerLoads([]);
     }
 
     /**

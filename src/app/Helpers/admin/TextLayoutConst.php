@@ -23,6 +23,7 @@ if (!function_exists('TextLayoutSidebar')) {
             "infomations"           => "Quản Lý Cá Nhân",
             "profile"               => "Hồ Sơ",
             "change_password"       => "Mật Khẩu",
+            "administrators"        => "Nhân Sự"
         ];
         return $const[$key];
     }
@@ -49,6 +50,8 @@ if (!function_exists('TextLayoutTitle')) {
             "create_edit"           => "Chỉnh Sửa Khách Hàng",
             "profile"               => "Hồ Sơ Cá Nhân",
             "change_password"       => "Đổi Mật Khẩu",
+            "administrators"        => "Quản Lý Nhân Sự",
+            "create_staff"          => "Thêm Mới Nhân Sự",
         ];
         return $const[$index];
     }

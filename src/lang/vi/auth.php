@@ -16,6 +16,6 @@ return [
     'failed' => 'Thông tin đăng nhập không chính xác',
     'password' => 'Mật khẩu không chính xác',
     'throttle' => 'Bạn đã đăng nhập quá nhiều lần. Vui lòng thử lại sau vài giây',
-    'locked' => 'Tài khoản của bạn đã bị khóa vì. ',
+    'locked' => 'Tài khoản của bạn đã bị khóa. Vì ',
 
 ];

@@ -85,5 +85,13 @@ class BaseRepository implements BaseRepositoryInterface
     {
         return $model->delete();
     }
+
+    /**
+     * Get all of the users from the database
+     */
+    public function where($attributes)
+    {
+        return $this->model->where($attributes)->get();
+    }
 }
 ?>
