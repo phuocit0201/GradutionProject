@@ -2,20 +2,20 @@
 
 namespace App\Repository\Eloquent;
 
-use App\Models\Category;
+use App\Models\Color;
 
 /**
  * Class UserRepository
  * @package App\Repositories\Eloquent
  */
-class CategoryRepository extends BaseRepository
+class ColorRepository extends BaseRepository
 {
     /**
-     * UserRepository constructor.
+     * ColorRepository constructor.
      *
-     * @param Category $model
+     * @param Color $model
      */
-    public function __construct(Category $category)
+    public function __construct(Color $category)
     {
         parent::__construct($category);
     }
