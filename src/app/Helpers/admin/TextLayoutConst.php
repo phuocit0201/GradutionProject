@@ -23,7 +23,9 @@ if (!function_exists('TextLayoutSidebar')) {
             "infomations"           => "Quản Lý Cá Nhân",
             "profile"               => "Hồ Sơ",
             "change_password"       => "Mật Khẩu",
-            "administrators"        => "Nhân Sự"
+            "administrators"        => "Nhân Sự",
+            "product"               => "Sản Phẩm",
+            "category"              => "Danh Mục",
         ];
         return $const[$key];
     }
@@ -52,6 +54,9 @@ if (!function_exists('TextLayoutTitle')) {
             "change_password"       => "Đổi Mật Khẩu",
             "administrators"        => "Quản Lý Nhân Sự",
             "create_staff"          => "Thêm Mới Nhân Sự",
+            "create_product"        => "Thêm Mới Sản Phẩm",
+            "create_category"       => "Thêm Mới Danh Mục",
+            "edit_category"         => "Chỉnh Sửa Danh Mục",
         ];
         return $const[$index];
     }

@@ -6,15 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-   /**
+    /**
      * Run the migrations.
      *
      * @return void
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropUnique(['email']);
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id();
+            $table->char('name', 100);
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -25,8 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->unique('email');
-        });
+        Schema::dropIfExists('categories');
     }
 };
