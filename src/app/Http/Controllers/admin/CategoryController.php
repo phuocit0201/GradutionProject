@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-     /**
+    /**
      * @var CategoryService
      */
     private $categoryService;
@@ -36,7 +36,7 @@ class CategoryController extends Controller
             return view('admin.category.create', $this->categoryService->create());
         }
 
-        return redirect()->route('admin.staffs_index');
+        return redirect()->route('admin.category_index');
     }
 
     public function store(StoreCategoryRequest $request)
@@ -50,7 +50,7 @@ class CategoryController extends Controller
             return view('admin.category.edit',$this->categoryService->edit($category));
         }
 
-        return redirect()->route('admin.staffs_index');
+        return redirect()->route('admin.category_index');
     }
 
     public function update(StoreCategoryRequest $request, Category $category)

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\Auth\EmailVerificationPromptController as AdminEm
 use App\Http\Controllers\Admin\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\UserController;
@@ -68,6 +69,15 @@ Route::middleware(['auth.admin', 'admin.verified'])->group(function () {
         Route::get('edit/{category}', [CategoryController::class, "edit"])->name('admin.category_edit');
         Route::post('update/{category}', [CategoryController::class, "update"])->name('admin.category_update');
         Route::post('delete', [CategoryController::class, "delete"])->name('admin.category_delete');
+    });
+
+    Route::group(['prefix' => 'colors'], function(){
+        Route::get('/', [ColorController::class, "index"])->name('admin.colors_index');
+        Route::get('create', [ColorController::class, "create"])->name('admin.colors_create');
+        Route::post('create', [ColorController::class, "store"])->name('admin.colors_store');
+        Route::get('edit/{color}', [ColorController::class, "edit"])->name('admin.colors_edit');
+        Route::post('update/{color}', [ColorController::class, "update"])->name('admin.colors_update');
+        Route::post('delete', [ColorController::class, "delete"])->name('admin.colors_delete');
     });
 });
 

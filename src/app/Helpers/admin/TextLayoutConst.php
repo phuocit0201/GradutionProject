@@ -26,6 +26,7 @@ if (!function_exists('TextLayoutSidebar')) {
             "administrators"        => "Nhân Sự",
             "product"               => "Sản Phẩm",
             "category"              => "Danh Mục",
+            "color"                 => "Màu Sắc",
         ];
         return $const[$key];
     }
@@ -57,6 +58,9 @@ if (!function_exists('TextLayoutTitle')) {
             "create_product"        => "Thêm Mới Sản Phẩm",
             "create_category"       => "Thêm Mới Danh Mục",
             "edit_category"         => "Chỉnh Sửa Danh Mục",
+            "color"                 => "Quản Lý Màu Sắc",
+            "edit_color"            => "Chỉnh Sửa Màu Sắc",
+            "create_color"          => "Thêm Mới Màu Sắc",
         ];
         return $const[$index];
     }

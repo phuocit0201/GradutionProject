@@ -4,30 +4,28 @@ namespace App\Services;
 
 use App\Helpers\TextSystemConst;
 use App\Http\Requests\Admin\StoreCategoryRequest;
-use App\Models\Category;
-use App\Repository\Eloquent\CategoryRepository;
+use App\Models\Color;
+use App\Repository\Eloquent\ColorRepository;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class CategoryService 
+class ColorService 
 {
     /**
-     * @var CategoryRepository
+     * @var ColorRepository
      */
-    private $categoryRepository;
+    private $colorRepository;
 
     /**
      * CategoryService constructor.
      *
-     * @param CategoryRepository $categoryRepository
+     * @param ColorRepository $categoryRepository
      */
-    public function __construct(
-        CategoryRepository $categoryRepository,
-    )
+    public function __construct(ColorRepository $colorRepository)
     {
-        $this->categoryRepository = $categoryRepository;
+        $this->colorRepository = $colorRepository;
     }
 
     /**
@@ -38,15 +36,15 @@ class CategoryService
     public function index()
     {
         // Get list category
-        $list = $this->categoryRepository->all();
+        $list = $this->colorRepository->all();
         $tableCrud = [
             'headers' => [
                 [
-                    'text' => 'Mã DM',
+                    'text' => 'Mã Màu',
                     'key' => 'id',
                 ],
                 [
-                    'text' => 'Tên Danh Mục',
+                    'text' => 'Tên Màu Sắc',
                     'key' => 'name',
                 ],
             ],
@@ -60,15 +58,15 @@ class CategoryService
                 'viewDetail'    => false,
             ],
             'routes' => [
-                'create' => 'admin.category_create',
-                'delete' => 'admin.category_delete',
-                'edit' => 'admin.category_edit',
+                'create' => 'admin.colors_create',
+                'delete' => 'admin.colors_delete',
+                'edit' => 'admin.colors_edit',
             ],
             'list' => $list,
         ];
 
         return [
-            'title' => TextLayoutTitle("category"),
+            'title' => TextLayoutTitle("color"),
             'tableCrud' => $tableCrud,
         ];
     }
@@ -85,7 +83,7 @@ class CategoryService
             $fields = [
                 [
                     'attribute' => 'name',
-                    'label' => 'Tên Danh Mục',
+                    'label' => 'Tên Màu Sắc',
                     'type' => 'text',
                 ],
             ];
@@ -109,7 +107,7 @@ class CategoryService
             ];
     
             return [
-                'title' => TextLayoutTitle("create_category"),
+                'title' => TextLayoutTitle("create_color"),
                 'fields' => $fields,
                 'rules' => $rules,
                 'messages' => $messages,
@@ -129,11 +127,11 @@ class CategoryService
     {
         try {
             $data = $request->validated();
-            $this->categoryRepository->create($data);
-            return redirect()->route('admin.category_index')->with('success', TextSystemConst::CREATE_SUCCESS);
+            $this->colorRepository->create($data);
+            return redirect()->route('admin.colors_index')->with('success', TextSystemConst::CREATE_SUCCESS);
         } catch (Exception $e) {
             Log::error($e);
-            return redirect()->route('admin.staffs_index')->with('error', TextSystemConst::CREATE_FAILED);
+            return redirect()->route('admin.colors_index')->with('error', TextSystemConst::CREATE_FAILED);
         }
     }
 
@@ -142,14 +140,14 @@ class CategoryService
      *
      * @return array
      */
-    public function edit(Category $category)
+    public function edit(Color $category)
     {
         try {
             // Fields form
             $fields = [
                 [
                     'attribute' => 'name',
-                    'label' => 'Tên Danh Mục',
+                    'label' => 'Tên Màu Sắc',
                     'type' => 'text',
                     'value' => $category->name,
                 ],
@@ -174,7 +172,7 @@ class CategoryService
             ];
     
             return [
-                'title' => TextLayoutTitle("edit_category"),
+                'title' => TextLayoutTitle("edit_color"),
                 'fields' => $fields,
                 'rules' => $rules,
                 'messages' => $messages,
@@ -186,16 +184,16 @@ class CategoryService
         
     }
 
-    public function update(StoreCategoryRequest $request, Category $category)
+    public function update(StoreCategoryRequest $request, Color $color)
     {
         try {
             $data = $request->validated();
-            $this->categoryRepository->update($category, $data);
-            return redirect()->route('admin.category_index')->with('success', TextSystemConst::UPDATE_SUCCESS);
+            $this->colorRepository->update($color, $data);
+            return redirect()->route('admin.colors_index')->with('success', TextSystemConst::UPDATE_SUCCESS);
         } catch (Exception $e) {
             Log::error($e);
             DB::rollBack();
-            return redirect()->route('admin.category_index')->with('error', TextSystemConst::UPDATE_FAILED);
+            return redirect()->route('admin.colors_index')->with('error', TextSystemConst::UPDATE_FAILED);
         }
     }
 
@@ -207,7 +205,7 @@ class CategoryService
     public function delete(Request $request)
     {
         try{
-            if($this->categoryRepository->delete($this->categoryRepository->find($request->id))) {
+            if($this->colorRepository->delete($this->colorRepository->find($request->id))) {
                 return response()->json(['status' => 'success', 'message' => TextSystemConst::DELETE_SUCCESS], 200);
             }
 
