@@ -168,6 +168,28 @@
                   </p>
                 </a>
               </li>
+              <li class="nav-item">
+                @php
+                    $isRouteUser = request()->is('admin/categories*');
+                @endphp
+                <a href="{{ route('admin.category_index') }}" class="nav-link {{ ($isRouteUser) ? 'active' : '' }} next-link__js">
+                  <i class="nav-icon fas fa-inbox"></i>
+                  <p>
+                    {{ TextLayoutSidebar("category") }}
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                @php
+                    $isRouteUser = request()->is('admin/products*');
+                @endphp
+                <a href="{{ route('admin.staffs_index') }}" class="nav-link {{ ($isRouteUser) ? 'active' : '' }} next-link__js">
+                  <i class="nav-icon fas fa-inbox"></i>
+                  <p>
+                    {{ TextLayoutSidebar("product") }}
+                  </p>
+                </a>
+              </li>
               <li class="nav-header">{{ TextLayoutSidebar("infomations") }}</li>
               <li class="nav-item">
                 <a href="{{route('admin.profile_change-profile')}}" class="nav-link {{ (Route::is('admin.profile_change-profile')) ? 'active' : '' }} next-link__js">

@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Auth\EmailVerificationPromptController as AdminEmailVerificationPromptController;
 use App\Http\Controllers\Admin\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +29,7 @@ Route::middleware(['auth.admin'])->group(function () {
 
 Route::middleware(['auth.admin', 'admin.verified'])->group(function () {
     Route::get('/', [DashboardController::class, "index"])->name('admin.home');
+
     Route::group(['prefix' => 'users'], function(){
         Route::get('/', [UserController::class, "index"])->name('admin.users_index');
         Route::get('create', [UserController::class, "create"])->name('admin.users_create');
@@ -35,19 +38,36 @@ Route::middleware(['auth.admin', 'admin.verified'])->group(function () {
         Route::post('update/{user}', [UserController::class, "update"])->name('admin.users_update');
         Route::post('delete', [UserController::class, "delete"])->name('admin.users_delete');
     });
+
     Route::group(['prefix' => 'staffs'], function(){
         Route::get('/', [AdminController::class, "index"])->name('admin.staffs_index');
         Route::get('create', [AdminController::class, "create"])->name('admin.staffs_create');
         Route::post('create', [AdminController::class, "store"])->name('admin.staffs_store');
         Route::get('edit/{user}', [AdminController::class, "edit"])->name('admin.staffs_edit');
-        Route::post('update/{user}', [AdminController::class, "update"])->name('admin.staffs_update');
+        Route::post('edit/{user}', [AdminController::class, "update"])->name('admin.staffs_update');
         Route::post('delete', [AdminController::class, "delete"])->name('admin.staffs_delete');
     });
+
     Route::group(['prefix' => 'profile'], function(){
         Route::get('/change-profile', [ProfileController::class, "changeProfile"])->name('admin.profile_change-profile');
         Route::post('/change-profile', [ProfileController::class, "updateProfile"])->name('admin.profile_update-profile');
         Route::get('/change-password', [ProfileController::class, "changePassword"])->name('admin.profile_change-password');
         Route::post('/change-password', [ProfileController::class, "updatePassword"])->name('admin.profile_update-password');
+    });
+
+    Route::group(['prefix' => 'products'], function(){
+        Route::get('/', [ProductController::class, "index"])->name('admin.product_index');
+        Route::get('create', [ProductController::class, "create"])->name('admin.product_create');
+        Route::post('create', [ProductController::class, "store"])->name('admin.product_store');
+    });
+
+    Route::group(['prefix' => 'categories'], function(){
+        Route::get('/', [CategoryController::class, "index"])->name('admin.category_index');
+        Route::get('create', [CategoryController::class, "create"])->name('admin.category_create');
+        Route::post('create', [CategoryController::class, "store"])->name('admin.category_store');
+        Route::get('edit/{category}', [CategoryController::class, "edit"])->name('admin.category_edit');
+        Route::post('update/{category}', [CategoryController::class, "update"])->name('admin.category_update');
+        Route::post('delete', [CategoryController::class, "delete"])->name('admin.category_delete');
     });
 });
 

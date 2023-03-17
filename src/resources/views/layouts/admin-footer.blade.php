@@ -61,6 +61,11 @@
 <!-- Select2 -->
 <script src="{{ asset('asset/admin/plugins/select2/js/select2.full.min.js') }}"></script>
 <script src="{{ asset('asset/admin/plugins/jquery-validation/jquery.validate.js') }}"></script>
+<script src="{{ asset('asset/admin/plugins/summernote/summernote-bs4.min.js') }}"></script>
+<script src="{{ asset('asset/admin/plugins/codemirror/codemirror.js') }}"></script>
+<script src="{{ asset('asset/admin/plugins/codemirror/mode/css/css.js') }}"></script>
+<script src="{{ asset('asset/admin/plugins/codemirror/mode/xml/xml.js') }}"></script>
+<script src="{{ asset('asset/admin/plugins/codemirror/mode/htmlmixed/htmlmixed.js') }}"></script>
 @vite(['resources/admin/js/next-link.js'])
 </body>
 </html>
