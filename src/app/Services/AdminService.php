@@ -684,7 +684,7 @@ class AdminService
 
     public function update(UpdateStaffRequest $request, User $user)
     {
-        // try {
+        try {
             if ($user->role_id == Role::ROLE['user']) {
                 return redirect()->route('admin.staffs_index')->with('error', TextSystemConst::UPDATE_FAILED);
             }
@@ -746,11 +746,11 @@ class AdminService
             }
             DB::commit();
             return redirect()->route('admin.staffs_index')->with('success', TextSystemConst::UPDATE_SUCCESS);
-        // } catch (Exception $e) {
-        //     Log::error($e);
-        //     DB::rollBack();
-        //     return redirect()->route('admin.staffs_index')->with('error', TextSystemConst::UPDATE_FAILED);
-        // }
+        } catch (Exception $e) {
+            Log::error($e);
+            DB::rollBack();
+            return redirect()->route('admin.staffs_index')->with('error', TextSystemConst::UPDATE_FAILED);
+        }
     }
 
      /** 
