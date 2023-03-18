@@ -27,6 +27,7 @@ if (!function_exists('TextLayoutSidebar')) {
             "product"               => "Sản Phẩm",
             "category"              => "Danh Mục",
             "color"                 => "Màu Sắc",
+            "brand"                 => "Thương Hiệu",
         ];
         return $const[$key];
     }
@@ -61,6 +62,9 @@ if (!function_exists('TextLayoutTitle')) {
             "color"                 => "Quản Lý Màu Sắc",
             "edit_color"            => "Chỉnh Sửa Màu Sắc",
             "create_color"          => "Thêm Mới Màu Sắc",
+            "create_brand"          => "Thêm Mới Thương Hiệu",
+            "edit_brand"            => "Chỉnh Sửa Thương Hiệu",
+            "brand"                 => "Quản Lý Thương Hiệu",
         ];
         return $const[$index];
     }

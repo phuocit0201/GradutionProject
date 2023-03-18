@@ -25,8 +25,8 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('categories');
             $table->bigInteger('product_type_id')->unsigned();
             $table->foreign('product_type_id')->references('id')->on('product_type');
-            $table->bigInteger('branch_id')->unsigned();
-            $table->foreign('branch_id')->references('id')->on('branches');
+            $table->bigInteger('brand_id')->unsigned();
+            $table->foreign('brand_id')->references('id')->on('brands');
             $table->bigInteger('origin_id')->unsigned();
             $table->foreign('origin_id')->references('id')->on('origins');
             $table->timestamps();
