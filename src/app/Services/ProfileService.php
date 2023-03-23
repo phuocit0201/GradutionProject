@@ -33,7 +33,7 @@ class ProfileService
     private $addressRepository;
 
     /**
-     * UserService constructor.
+     * ProfileService constructor.
      *
      * @param UserRepository $userRepository
      * @param AddressRepository $addressRepository

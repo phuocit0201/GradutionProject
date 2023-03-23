@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreCategoryRequest;
 use App\Models\Brand;
-use App\Models\Color;
 use App\Services\BrandService;
-use App\Services\ColorService;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller

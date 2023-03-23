@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ColorController;
+use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\UserController;
@@ -88,6 +89,15 @@ Route::middleware(['auth.admin', 'admin.verified'])->group(function () {
         Route::get('edit/{brand}', [BrandController::class, "edit"])->name('admin.brands_edit');
         Route::post('update/{brand}', [BrandController::class, "update"])->name('admin.brands_update');
         Route::post('delete', [BrandController::class, "delete"])->name('admin.brands_delete');
+    });
+
+    Route::group(['prefix' => 'payments'], function(){
+        Route::get('/', [PaymentMethodController::class, "index"])->name('admin.payments_index');
+        Route::get('create', [PaymentMethodController::class, "create"])->name('admin.payments_create');
+        Route::post('create', [PaymentMethodController::class, "store"])->name('admin.payments_store');
+        Route::get('edit/{brand}', [PaymentMethodController::class, "edit"])->name('admin.payments_edit');
+        Route::post('update/{brand}', [PaymentMethodController::class, "update"])->name('admin.payments_update');
+        Route::post('delete', [PaymentMethodController::class, "delete"])->name('admin.payments_delete');
     });
 });
 
