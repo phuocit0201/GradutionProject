@@ -19,9 +19,9 @@ class ColorService
     private $colorRepository;
 
     /**
-     * CategoryService constructor.
+     * ColorRepository constructor.
      *
-     * @param ColorRepository $categoryRepository
+     * @param ColorRepository $colorRepository
      */
     public function __construct(ColorRepository $colorRepository)
     {
@@ -35,7 +35,7 @@ class ColorService
      */
     public function index()
     {
-        // Get list category
+        // Get list colors
         $list = $this->colorRepository->all();
         $tableCrud = [
             'headers' => [

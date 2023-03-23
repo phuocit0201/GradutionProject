@@ -11,7 +11,7 @@ use App\Models\Category;
 class CategoryRepository extends BaseRepository
 {
     /**
-     * UserRepository constructor.
+     * CategoryRepository constructor.
      *
      * @param Category $model
      */

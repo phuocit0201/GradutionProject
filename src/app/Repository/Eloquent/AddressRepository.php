@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 class AddressRepository extends BaseRepository implements AddressRepositoryInterface
 {
     /**
-     * UserRepository constructor.
+     * AddressRepository constructor.
      *
      * @param Address $model
      */

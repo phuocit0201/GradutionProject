@@ -15,9 +15,9 @@ class ColorRepository extends BaseRepository
      *
      * @param Color $model
      */
-    public function __construct(Color $category)
+    public function __construct(Color $color)
     {
-        parent::__construct($category);
+        parent::__construct($color);
     }
 }
 

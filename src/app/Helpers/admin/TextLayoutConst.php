@@ -28,6 +28,7 @@ if (!function_exists('TextLayoutSidebar')) {
             "category"              => "Danh Mục",
             "color"                 => "Màu Sắc",
             "brand"                 => "Thương Hiệu",
+            "payment_method"        => "Cổng Thanh Toán",
         ];
         return $const[$key];
     }
@@ -65,6 +66,7 @@ if (!function_exists('TextLayoutTitle')) {
             "create_brand"          => "Thêm Mới Thương Hiệu",
             "edit_brand"            => "Chỉnh Sửa Thương Hiệu",
             "brand"                 => "Quản Lý Thương Hiệu",
+            "payment_method"        => "Phương Thức Thanh Toán",
         ];
         return $const[$index];
     }

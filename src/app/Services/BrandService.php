@@ -21,7 +21,7 @@ class BrandService
     /**
      * BrandService constructor.
      *
-     * @param BrandRepository $categoryRepository
+     * @param BrandRepository $brandRepository
      */
     public function __construct(BrandRepository $brandRepository)
     {
@@ -35,7 +35,7 @@ class BrandService
      */
     public function index()
     {
-        // Get list category
+        // Get list brand
         $list = $this->brandRepository->all();
         $tableCrud = [
             'headers' => [

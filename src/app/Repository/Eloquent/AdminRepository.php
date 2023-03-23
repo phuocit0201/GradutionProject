@@ -13,7 +13,7 @@ use App\Repository\AdminRepositoryInterface;
 class AdminRepository extends BaseRepository implements AdminRepositoryInterface
 {
     /**
-     * UserRepository constructor.
+     * AdminRepository constructor.
      *
      * @param Admin $model
      */
