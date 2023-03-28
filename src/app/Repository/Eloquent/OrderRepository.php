@@ -84,6 +84,85 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         ->where('orders.id', $id)
         ->first();
     }
+
+    public function getRevenue()
+    {
+        return DB::table('orders')->where('order_status', 3)->sum('total_money');
+    }
+
+    public function getOrderTotal()
+    {
+        return DB::table('orders')->where('order_status', '!=', 2)->count();
+    }
+
+    /**
+     * Get orders total
+     */
+    public function getProductTotal()
+    {
+        return DB::table('products_size')
+        ->join('products_color', 'products_color.id', '=', 'products_size.product_color_id')
+        ->where('products_color.deleted_at', null)
+        ->sum('products_size.quantity');
+    }
+
+    /**
+     * Get total number of products sold
+     */
+    public function getTotalProductSold()
+    {
+        return DB::table('orders')
+        ->join('order_details', 'orders.id', '=', 'order_details.order_id')
+        ->where('orders.order_status', 3)
+        ->sum('order_details.quantity');
+    }
+
+    /**
+     * Get profit
+     */
+    public function getProfit()
+    {
+        return DB::select('
+            select sum(order_details.quantity * order_details.unit_price) - sum(order_details.quantity * products.price_import) as profit from products 
+            join products_color on products.id = products_color.product_id
+            join products_size on products_color.id = products_size.product_color_id
+            join order_details on products_size.id = order_details.product_size_id
+            join orders on orders.id = order_details.order_id
+            where orders.order_status = 3;
+        ')[0]->profit ?? 0;
+        ;
+    }
+
+    /**
+     * Sales statistics by day
+     */
+    public function salesStatisticsByDay()
+    {
+        return DB::select('
+            select day(created_at) as day, sum(total_money) as total from orders
+            where month(orders.created_at) = month(current_date())
+            and year(orders.created_at) = year(current_date())
+            and orders.order_status = 3
+            group by day(orders.created_at)
+            order by created_at asc
+            ;
+        ');
+        ;
+    }
+
+    /**
+     * Get 10 new orders
+     */
+    public function getNewOrders()
+    {
+        return DB::table('orders')
+        ->join('users', 'orders.user_id', '=', 'users.id')
+        ->join('payments', 'orders.payment_id', '=', 'payments.id')
+        ->select('users.name as user_name', 'users.email as user_email', 'payments.name as payment_name', 'orders.*')
+        ->orderByDesc('orders.id')
+        ->limit(10)
+        ->get();
+    }
 }
 
 ?>

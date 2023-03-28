@@ -3,9 +3,25 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Services\DashboardService;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
+    /**
+     * @var DashboardService
+     */
+    private $dashboardService;
+
+    /**
+     * BrandController constructor.
+     *
+     * @param DashboardService $dashboardService
+     */
+    public function __construct(DashboardService $dashboardService)
+    {
+        $this->dashboardService = $dashboardService;
+    }
     /**
      * Displays a dashboard.
      *
@@ -13,7 +29,6 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $dataView = ['title' => TextLayoutTitle("dashboard")];
-        return view('admin.dashboard.index', $dataView);
+        return view('admin.dashboard.index', $this->dashboardService->index());
     }
 }
