@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-     /**
+    /**
      * @var OrderService
      */
     private $orderService;
