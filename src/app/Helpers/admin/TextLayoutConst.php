@@ -69,6 +69,7 @@ if (!function_exists('TextLayoutTitle')) {
             "brand"                 => "Quản Lý Thương Hiệu",
             "payment_method"        => "Phương Thức Thanh Toán",
             "order"                 => "Quản Lý Đơn Hàng",
+            "order_detail"          => "Thông Tin Đơn Hàng",
         ];
         return $const[$index];
     }

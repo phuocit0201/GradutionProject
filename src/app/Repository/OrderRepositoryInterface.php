@@ -14,5 +14,15 @@ interface OrderRepositoryInterface
      * Get all orders 
      */
     public function getAllOrders();
+
+    /**
+     * Get orders detail
+     */
+    public function getOrderDetail($id);
+
+    /**
+     * Get customer information of the order
+     */
+    public function getInfoUserOfOrder($id);
 }
 ?>

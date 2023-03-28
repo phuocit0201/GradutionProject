@@ -4,20 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Order extends Model
+class OrderDetail extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'orders';
+    protected $table = 'order_details';
 
     /**
      * The attributes that are mass assignable.
@@ -25,11 +24,9 @@ class Order extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'payment_id',
-        'user_id',
-        'total_money',
-        'order_status',
-        'transport_fee',
-        'note',
+        'order_id',
+        'product_size_id',
+        'unit_price',
+        'quantity',
     ];
 }
