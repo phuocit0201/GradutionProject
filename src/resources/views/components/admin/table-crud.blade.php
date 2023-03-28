@@ -46,7 +46,7 @@
                                         $value = is_array($item_value = data_get($item, $header['key'])) ? nl2br(implode(PHP_EOL, $item_value)) : $item_value 
                                     @endphp
                                     @if (isset($header['format']))
-                                        {{ number_format ($value, 0 , ",", "." ) }}
+                                        {{ format_number_to_money ($value) }}
                                     @else
                                         {{$value}}
                                     @endif

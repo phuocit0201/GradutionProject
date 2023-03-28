@@ -18,5 +18,6 @@ class TextSystemConst
         'success' => 'Thay đổi mật khẩu thành công',
         'error' => 'Thực hiện thất bại vui lòng thử lại'
     ];
+    public const ORDER_PROCESSING = "Xử lý đơn hàng thành công";
 }
 ?>

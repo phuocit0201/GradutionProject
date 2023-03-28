@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ColorController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -98,6 +99,15 @@ Route::middleware(['auth.admin', 'admin.verified'])->group(function () {
         Route::get('edit/{brand}', [PaymentMethodController::class, "edit"])->name('admin.payments_edit');
         Route::post('update/{brand}', [PaymentMethodController::class, "update"])->name('admin.payments_update');
         Route::post('delete', [PaymentMethodController::class, "delete"])->name('admin.payments_delete');
+    });
+
+    Route::group(['prefix' => 'orders'], function(){
+        Route::get('/', [OrderController::class, "index"])->name('admin.orders_index');
+        Route::get('create', [OrderController::class, "create"])->name('admin.orders_create');
+        Route::post('create', [OrderController::class, "store"])->name('admin.orders_store');
+        Route::get('edit/{order}', [OrderController::class, "edit"])->name('admin.orders_edit');
+        Route::post('update/{order}', [OrderController::class, "update"])->name('admin.orders_update');
+        Route::post('delete', [OrderController::class, "delete"])->name('admin.orders_delete');
     });
 });
 
