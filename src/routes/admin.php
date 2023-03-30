@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -108,6 +109,15 @@ Route::middleware(['auth.admin', 'admin.verified'])->group(function () {
         Route::get('edit/{order}', [OrderController::class, "edit"])->name('admin.orders_edit');
         Route::post('update/{order}', [OrderController::class, "update"])->name('admin.orders_update');
         Route::post('delete', [OrderController::class, "delete"])->name('admin.orders_delete');
+    });
+
+    Route::group(['prefix' => 'sizes'], function(){
+        Route::get('/', [SizeController::class, "index"])->name('admin.sizes_index');
+        Route::get('create', [SizeController::class, "create"])->name('admin.sizes_create');
+        Route::post('create', [SizeController::class, "store"])->name('admin.sizes_store');
+        Route::get('edit/{size}', [SizeController::class, "edit"])->name('admin.sizes_edit');
+        Route::post('update/{size}', [SizeController::class, "update"])->name('admin.sizes_update');
+        Route::post('delete', [SizeController::class, "delete"])->name('admin.sizes_delete');
     });
 });
 

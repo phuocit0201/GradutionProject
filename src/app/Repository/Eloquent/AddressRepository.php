@@ -7,7 +7,7 @@ use App\Repository\AddressRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class UserRepository
+ * Class AddressRepository
  * @package App\Repositories\Eloquent
  */
 class AddressRepository extends BaseRepository implements AddressRepositoryInterface
@@ -15,7 +15,7 @@ class AddressRepository extends BaseRepository implements AddressRepositoryInter
     /**
      * AddressRepository constructor.
      *
-     * @param Address $model
+     * @param Address $address
      */
     public function __construct(Address $address)
     {

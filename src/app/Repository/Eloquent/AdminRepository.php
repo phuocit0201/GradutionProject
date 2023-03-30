@@ -7,7 +7,7 @@ use App\Models\Role;
 use App\Repository\AdminRepositoryInterface;
 
 /**
- * Class UserRepository
+ * Class AdminRepository
  * @package App\Repositories\Eloquent
  */
 class AdminRepository extends BaseRepository implements AdminRepositoryInterface
@@ -15,7 +15,7 @@ class AdminRepository extends BaseRepository implements AdminRepositoryInterface
     /**
      * AdminRepository constructor.
      *
-     * @param Admin $model
+     * @param Admin $admin
      */
     public function __construct(Admin $admin)
     {
