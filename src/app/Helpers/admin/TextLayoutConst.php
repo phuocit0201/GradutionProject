@@ -30,6 +30,7 @@ if (!function_exists('TextLayoutSidebar')) {
             "brand"                 => "Thương Hiệu",
             "payment_method"        => "Cổng Thanh Toán",
             "order"                 => "Đơn Hàng",
+            "size"                  => "Kích Thước",
         ];
         return $const[$key];
     }
@@ -70,6 +71,9 @@ if (!function_exists('TextLayoutTitle')) {
             "payment_method"        => "Phương Thức Thanh Toán",
             "order"                 => "Quản Lý Đơn Hàng",
             "order_detail"          => "Thông Tin Đơn Hàng",
+            "size"                  => "Quản Lý Kích Thước",
+            "create_size"           => "Thêm Mới Kích Thước",
+            "edit_size"             => "Chỉnh Sửa Kích Thước",
         ];
         return $const[$index];
     }

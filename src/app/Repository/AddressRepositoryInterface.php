@@ -5,7 +5,7 @@ namespace App\Repository;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Interface UserRepositoryInterface
+ * Interface AddressRepositoryInterface
  * @package App\Repositories
  */
 interface AddressRepositoryInterface

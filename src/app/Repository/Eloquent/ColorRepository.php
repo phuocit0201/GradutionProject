@@ -5,7 +5,7 @@ namespace App\Repository\Eloquent;
 use App\Models\Color;
 
 /**
- * Class UserRepository
+ * Class ColorRepository
  * @package App\Repositories\Eloquent
  */
 class ColorRepository extends BaseRepository
@@ -13,7 +13,7 @@ class ColorRepository extends BaseRepository
     /**
      * ColorRepository constructor.
      *
-     * @param Color $model
+     * @param Color $color
      */
     public function __construct(Color $color)
     {

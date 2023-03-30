@@ -15,7 +15,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     /**
      * UserRepository constructor.
      *
-     * @param User $model
+     * @param User $user
      */
     public function __construct(User $user)
     {
