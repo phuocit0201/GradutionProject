@@ -93,5 +93,13 @@ class BaseRepository implements BaseRepositoryInterface
     {
         return $this->model->where($attributes)->get();
     }
+
+    /**
+     * Get all of the users from the database
+     */
+    public function whereFirst($attributes)
+    {
+        return $this->model->where($attributes)->first();
+    }
 }
 ?>

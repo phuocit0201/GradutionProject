@@ -12,7 +12,7 @@
           chúng tôi sẽ gửi liên kết xác nhận đến cho bạn. Xin cảm ơn.
         @if (session('status') == 'verification-link-sent')
             <div class="login-box-msg text-success">
-              Một liên kết xác nhận đã được gửi đến địa chỉ email của bạn.
+              Một liên kết xác thực mới đã được gửi đến địa chỉ email của bạn.
             </div>
         @endif
       </p>

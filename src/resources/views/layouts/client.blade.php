@@ -12,6 +12,8 @@
       <link rel="stylesheet" href="{{ asset('css/flexslider.css') }}" type="text/css" media="screen"/>
       <link href="{{ asset('asset/client/css/sequence-looptheme.css') }}" rel="stylesheet" media="all"/>
       <link href="{{ asset('asset/client/css/style.css') }}" rel="stylesheet">
+      @vite(['resources/client/css/auth.css'])
+
       <!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script><![endif]-->
    </head>
    <body id="home">
@@ -25,27 +27,6 @@
                   <div class="col-md-10 col-sm-10">
                      <div class="header_top">
                         <div class="row">
-                           {{-- <div class="col-md-3">
-                              <ul class="option_nav">
-                                 <li class="dorpdown">
-                                    <a href="#">Eng</a>
-                                    <ul class="subnav">
-                                       <li><a href="#">Eng</a></li>
-                                       <li><a href="#">Vns</a></li>
-                                       <li><a href="#">Fer</a></li>
-                                       <li><a href="#">Gem</a></li>
-                                    </ul>
-                                 </li>
-                                 <li class="dorpdown">
-                                    <a href="#">USD</a>
-                                    <ul class="subnav">
-                                       <li><a href="#">USD</a></li>
-                                       <li><a href="#">UKD</a></li>
-                                       <li><a href="#">FER</a></li>
-                                    </ul>
-                                 </li>
-                              </ul>
-                           </div> --}}
                            <div class="col-md-6">
                               <ul class="topmenu">
                                  <li><a href="#">About Us</a></li>
@@ -58,8 +39,13 @@
                            </div>
                            <div class="col-md-6">
                               <ul class="usermenu">
-                                 <li><a href="checkout.html" class="log">Login</a></li>
-                                 <li><a href="checkout2.html" class="reg">Register</a></li>
+                                 @if (Auth::check())
+                                    <li><a href="{{ route('user.login') }}" class="log">{{ Auth::user()->name }}</a></li>
+                                    <li><a href="{{ route('user.logout') }}" class="reg">Đăng xuất</a></li>
+                                 @else
+                                    <li><a href="{{ route('user.login') }}" class="log">Đăng Nhập</a></li>
+                                    <li><a href="{{ route('user.register') }}" class="reg">Đăng Kí</a></li>
+                                 @endif
                               </ul>
                            </div>
                         </div>
@@ -178,5 +164,7 @@
 	  <script type="text/javascript" src="{{ asset('asset/client/js/jquery.carouFredSel-6.2.1-packed.js') }}"></script>
 	  <script defer src="{{ asset('asset/client/js/jquery.flexslider.js') }}"></script>
 	  <script type="text/javascript" src="{{ asset('asset/client/js/script.min.js') }}" ></script>
+     <script src="{{ asset('asset/admin/plugins/jquery/jquery.min.js') }}"></script>
+     <script src="{{ asset('asset/admin/plugins/jquery-validation/jquery.validate.js') }}"></script>
    </body>
 </html>
