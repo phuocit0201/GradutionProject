@@ -2,8 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\HomeService;
+
 class HomeController extends Controller
 {
+    /**
+     * @var HomeService
+     */
+    private $homeService;
+
+    /**
+     * HomeController constructor.
+     *
+     * @param HomeService $homeService
+     */
+    public function __construct(HomeService $homeService)
+    {
+        $this->homeService = $homeService;
+    }
     /**
      * Displays home website.
      *
@@ -11,6 +27,6 @@ class HomeController extends Controller
      */
     public function index() 
     {
-        return view('client.index');
+        return view('client.index', $this->homeService->index());
     }
 }
