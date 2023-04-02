@@ -23,7 +23,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         parent::__construct($product);
     }
 
-        /**
+    /**
      * Get best selling product
      */
     public function getBestSellingProduct()
@@ -34,11 +34,21 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         join products_size on products_color.id = products_size.product_color_id
         join order_details on products_size.id = order_details.product_size_id
         join orders on orders.id = order_details.order_id
-        where orders.order_status = 3
+        where orders.order_status = 3 and products.deleted_at is null
         group by products.id, products.name, products.price_sell, products.img
         order by sum desc
+        limit 12
         ');
     }
+
+    /**
+     * Get new products
+     */
+    public function getNewProducts()
+    {
+        return $this->model->orderBy("id", "desc")->limit(10)->get();
+    }
+
 }
 
 ?>

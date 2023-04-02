@@ -30,9 +30,11 @@ class HomeService
     {
         // Get list payments
         $bellingProducts = $this->productRepository->getBestSellingProduct();
+        $newProducts = $this->productRepository->getNewProducts();
         return [
             'title' => TextLayoutTitle("payment_method"),
             'bellingProducts' => $bellingProducts,
+            'newProducts' => $newProducts,
         ];
     }
 }

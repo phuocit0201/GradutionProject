@@ -14,5 +14,10 @@ interface ProductRepositoryInterface
      * Get best selling product
      */
     public function getBestSellingProduct();
+
+    /**
+     * Get new products
+     */
+    public function getNewProducts();
 }
 ?>
