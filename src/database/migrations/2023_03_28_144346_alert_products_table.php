@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('origins', function (Blueprint $table) {
-            $table->id();
-            $table->char('name', 50);
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropForeign('products_origin_id_foreign');
+            $table->dropColumn('origin_id');
         });
     }
 
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('origins');
+        //
     }
 };
