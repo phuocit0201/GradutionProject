@@ -19,5 +19,11 @@ interface ProductRepositoryInterface
      * Get new products
      */
     public function getNewProducts();
+
+    /**
+     * Get total product sold by id
+     * @param int $id
+     */
+    public function getTotalProductSoldById($id);
 }
 ?>

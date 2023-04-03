@@ -5,9 +5,11 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductDetailController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, "index"])->name('user.home');
+Route::get('/product-detail/{product}', [ProductDetailController::class, "show"])->name('user.products_detail');
 
 Route::middleware(['auth.user'])->group(function () {
     Route::get('logout', [AuthenticatedSessionController::class, "destroy"])->name('user.logout');

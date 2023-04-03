@@ -21,6 +21,7 @@ export default defineConfig({
                 'resources/admin/css/form-edit.css',
                 'resources/client/js/register.js',
                 'resources/client/css/auth.css',
+                'resources/client/js/product-detail.js',
             ],
             refresh: true,
         }),
