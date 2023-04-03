@@ -9,7 +9,7 @@
       <link href="{{ asset('asset/client/css/bootstrap.css') }}" rel="stylesheet">
       <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,700,500italic,100italic,100' rel='stylesheet' type='text/css'>
       <link href="{{ asset('asset/client/css/font-awesome.min.css') }}" rel="stylesheet">
-      <link rel="stylesheet" href="{{ asset('css/flexslider.css') }}" type="text/css" media="screen"/>
+      <link rel="stylesheet" href="{{ asset('asset/client/css/flexslider.css') }}" type="text/css" media="screen"/>
       <link href="{{ asset('asset/client/css/sequence-looptheme.css') }}" rel="stylesheet" media="all"/>
       <link href="{{ asset('asset/client/css/style.css') }}" rel="stylesheet">
       @vite(['resources/client/css/auth.css'])
@@ -157,14 +157,15 @@
          </div>
       </div>
       <!-- Bootstrap core JavaScript==================================================-->
-	  <script type="text/javascript" src="{{ asset('asset/client/js/jquery-1.10.2.min.js') }}"></script>
+      <script src="{{ asset('asset/admin/plugins/jquery/jquery.min.js') }}"></script>
+      <script src="{{ asset('asset/admin/plugins/jquery-validation/jquery.validate.js') }}"></script>
+      <script type="text/javascript" src="{{ asset('asset/client/js/jquery-1.10.2.min.js') }}"></script>
 	  <script type="text/javascript" src="{{ asset('asset/client/js/jquery.easing.1.3.js') }}"></script>
 	  <script type="text/javascript" src="{{ asset('asset/client/js/bootstrap.min.js') }}"></script>
 	  <script type="text/javascript" src="{{ asset('asset/client/js/jquery.sequence-min.js') }}"></script>
 	  <script type="text/javascript" src="{{ asset('asset/client/js/jquery.carouFredSel-6.2.1-packed.js') }}"></script>
+     <script type="text/javascript" src="{{ asset('asset/client/js/script.min.js') }}" ></script>
 	  <script defer src="{{ asset('asset/client/js/jquery.flexslider.js') }}"></script>
-	  <script type="text/javascript" src="{{ asset('asset/client/js/script.min.js') }}" ></script>
-     <script src="{{ asset('asset/admin/plugins/jquery/jquery.min.js') }}"></script>
-     <script src="{{ asset('asset/admin/plugins/jquery-validation/jquery.validate.js') }}"></script>
+
    </body>
 </html>
