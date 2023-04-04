@@ -2,13 +2,12 @@
 
 namespace App\Repository\Eloquent;
 
-use App\Models\Color;
 use App\Models\Product;
 use App\Repository\ProductRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Class ColorRepository
+ * Class ProductRepository
  * @package App\Repositories\Eloquent
  */
 class ProductRepository extends BaseRepository implements ProductRepositoryInterface

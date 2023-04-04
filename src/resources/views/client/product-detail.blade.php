@@ -57,49 +57,52 @@
               <div class="price">
                 Price : 
                 <span class="new_price">
-                  {{ number_format($productSold->price_sell) }}
+                  {{ format_number_to_money($productSold->price_sell) }}
                   <sup>
                     VNĐ
                   </sup>
                 </span>
               </div>
               <hr class="border">
-              <div class="wided row">
-                <div class="col-md-3 wided-box">
-                  Màu &nbsp;&nbsp;: 
-                  <select id="data-color">
-                    @foreach ($productColor as $color)
-                      <option value="{{ $color->id }}">
-                        {{ $color->color_name }}
-                      </option>
-                    @endforeach
-                  </select>
-                </div>
-                <div class="col-md-3 wided-box">
-                  Kích thước &nbsp;&nbsp;: 
-                  <select id="data-size" data-sizes="{{ json_encode($productSize) }}">
-                    
-                  </select>
-                </div>
-                <div class="col-md-3 wided-box">
-                  <div style="display: flex; align-items: center; height: 30px;">
-                    Số lượng còn &nbsp;&nbsp;: <span id="quantity_remain" style="margin-left: 10px;"></span>
+              <form action="{{ route('cart.store') }}" method="POST">
+                @csrf
+                <div class="wided row">
+                  <div class="col-md-3 wided-box">
+                    Màu &nbsp;&nbsp;: 
+                    <select id="data-color">
+                      @foreach ($productColor as $color)
+                        <option value="{{ $color->id }}">
+                          {{ $color->color_name }}
+                        </option>
+                      @endforeach
+                    </select>
+                  </div>
+                  <div class="col-md-3 wided-box">
+                    Kích thước &nbsp;&nbsp;: 
+                    <select id="data-size" data-sizes="{{ json_encode($productSize) }}" name="id">
+                      
+                    </select>
+                  </div>
+                  <div class="col-md-3 wided-box">
+                    <div style="display: flex; align-items: center; height: 30px;">
+                      Số lượng còn &nbsp;&nbsp;: <span id="quantity_remain" style="margin-left: 10px;"></span>
+                    </div>
+                  </div>
+                  <div class="col-md-3 wided-box" style="display: flex">
+                    <div style="display: flex; align-items: center;">
+                      <span>Số lượng&nbsp;&nbsp;:</span>
+                    </div>
+                    <div style="margin-left: 10px;">
+                      <input type="number" value="1" min="1" name="quantity" style="max-width: 70px; height: 30px;">
+                    </div>
+                  </div>
+                  <div class="col-md-12 wided-box text-center">
+                    <button class="button add-to-cart-btn" >
+                      Thêm Vào Giỏ Hàng
+                    </button>
                   </div>
                 </div>
-                <div class="col-md-3 wided-box" style="display: flex">
-                  <div style="display: flex; align-items: center;">
-                    <span>Số lượng&nbsp;&nbsp;:</span>
-                  </div>
-                  <div style="margin-left: 10px;">
-                    <input type="number" value="1" min="1" style="max-width: 70px; height: 30px;">
-                  </div>
-                </div>
-                <div class="col-md-12 wided-box text-center">
-                  <button class="button add-to-cart-btn" >
-                    Thêm Vào Giỏ Hàng
-                  </button>
-                </div>
-              </div>
+              </form>
               <div class="clearfix">
               </div>
             </div>
