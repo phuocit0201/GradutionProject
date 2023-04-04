@@ -12,6 +12,7 @@
       <link rel="stylesheet" href="{{ asset('asset/client/css/flexslider.css') }}" type="text/css" media="screen"/>
       <link href="{{ asset('asset/client/css/sequence-looptheme.css') }}" rel="stylesheet" media="all"/>
       <link href="{{ asset('asset/client/css/style.css') }}" rel="stylesheet">
+      <link rel="stylesheet" href="{{ asset('asset/admin/plugins/fontawesome-free/css/all.min.css') }}">
       @vite(['resources/client/css/auth.css'])
 
       <!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script><![endif]-->
@@ -57,7 +58,7 @@
                               <form><input class="search-submit" type="submit" value=""><input class="search-input" placeholder="Enter your search term..." type="text" value="" name="search"></form>
                            </li>
                            <li class="option-cart">
-                              <a href="#" class="cart-icon">cart <span class="cart_no">02</span></a>
+                              <a href="{{ route('cart.index') }}" class="cart-icon">cart <span class="cart_no">02</span></a>
                               <ul class="option-cart-item">
                                  <li>
                                     <div class="cart-item">
@@ -93,7 +94,7 @@
                         <div class="navbar-collapse collapse">
                            <ul class="nav navbar-nav">
                               <li class="active dropdown">
-                                 <a href="#">Home</a>
+                                 <a href="{{ route('user.home') }}">Trang Chủ</a>
                               </li>
                            </ul>
                         </div>
@@ -156,6 +157,11 @@
             </div>
          </div>
       </div>
+      @if (Session::has('success'))
+        <span id="toast__js" message="{{ session('success') }}" type="success"></span>
+      @elseif (Session::has('error'))
+         <span id="toast__js" message="{{ session('error') }}" type="error"></span>
+      @endif
       <!-- Bootstrap core JavaScript==================================================-->
       <script src="{{ asset('asset/admin/plugins/jquery/jquery.min.js') }}"></script>
       <script src="{{ asset('asset/admin/plugins/jquery-validation/jquery.validate.js') }}"></script>
@@ -166,6 +172,7 @@
 	  <script type="text/javascript" src="{{ asset('asset/client/js/jquery.carouFredSel-6.2.1-packed.js') }}"></script>
      <script type="text/javascript" src="{{ asset('asset/client/js/script.min.js') }}" ></script>
 	  <script defer src="{{ asset('asset/client/js/jquery.flexslider.js') }}"></script>
+     @vite(['resources/admin/js/toast-message.js'])
 
    </body>
 </html>

@@ -19,5 +19,6 @@ class TextSystemConst
         'error' => 'Thực hiện thất bại vui lòng thử lại'
     ];
     public const ORDER_PROCESSING = "Xử lý đơn hàng thành công";
+    public const ADD_CART_ERROR_QUANTITY = "Số lượng trong kho không đủ";
 }
 ?>
