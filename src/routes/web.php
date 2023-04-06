@@ -5,12 +5,17 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductDetailController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, "index"])->name('user.home');
 Route::get('/product-detail/{product}', [ProductDetailController::class, "show"])->name('user.products_detail');
+Route::get('/order', [OrderController::class, "index"])->name('order');
+
 Route::middleware(['auth.user'])->group(function () {
     Route::get('logout', [AuthenticatedSessionController::class, "destroy"])->name('user.logout');
     Route::group(['prefix' => 'cart'], function(){
@@ -20,6 +25,19 @@ Route::middleware(['auth.user'])->group(function () {
         Route::get('delete{id}', [CartController::class, 'delete'])->name('cart.delete');
         Route::get('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
     });
+
+    Route::group(['prefix' => 'checkout'], function(){
+        Route::get('/', [CheckOutController::class, 'index'])->name('checkout.index');
+        Route::post('/', [CheckOutController::class, 'store']);
+        Route::get('/callback-momo', [CheckOutController::class, 'callbackMomo'])->name('checkout.callback_momo');
+    });
+});
+
+Route::group(["prefix" => "payment"], function(){
+    Route::get('/', [PaymentController::class, "index"])->name('admin.payment.index');
+    Route::get('/pay-with-momo-atm', [PaymentController::class, "payWithMoMoATM"])->name('admin.payment.pay_with_momo_atm');
+    Route::get('/pay-with-vnpay', [PaymentController::class, "payWithVnpay"])->name('admin.payment.pay_with_vnpay');
+    Route::get('/result', [PaymentController::class, "result"])->name('admin.payment.result');
 });
 
 Route::middleware('guest')->group(function () {

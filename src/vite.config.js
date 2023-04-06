@@ -22,6 +22,7 @@ export default defineConfig({
                 'resources/client/js/register.js',
                 'resources/client/css/auth.css',
                 'resources/client/js/product-detail.js',
+                'resources/client/js/checkout.js'
             ],
             refresh: true,
         }),

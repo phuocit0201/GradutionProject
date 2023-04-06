@@ -14,6 +14,20 @@
     vertical-align: middle !important;
     text-align: center !important;
   }
+  .btn-a{
+    background: #fff;
+    padding: 10px 20px;
+    border: 1px solid #cccccc;
+    font-size: 14px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    outline: none;
+  }
+  .btn-a:hover{
+    background: #f7544a;
+    color: #fff;
+    transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750);
+  }
 </style>
 <div class="container_fullwidth">
     <div class="container shopping-cart">
@@ -111,10 +125,10 @@
                       {{ Cart::getTotalQuantity() }}
                     </span>
                   </div>
-                  <div class="text-center">
-                    <button>
+                  <div class="text-center" style="margin-top: 100px;">
+                    <a class="btn-a" href="{{ route('checkout.index') }}">
                       Thanh Toán
-                    </button>
+                    </a>
                   </div>
               </div>
             </div>
@@ -122,102 +136,6 @@
         </div>
       </div>
       <div class="clearfix">
-      </div>
-      <div class="our-brand">
-        <h3 class="title">
-          <strong>
-            Our 
-          </strong>
-          Brands
-        </h3>
-        <div class="control">
-          <a id="prev_brand" class="prev" href="#">
-            &lt;
-          </a>
-          <a id="next_brand" class="next" href="#">
-            &gt;
-          </a>
-        </div>
-        <ul id="braldLogo">
-          <li>
-            <ul class="brand_item">
-              <li>
-                <a href="#">
-                  <div class="brand-logo">
-                    <img src="images/envato.png" alt="">
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div class="brand-logo">
-                    <img src="images/themeforest.png" alt="">
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div class="brand-logo">
-                    <img src="images/photodune.png" alt="">
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div class="brand-logo">
-                    <img src="images/activeden.png" alt="">
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div class="brand-logo">
-                    <img src="images/envato.png" alt="">
-                  </div>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <ul class="brand_item">
-              <li>
-                <a href="#">
-                  <div class="brand-logo">
-                    <img src="images/envato.png" alt="">
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div class="brand-logo">
-                    <img src="images/themeforest.png" alt="">
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div class="brand-logo">
-                    <img src="images/photodune.png" alt="">
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div class="brand-logo">
-                    <img src="images/activeden.png" alt="">
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div class="brand-logo">
-                    <img src="images/envato.png" alt="">
-                  </div>
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
       </div>
     </div>
 </div>

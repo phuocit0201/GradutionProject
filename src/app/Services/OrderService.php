@@ -64,27 +64,43 @@ class OrderService
                     'key' => 'created_at',
                 ],
                 [
-                    'text' => 'Trạng Thái',
+                    'text' => 'Trạng Thái Đơn',
                     'key' => 'order_status',
                     'status' => [
                         [
                             'text' => 'Chờ Xử Lý',
-                            'value' => 0,
+                            'value' => Order::STATUS_ORDER['wait'],
                             'class' => 'badge badge-warning'
                         ],
                         [
                             'text' => 'Đang Giao Hàng',
-                            'value' => 1,
+                            'value' => Order::STATUS_ORDER['transporting'],
                             'class' => 'badge badge-info'
                         ],
                         [
                             'text' => 'Đã Hủy',
-                            'value' => 2,
+                            'value' => Order::STATUS_ORDER['cancel'],
                             'class' => 'badge badge-danger'
                         ],
                         [
                             'text' => 'Đã Nhận Hàng',
-                            'value' => 3,
+                            'value' => Order::STATUS_ORDER['received'],
+                            'class' => 'badge badge-success'
+                        ],
+                    ],
+                ],
+                [
+                    'text' => 'Trạng Thái Thanh Toán',
+                    'key' => 'payment_status',
+                    'status' => [
+                        [
+                            'text' => 'Chưa Thanh Toán',
+                            'value' => Order::PAYMENT_STATUS['unpaid'],
+                            'class' => 'badge badge-warning'
+                        ],
+                        [
+                            'text' => 'Đã Thanh Toán',
+                            'value' => Order::PAYMENT_STATUS['paid'],
                             'class' => 'badge badge-success'
                         ],
                     ],

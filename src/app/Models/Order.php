@@ -25,11 +25,25 @@ class Order extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'id',
         'payment_id',
         'user_id',
         'total_money',
         'order_status',
         'transport_fee',
         'note',
+        'payment_status',
+    ];
+
+    const STATUS_ORDER = [
+        'wait' => 0,
+        'transporting' => 1,
+        'cancel' => 2,
+        'received' => 3,
+    ];
+
+    const PAYMENT_STATUS = [
+        'unpaid' => 0,
+        'paid' => 1,
     ];
 }
