@@ -104,6 +104,70 @@
             </div>
          </div>
          @yield('content-client')
+         <div class="our-brand">
+            <h3 class="title"><strong>Our </strong> Brands</h3>
+            <div class="control"><a id="prev_brand" class="prev" href="#">&lt;</a><a id="next_brand" class="next" href="#">&gt;</a></div>
+            <ul id="braldLogo">
+                <li>
+                <ul class="brand_item">
+                    <li>
+                        <a href="#">
+                            <div class="brand-logo"><img src="{{ asset('asset/client/images/envato.png') }}" alt=""></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="brand-logo"><img src="{{ asset('asset/client/images/themeforest.png') }}" alt=""></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="brand-logo"><img src="{{ asset('asset/client/images/photodune.png') }}" alt=""></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="brand-logo"><img src="{{ asset('asset/client/images/activeden.png') }}" alt=""></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="brand-logo"><img src="{{ asset('asset/client/images/envato.png') }}" alt=""></div>
+                        </a>
+                    </li>
+                </ul>
+                </li>
+                <li>
+                <ul class="brand_item">
+                    <li>
+                        <a href="#">
+                            <div class="brand-logo"><img src="{{ asset('asset/client/images/envato.png') }}" alt=""></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="brand-logo"><img src="{{ asset('asset/client/images/themeforest.png') }}" alt=""></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="brand-logo"><img src="{{ asset('asset/client/images/photodune.png') }}" alt=""></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="brand-logo"><img src="{{ asset('asset/client/images/activeden.png') }}" alt=""></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="brand-logo"><img src="{{ asset('asset/client/images/envato.png') }}" alt=""></div>
+                        </a>
+                    </li>
+                </ul>
+                </li>
+            </ul>
+         </div>
          <div class="clearfix"></div>
          <div class="footer">
             <div class="footer-info">
@@ -173,6 +237,5 @@
      <script type="text/javascript" src="{{ asset('asset/client/js/script.min.js') }}" ></script>
 	  <script defer src="{{ asset('asset/client/js/jquery.flexslider.js') }}"></script>
      @vite(['resources/admin/js/toast-message.js'])
-
    </body>
 </html>

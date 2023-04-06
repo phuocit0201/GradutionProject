@@ -47,6 +47,7 @@ class ProductDetailService
             'productSold' => $productSold,
             'productColor' => $productColor,
             'productSize' => $productsize,
+            'product' => $product
         ];
     }
 }

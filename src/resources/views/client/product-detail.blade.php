@@ -4,6 +4,12 @@
   .wided-box{
     padding-top: 20px;
   }
+  .sub-img{
+    width: auto !important;
+  }
+  .prev-thum{
+    width: 100% !important;
+  }
 </style>
 <div class="container_fullwidth">
     <div class="container">
@@ -17,7 +23,7 @@
               <div class="thum-image">
                 <ul id="gallery_01" class="prev-thum">
                   @foreach ($productColor as $color)
-                    <li>
+                    <li class="sub-img">
                       <a href="#" data-image="{{ asset("asset/client/images/products/medium/$color->img") }}" data-zoom-image="{{ asset("asset/client/images/products/Large/products-01.jpg") }}">
                         <img src="{{ asset("asset/client/images/products/thum/products-01.png") }}" alt="">
                       </a>
@@ -36,28 +42,22 @@
             </div>
             <div class="products-description">
               <h5 class="name">
-                {{ $productSold->name }}
+                {{ $product->name }}
               </h5>
-              <p>
-                Số lượng trong kho: 
-                <span class=" light-red">
-                  {{ $productSold->sum }}
-                </span>
-              </p>
               <p>
                 Số lượng đã bán: 
                 <span class=" light-red">
-                  {{ $productSold->sum }}
+                  {{ $productSold->sum ?? 0}}
                 </span>
               </p>
               <p>
-                {{ $productSold->description }}
+                {{ $product->description }}
               </p>
               <hr class="border">
               <div class="price">
                 Price : 
                 <span class="new_price">
-                  {{ format_number_to_money($productSold->price_sell) }}
+                  {{ format_number_to_money($product->price_sell) }}
                   <sup>
                     VNĐ
                   </sup>

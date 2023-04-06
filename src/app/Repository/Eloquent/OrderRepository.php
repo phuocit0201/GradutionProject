@@ -31,6 +31,7 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         ->join('users', 'orders.user_id', '=', 'users.id')
         ->join('payments', 'orders.payment_id', '=', 'payments.id')
         ->select('users.name as user_name', 'users.email as user_email', 'payments.name as payment_name', 'orders.*')
+        ->orderByDesc('created_at')
         ->get();
     }
 

@@ -91,5 +91,4 @@
         </table>
     </div>
 </div>
-@vite(['resources/admin/js/table-data.js'])
-@vite(['resources/admin/js/toast-message.js'])
+@vite(['resources/admin/js/table-data.js', 'resources/admin/js/toast-message.js'])
