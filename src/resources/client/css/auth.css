@@ -34,3 +34,14 @@ label {
 .text-notification{
     font-size: 16px;
 }
+
+.profile{
+  font-size: 12px !important;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile span {
+  margin-left: 4px;
+}

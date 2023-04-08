@@ -1,58 +1,5 @@
 @extends('layouts.client')
 @section('content-client')
-<style>
-  .info-order{
-    padding: 15px 30px;
-  }
-  .info__order-box{
-    display: flex;
-    justify-content: space-between;
-    font-size: 16px;
-    font-weight: 600;
-  }
-  .discount{
-    display: flex;
-    padding-bottom: 20px;
-    border-bottom: 2px solid rgba(135, 151, 174, 0.15);
-  }
-
-  .payment-method{
-    border-top: 2px solid rgba(135, 151, 174, 0.15);
-    font-size: 16px;
-    font-weight: 600;
-    padding-top: 20px; 
-    padding-bottom: 10px;
-  }
-  
-  .discount input{
-    flex-grow: 1;
-  }
-  .discount div{
-    padding-left: 20px;
-  }
-  .payment-method-select{
-    border: 1px solid rgba(135, 151, 174, 0.15);
-    border-radius: 5px;
-    padding: 10px; 
-    margin-bottom: 5px; 
-    }
-  .payment-method-select--check{
-    display: flex;
-    align-items: center;
-    justify-content: space-between
-  }
-  .payment-method-select--check img{
-    width: 30px;
-  }
-  .payment-method-select--check span{
-    margin-top: 4px;
-    margin-left: 10px;
-  }
-  #payment_method-error{
-    font-size: 12px;
-    font-weight: 400;
-  }
-</style>
 <div class="container_fullwidth">
     <div class="container">
       <form action="{{ route('checkout.index') }}" method="POST">
@@ -246,6 +193,6 @@
       </div>
     </div>
   </div>
-@vite(['resources/client/js/checkout.js'])
+@vite(['resources/client/js/checkout.js', 'resources/client/css/checkout.css'])
 
 @endsection
