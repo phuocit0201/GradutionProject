@@ -1,34 +1,5 @@
 @extends('layouts.client')
 @section('content-client')
-<style>
-  .input-address{
-    height: 30px !important;
-  }
-  .fa-times-circle{
-    font-size: 24px;
-  }
-  .table-cart{
-    border-collapse: separate !important;
-  }
-  .table-cart  tr td{
-    vertical-align: middle !important;
-    text-align: center !important;
-  }
-  .btn-a{
-    background: #fff;
-    padding: 10px 20px;
-    border: 1px solid #cccccc;
-    font-size: 14px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    outline: none;
-  }
-  .btn-a:hover{
-    background: #f7544a;
-    color: #fff;
-    transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750);
-  }
-</style>
 <div class="container_fullwidth">
     <div class="container shopping-cart">
       <div class="row">
@@ -139,4 +110,5 @@
       </div>
     </div>
 </div>
+@vite(['resources/client/css/cart.css'])
 @endsection

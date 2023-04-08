@@ -39,15 +39,28 @@
                               </ul>
                            </div>
                            <div class="col-md-6">
-                              <ul class="usermenu">
-                                 @if (Auth::check())
-                                    <li><a href="{{ route('user.login') }}" class="log">{{ Auth::user()->name }}</a></li>
-                                    <li><a href="{{ route('user.logout') }}" class="reg">Đăng xuất</a></li>
-                                 @else
-                                    <li><a href="{{ route('user.login') }}" class="log">Đăng Nhập</a></li>
-                                    <li><a href="{{ route('user.register') }}" class="reg">Đăng Kí</a></li>
-                                 @endif
+                              @if (Auth::check())
+                              <ul class="nav navbar-nav usermenu">
+                                 <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle profile" data-toggle="dropdown">
+                                       <img src="{{ asset('asset/client/images/loginbg.png') }}" alt="">
+                                       <span>{{ Auth::user()->name }}</span>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                       <ul class="mega-menu-links">
+                                          <li><a href="{{ route('profile.index') }}">Thông tin cá nhân</a></li>
+                                          <li><a href="home3.html">Lịch sử mua hàng</a></li>
+                                          <li><a href="{{ route('user.logout') }}">Đăng xuất</a></li>
+                                       </ul>
+                                    </div>
+                                 </li>
                               </ul>
+                              @else
+                              <ul class="usermenu">
+                                 <li><a href="{{ route('user.login') }}" class="log">Đăng Nhập</a></li>
+                                 <li><a href="{{ route('user.register') }}" class="reg">Đăng Kí</a></li>
+                              </ul>
+                              @endif
                            </div>
                         </div>
                      </div>
@@ -104,70 +117,6 @@
             </div>
          </div>
          @yield('content-client')
-         <div class="our-brand">
-            <h3 class="title"><strong>Our </strong> Brands</h3>
-            <div class="control"><a id="prev_brand" class="prev" href="#">&lt;</a><a id="next_brand" class="next" href="#">&gt;</a></div>
-            <ul id="braldLogo">
-                <li>
-                <ul class="brand_item">
-                    <li>
-                        <a href="#">
-                            <div class="brand-logo"><img src="{{ asset('asset/client/images/envato.png') }}" alt=""></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="brand-logo"><img src="{{ asset('asset/client/images/themeforest.png') }}" alt=""></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="brand-logo"><img src="{{ asset('asset/client/images/photodune.png') }}" alt=""></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="brand-logo"><img src="{{ asset('asset/client/images/activeden.png') }}" alt=""></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="brand-logo"><img src="{{ asset('asset/client/images/envato.png') }}" alt=""></div>
-                        </a>
-                    </li>
-                </ul>
-                </li>
-                <li>
-                <ul class="brand_item">
-                    <li>
-                        <a href="#">
-                            <div class="brand-logo"><img src="{{ asset('asset/client/images/envato.png') }}" alt=""></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="brand-logo"><img src="{{ asset('asset/client/images/themeforest.png') }}" alt=""></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="brand-logo"><img src="{{ asset('asset/client/images/photodune.png') }}" alt=""></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="brand-logo"><img src="{{ asset('asset/client/images/activeden.png') }}" alt=""></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="brand-logo"><img src="{{ asset('asset/client/images/envato.png') }}" alt=""></div>
-                        </a>
-                    </li>
-                </ul>
-                </li>
-            </ul>
-         </div>
          <div class="clearfix"></div>
          <div class="footer">
             <div class="footer-info">

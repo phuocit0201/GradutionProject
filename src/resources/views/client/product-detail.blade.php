@@ -1,16 +1,5 @@
 @extends('layouts.client')
 @section('content-client')
-<style>
-  .wided-box{
-    padding-top: 20px;
-  }
-  .sub-img{
-    width: auto !important;
-  }
-  .prev-thum{
-    width: 100% !important;
-  }
-</style>
 <div class="container_fullwidth">
     <div class="container">
       <div class="row">
@@ -330,5 +319,5 @@
       </div>
     </div>
 </div>
-@vite(['resources/client/js/product-detail.js'])
+@vite(['resources/client/js/product-detail.js', 'resources/client/css/product-detail.css'])
 @endsection
