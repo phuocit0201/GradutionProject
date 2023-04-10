@@ -9,9 +9,12 @@
       <link href="{{ asset('asset/client/css/bootstrap.css') }}" rel="stylesheet">
       <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,700,500italic,100italic,100' rel='stylesheet' type='text/css'>
       <link href="{{ asset('asset/client/css/font-awesome.min.css') }}" rel="stylesheet">
-      <link rel="stylesheet" href="{{ asset('css/flexslider.css') }}" type="text/css" media="screen"/>
+      <link rel="stylesheet" href="{{ asset('asset/client/css/flexslider.css') }}" type="text/css" media="screen"/>
       <link href="{{ asset('asset/client/css/sequence-looptheme.css') }}" rel="stylesheet" media="all"/>
       <link href="{{ asset('asset/client/css/style.css') }}" rel="stylesheet">
+      <link rel="stylesheet" href="{{ asset('asset/admin/plugins/fontawesome-free/css/all.min.css') }}">
+      @vite(['resources/client/css/auth.css'])
+
       <!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script><![endif]-->
    </head>
    <body id="home">
@@ -25,27 +28,6 @@
                   <div class="col-md-10 col-sm-10">
                      <div class="header_top">
                         <div class="row">
-                           {{-- <div class="col-md-3">
-                              <ul class="option_nav">
-                                 <li class="dorpdown">
-                                    <a href="#">Eng</a>
-                                    <ul class="subnav">
-                                       <li><a href="#">Eng</a></li>
-                                       <li><a href="#">Vns</a></li>
-                                       <li><a href="#">Fer</a></li>
-                                       <li><a href="#">Gem</a></li>
-                                    </ul>
-                                 </li>
-                                 <li class="dorpdown">
-                                    <a href="#">USD</a>
-                                    <ul class="subnav">
-                                       <li><a href="#">USD</a></li>
-                                       <li><a href="#">UKD</a></li>
-                                       <li><a href="#">FER</a></li>
-                                    </ul>
-                                 </li>
-                              </ul>
-                           </div> --}}
                            <div class="col-md-6">
                               <ul class="topmenu">
                                  <li><a href="#">About Us</a></li>
@@ -57,10 +39,28 @@
                               </ul>
                            </div>
                            <div class="col-md-6">
-                              <ul class="usermenu">
-                                 <li><a href="checkout.html" class="log">Login</a></li>
-                                 <li><a href="checkout2.html" class="reg">Register</a></li>
+                              @if (Auth::check())
+                              <ul class="nav navbar-nav usermenu">
+                                 <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle profile" data-toggle="dropdown">
+                                       <img src="{{ asset('asset/client/images/loginbg.png') }}" alt="">
+                                       <span>{{ Auth::user()->name }}</span>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                       <ul class="mega-menu-links">
+                                          <li><a href="{{ route('profile.index') }}">Thông tin cá nhân</a></li>
+                                          <li><a href="{{ route('order_history.index') }}">Lịch sử mua hàng</a></li>
+                                          <li><a href="{{ route('user.logout') }}">Đăng xuất</a></li>
+                                       </ul>
+                                    </div>
+                                 </li>
                               </ul>
+                              @else
+                              <ul class="usermenu">
+                                 <li><a href="{{ route('user.login') }}" class="log">Đăng Nhập</a></li>
+                                 <li><a href="{{ route('user.register') }}" class="reg">Đăng Kí</a></li>
+                              </ul>
+                              @endif
                            </div>
                         </div>
                      </div>
@@ -71,7 +71,7 @@
                               <form><input class="search-submit" type="submit" value=""><input class="search-input" placeholder="Enter your search term..." type="text" value="" name="search"></form>
                            </li>
                            <li class="option-cart">
-                              <a href="#" class="cart-icon">cart <span class="cart_no">02</span></a>
+                              <a href="{{ route('cart.index') }}" class="cart-icon">cart <span class="cart_no">02</span></a>
                               <ul class="option-cart-item">
                                  <li>
                                     <div class="cart-item">
@@ -107,7 +107,7 @@
                         <div class="navbar-collapse collapse">
                            <ul class="nav navbar-nav">
                               <li class="active dropdown">
-                                 <a href="#">Home</a>
+                                 <a href="{{ route('user.home') }}">Trang Chủ</a>
                               </li>
                            </ul>
                         </div>
@@ -170,13 +170,21 @@
             </div>
          </div>
       </div>
+      @if (Session::has('success'))
+        <span id="toast__js" message="{{ session('success') }}" type="success"></span>
+      @elseif (Session::has('error'))
+         <span id="toast__js" message="{{ session('error') }}" type="error"></span>
+      @endif
       <!-- Bootstrap core JavaScript==================================================-->
-	  <script type="text/javascript" src="{{ asset('asset/client/js/jquery-1.10.2.min.js') }}"></script>
+      <script src="{{ asset('asset/admin/plugins/jquery/jquery.min.js') }}"></script>
+      <script src="{{ asset('asset/admin/plugins/jquery-validation/jquery.validate.js') }}"></script>
+      <script type="text/javascript" src="{{ asset('asset/client/js/jquery-1.10.2.min.js') }}"></script>
 	  <script type="text/javascript" src="{{ asset('asset/client/js/jquery.easing.1.3.js') }}"></script>
 	  <script type="text/javascript" src="{{ asset('asset/client/js/bootstrap.min.js') }}"></script>
 	  <script type="text/javascript" src="{{ asset('asset/client/js/jquery.sequence-min.js') }}"></script>
 	  <script type="text/javascript" src="{{ asset('asset/client/js/jquery.carouFredSel-6.2.1-packed.js') }}"></script>
+     <script type="text/javascript" src="{{ asset('asset/client/js/script.min.js') }}" ></script>
 	  <script defer src="{{ asset('asset/client/js/jquery.flexslider.js') }}"></script>
-	  <script type="text/javascript" src="{{ asset('asset/client/js/script.min.js') }}" ></script>
+     @vite(['resources/admin/js/toast-message.js'])
    </body>
 </html>

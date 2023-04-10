@@ -56,5 +56,16 @@
 <script src="{{ asset('asset/admin/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
 <script src="{{ asset('asset/admin/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
 <script src="{{ asset('asset/admin/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+<script src="{{ asset('asset/admin/plugins/moment/moment.min.js') }}"></script>
+<script src="{{ asset('asset/admin/plugins/inputmask/jquery.inputmask.min.js') }}"></script>
+<!-- Select2 -->
+<script src="{{ asset('asset/admin/plugins/select2/js/select2.full.min.js') }}"></script>
+<script src="{{ asset('asset/admin/plugins/jquery-validation/jquery.validate.js') }}"></script>
+<script src="{{ asset('asset/admin/plugins/summernote/summernote-bs4.min.js') }}"></script>
+<script src="{{ asset('asset/admin/plugins/codemirror/codemirror.js') }}"></script>
+<script src="{{ asset('asset/admin/plugins/codemirror/mode/css/css.js') }}"></script>
+<script src="{{ asset('asset/admin/plugins/codemirror/mode/xml/xml.js') }}"></script>
+<script src="{{ asset('asset/admin/plugins/codemirror/mode/htmlmixed/htmlmixed.js') }}"></script>
+@vite(['resources/admin/js/next-link.js'])
 </body>
 </html>

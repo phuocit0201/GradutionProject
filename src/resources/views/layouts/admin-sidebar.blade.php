@@ -114,7 +114,9 @@
         <!-- Brand Logo -->
         <a href="index3.html" class="brand-link">
           <img src="{{ asset('asset/admin/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-          <span class="brand-text font-weight-light">Admin</span>
+          <span class="brand-text font-weight-light">
+            {{ (Auth::guard('admin')->user()->id == 1) ? 'Quản Trị' : 'Nhân Viên'}}
+          </span>
         </a>
     
         <!-- Sidebar -->
@@ -125,7 +127,7 @@
               <img src="{{ asset('asset/admin/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-              <a href="#" class="d-block">Admin</a>
+              <a href="javascrip:void(0)" class="d-block">{{ Auth::guard('admin')->user()->name }}</a>
             </div>
           </div>
     
@@ -136,10 +138,124 @@
                    with font-awesome or any other icon font library -->
               <li class="nav-header">{{ TextLayoutSidebar("overview") }}</li>
               <li class="nav-item">
-                <a href="{{ route('admin.home') }}" class="nav-link {{ (Route::is('admin.home')) ? 'active' : '' }}">
+                <a href="{{ route('admin.home') }}" class="nav-link {{ (Route::is('admin.home')) ? 'active' : '' }} next-link__js">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>
                     {{ TextLayoutSidebar("dashboard") }}
+                  </p>
+                </a>
+              </li>
+              <li class="nav-header">{{ TextLayoutSidebar("website_management") }}</li>
+              <li class="nav-item">
+                @php
+                    $isRouteUser = request()->is('admin/users*');
+                @endphp
+                <a href="{{ route('admin.users_index') }}" class="nav-link {{ ($isRouteUser) ? 'active' : '' }} next-link__js">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p>
+                    {{ TextLayoutSidebar("customer") }}
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                @php
+                    $isRouteUser = request()->is('admin/staffs*');
+                @endphp
+                <a href="{{ route('admin.staffs_index') }}" class="nav-link {{ ($isRouteUser) ? 'active' : '' }} next-link__js">
+                  <i class="nav-icon fas fa-users-cog"></i>
+                  <p>
+                    {{ TextLayoutSidebar("administrators") }}
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                @php
+                    $isRouteUser = request()->is('admin/categories*');
+                @endphp
+                <a href="{{ route('admin.category_index') }}" class="nav-link {{ ($isRouteUser) ? 'active' : '' }} next-link__js">
+                  <i class="nav-icon fas fa-inbox"></i>
+                  <p>
+                    {{ TextLayoutSidebar("category") }}
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                @php
+                    $isRouteUser = request()->is('admin/products*');
+                @endphp
+                <a href="{{ route('admin.staffs_index') }}" class="nav-link {{ ($isRouteUser) ? 'active' : '' }} next-link__js">
+                  <i class="nav-icon fas fa-inbox"></i>
+                  <p>
+                    {{ TextLayoutSidebar("product") }}
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                @php
+                    $isRouteUser = request()->is('admin/colors*');
+                @endphp
+                <a href="{{ route('admin.colors_index') }}" class="nav-link {{ ($isRouteUser) ? 'active' : '' }} next-link__js">
+                  <i class="nav-icon fas fa-inbox"></i>
+                  <p>
+                    {{ TextLayoutSidebar("color") }}
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                @php
+                    $isRouteUser = request()->is('admin/brands*');
+                @endphp
+                <a href="{{ route('admin.brands_index') }}" class="nav-link {{ ($isRouteUser) ? 'active' : '' }} next-link__js">
+                  <i class="nav-icon fas fa-inbox"></i>
+                  <p>
+                    {{ TextLayoutSidebar("brand") }}
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                @php
+                    $isRouteUser = request()->is('admin/payments*');
+                @endphp
+                <a href="{{ route('admin.payments_index') }}" class="nav-link {{ ($isRouteUser) ? 'active' : '' }} next-link__js">
+                  <i class="nav-icon fas fa-inbox"></i>
+                  <p>
+                    {{ TextLayoutSidebar("payment_method") }}
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                @php
+                    $isRouteUser = request()->is('admin/orders*');
+                @endphp
+                <a href="{{ route('admin.orders_index') }}" class="nav-link {{ ($isRouteUser) ? 'active' : '' }} next-link__js">
+                  <i class="nav-icon fas fa-inbox"></i>
+                  <p>
+                    {{ TextLayoutSidebar("order") }}
+                  </p>
+                </a>
+              </li>
+              <li class="nav-header">{{ TextLayoutSidebar("infomations") }}</li>
+              <li class="nav-item">
+                <a href="{{route('admin.profile_change-profile')}}" class="nav-link {{ (Route::is('admin.profile_change-profile')) ? 'active' : '' }} next-link__js">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>
+                    {{ TextLayoutSidebar("profile") }}
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('admin.profile_change-password')}}" class="nav-link {{ (Route::is('admin.profile_change-password')) ? 'active' : '' }} next-link__js">
+                  <i class="nav-icon fas fa-key"></i>
+                  <p>
+                    {{ TextLayoutSidebar("change_password") }}
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('admin.logout')}}" class="nav-link next-link__js">
+                  <i class="nav-icon fas fa-sign-out-alt"></i>
+                  <p>
+                    {{ TextLayoutSidebar("logout") }}
                   </p>
                 </a>
               </li>
