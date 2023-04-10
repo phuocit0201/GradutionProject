@@ -49,7 +49,7 @@
                                     <div class="dropdown-menu">
                                        <ul class="mega-menu-links">
                                           <li><a href="{{ route('profile.index') }}">Thông tin cá nhân</a></li>
-                                          <li><a href="home3.html">Lịch sử mua hàng</a></li>
+                                          <li><a href="{{ route('order_history.index') }}">Lịch sử mua hàng</a></li>
                                           <li><a href="{{ route('user.logout') }}">Đăng xuất</a></li>
                                        </ul>
                                     </div>

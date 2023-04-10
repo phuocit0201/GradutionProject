@@ -31,7 +31,8 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         ->join('users', 'orders.user_id', '=', 'users.id')
         ->join('payments', 'orders.payment_id', '=', 'payments.id')
         ->select('users.name as user_name', 'users.email as user_email', 'payments.name as payment_name', 'orders.*')
-        ->orderByDesc('created_at')
+        ->orderByDesc('orders.created_at')
+        ->whereNull('orders.deleted_at')
         ->get();
     }
 
@@ -162,6 +163,22 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         ->select('users.name as user_name', 'users.email as user_email', 'payments.name as payment_name', 'orders.*')
         ->orderByDesc('orders.id')
         ->limit(10)
+        ->get();
+    }
+
+    /**
+     * Get orders by user
+     * @param int|string $id
+     */
+    public function getOrderByUser($id)
+    {
+        return DB::table('orders')
+        ->join('users', 'orders.user_id', '=', 'users.id')
+        ->join('payments', 'orders.payment_id', '=', 'payments.id')
+        ->select('users.name as user_name', 'users.email as user_email', 'payments.name as payment_name', 'orders.*')
+        ->where('user_id', $id)
+        ->whereNull('orders.deleted_at')
+        ->orderByDesc('orders.id')
         ->get();
     }
 }

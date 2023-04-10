@@ -20,5 +20,11 @@ class TextSystemConst
     ];
     public const ORDER_PROCESSING = "Xử lý đơn hàng thành công";
     public const ADD_CART_ERROR_QUANTITY = "Số lượng trong kho không đủ";
+    public const MESS_ORDER_HISTORY = [
+        'cancel' => "Bạn đã hủy đơn hàng thành công",
+        'confirm' => "Bạn đã nhận hàng thành công",
+        'delete' => "Bạn đã xóa đơn hàng thành công",
+        'reorder' => "Bạn đã đặt lại đơn hàng thành công",
+    ];
 }
 ?>

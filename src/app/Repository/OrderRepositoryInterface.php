@@ -59,5 +59,11 @@ interface OrderRepositoryInterface
      * Get 10 new orders
      */
     public function getNewOrders();
+
+    /**
+     * Get orders by user
+     * @param int|string $id
+     */
+    public function getOrderByUser($id);
 }
 ?>

@@ -142,7 +142,7 @@ class CheckOutService
                 return $this->payWithMoMo($order->id."", $order->total_money."", route('checkout.callback_momo'), route('cart.index'));
             }
 
-            return redirect()->route('user.home');
+            return redirect()->route('order_history.index');
         } catch (Exception $e) {
             Log::error($e);
             DB::rollBack();
@@ -193,7 +193,7 @@ class CheckOutService
             $this->orderRepository->update($order, ['payment_status' => Order::PAYMENT_STATUS['paid']]);
         }
         
-        return redirect()->route('user.home');
+        return redirect()->route('order_history.index');
     }
 
     public function payWithMoMo($orderId, $amount, $returnUrl, $notifyurl)

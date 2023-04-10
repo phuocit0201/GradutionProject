@@ -32,3 +32,31 @@
   .container_fullwidth{
     padding-bottom: 0px !important; 
   }
+  .title {
+    font-weight: 600;
+  }
+  .badge-success{
+    background-color: #28a745 !important;
+  }
+  .badge-warning {
+    color: #212529 !important;
+    background-color: #ffc107 !important;
+  }
+  .badge-info {
+    color: #fff !important;
+    background-color: #17a2b8 !important;
+  }
+
+  .badge-danger {
+    color: #fff !important;
+    background-color: #dc3545 !important;
+  }
+  
+  .table-cart thead tr th{
+    font-size: 14px !important;
+    font-weight: 600;
+  }
+
+  .table-cart tbody td{
+    font-size: 13px !important;
+  }

@@ -8,6 +8,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderHistoryController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\ProfileController;
@@ -37,6 +38,12 @@ Route::middleware(['auth.user'])->group(function () {
         Route::get('/', [ProfileController::class, 'index'])->name('profile.index');
         Route::post('/change-password', [ProfileController::class, 'changePassword'])->name('profile.change_password');
         Route::post('/change-profile', [ProfileController::class, 'changeProfile'])->name('profile.change_profile');
+    });
+
+    Route::group(['prefix' => 'order-history'], function(){
+        Route::get('/', [OrderHistoryController::class, 'index'])->name('order_history.index');
+        Route::get('/detail/{order}', [OrderHistoryController::class, 'show'])->name('order_history.show');
+        Route::get('/update/{order}', [OrderHistoryController::class, 'update'])->name('order_history.update');
     });
 });
 
