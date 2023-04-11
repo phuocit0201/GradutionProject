@@ -35,4 +35,8 @@ class Product extends Model
         'product_type_id',
         'brand_id',
     ];
+
+    const PRODUCT_NUMBER_ITEM = [
+        'search' => 24,
+    ];
 }
