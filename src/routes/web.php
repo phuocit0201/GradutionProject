@@ -7,16 +7,15 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderHistoryController;
-use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, "index"])->name('user.home');
 Route::get('/product-detail/{product}', [ProductDetailController::class, "show"])->name('user.products_detail');
-Route::get('/order', [OrderController::class, "index"])->name('order');
+Route::get('/search', [SearchController::class, "search"])->name('user.search');
 
 Route::middleware(['auth.user'])->group(function () {
     Route::get('logout', [AuthenticatedSessionController::class, "destroy"])->name('user.logout');
@@ -45,13 +44,6 @@ Route::middleware(['auth.user'])->group(function () {
         Route::get('/detail/{order}', [OrderHistoryController::class, 'show'])->name('order_history.show');
         Route::get('/update/{order}', [OrderHistoryController::class, 'update'])->name('order_history.update');
     });
-});
-
-Route::group(["prefix" => "payment"], function(){
-    Route::get('/', [PaymentController::class, "index"])->name('admin.payment.index');
-    Route::get('/pay-with-momo-atm', [PaymentController::class, "payWithMoMoATM"])->name('admin.payment.pay_with_momo_atm');
-    Route::get('/pay-with-vnpay', [PaymentController::class, "payWithVnpay"])->name('admin.payment.pay_with_vnpay');
-    Route::get('/result', [PaymentController::class, "result"])->name('admin.payment.result');
 });
 
 Route::middleware('guest')->group(function () {

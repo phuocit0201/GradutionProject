@@ -28,15 +28,15 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     public function getBestSellingProduct()
     {
         return DB::select('
-        select sum(order_details.quantity) as sum, products.id, products.name, products.price_sell, products.img from products 
-        join products_color on products.id = products_color.product_id
-        join products_size on products_color.id = products_size.product_color_id
-        join order_details on products_size.id = order_details.product_size_id
-        join orders on orders.id = order_details.order_id
-        where orders.order_status = 3 and products.deleted_at is null
-        group by products.id, products.name, products.price_sell, products.img
-        order by sum desc
-        limit 12
+            select sum(order_details.quantity) as sum, products.id, products.name, products.price_sell, products.img from products 
+            join products_color on products.id = products_color.product_id
+            join products_size on products_color.id = products_size.product_color_id
+            join order_details on products_size.id = order_details.product_size_id
+            join orders on orders.id = order_details.order_id
+            where orders.order_status = 3 and products.deleted_at is null
+            group by products.id, products.name, products.price_sell, products.img
+            order by sum desc
+            limit 12
         ');
     }
 
@@ -65,6 +65,27 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             where orders.order_status = 3 and products.id = $id
             group by products.id, products.name, products.price_sell, products.description, products.img;
         ")[0] ?? null;
+    }
+
+    public function getProductSearch($keyword = null, $category = null, $minPrice = null, $maxPrice = null, $brand = null)
+    {
+        return $this->model->when($keyword, function($query, $keyword){
+            return $query->where('name', 'LIKE', '%' . $keyword . '%');
+        })
+        ->when($category, function($query, $category){
+            return $query->where('category_id', $category);
+        })
+        ->when($minPrice, function ($query, $minPrice) {
+            return $query->where('price_sell', '>=', $minPrice);
+        })
+        ->when($maxPrice, function ($query, $maxPrice) {
+            return $query->where('price_sell', '<=', $maxPrice);
+        })
+        ->when($brand, function ($query, $brand) {
+            return $query->where('brand_id', $brand);
+        })
+        ->paginate(Product::PRODUCT_NUMBER_ITEM['search'])
+        ->withQueryString();
     }
 }
 

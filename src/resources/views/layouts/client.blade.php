@@ -68,7 +68,10 @@
                      <div class="header_bottom">
                         <ul class="option">
                            <li id="search" class="search">
-                              <form><input class="search-submit" type="submit" value=""><input class="search-input" placeholder="Enter your search term..." type="text" value="" name="search"></form>
+                              <form method="GET" action="{{ route('user.search') }}">
+                                 <input class="search-submit" type="submit" value="">
+                                 <input class="search-input" placeholder="Enter your search term..." type="text" value="" name="keyword">
+                              </form>
                            </li>
                            <li class="option-cart">
                               <a href="{{ route('cart.index') }}" class="cart-icon">cart <span class="cart_no">02</span></a>
