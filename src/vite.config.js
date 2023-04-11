@@ -26,6 +26,7 @@ export default defineConfig({
                 'resources/client/css/cart.css',
                 'resources/client/css/checkout.css',
                 'resources/client/css/product-detail.css',
+                'resources/client/css/search.css',
             ],
             refresh: true,
         }),

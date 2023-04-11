@@ -1,10 +1,5 @@
 @extends('layouts.client')
 @section('content-client')
-<style>
-    .form-select, .price-filter{
-        border-radius: 5px !important; 
-    }
-</style>
 <div class="container_fullwidth" style="min-height: calc(100vh - 389px);">
     <div class="container">
         <div class="hot-products">
@@ -76,4 +71,5 @@
         </div>
     </div>
 </div>
+@vite(['resources/client/css/search.css'])
 @endsection
