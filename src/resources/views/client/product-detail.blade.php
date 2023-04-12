@@ -1,5 +1,33 @@
 @extends('layouts.client')
 @section('content-client')
+<style>
+  .fa-star, .fa-star-half-alt{
+    color: #b1b1b1;
+    font-size: 20px;
+  }
+  .avg-star .fa-star, .fa-star-half-alt {
+    color: #F5A623;
+  }
+
+  .review-lable{
+    padding: 10px 0px;
+    font-size: 16px !important;
+  }
+
+  .number-avg-star{
+    font-weight: 700;
+    padding: 10px 0px;
+    color: #84c52c;
+  }
+  .star-none{
+    color: #b1b1b1 !important;
+  }
+  .parameter-review{
+    font-size: 16px;
+    padding-left: 4px;
+    font-weight: 600;
+  }
+</style>
 <div class="container_fullwidth">
     <div class="container">
       <div class="row">
@@ -103,157 +131,90 @@
               <ul>
                 <li>
                   <a href="#Descraption">
-                    DESCRIPTION
+                    Các Đánh Giá
                   </a>
                 </li>
                 <li>
                   <a href="#Reviews">
-                    REVIEW
+                    Đánh Giá Sản Phẩm
                   </a>
                 </li>
-                
               </ul>
             </div>
             <div class="tab-content-wrap">
               <div class="tab-content" id="Descraption">
-                <p>
-                  Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultri ces posuere cubilia curae Aenean eleifend laoreet congue. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibu um ante ipsum primis in faucibus orci luctus et ultri ces posuere cubilia curae Aenean eleifend laoreet congue. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultri ces posuere cubilia curae Aenean eleifend laoreet congue. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultri ces posuere cubilia curae...
-                </p>
-                <p>
-                  Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultri ces posuere cubilia curae Aenean eleifend laoreet congue. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibu um ante ipsum primis in faucibus orci luctus et ultri ces posuere cubilia curae Aenean eleifend laoreet congue. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc...
-                </p>
+                
               </div>
               <div class="tab-content" id="Reviews">
                 <form>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>
-                          &nbsp;
-                        </th>
-                        <th>
-                          1 star
-                        </th>
-                        <th>
-                          2 stars
-                        </th>
-                        <th>
-                          3 stars
-                        </th>
-                        <th>
-                          4 stars
-                        </th>
-                        <th>
-                          5 stars
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          Quality
-                        </td>
-                        <td>
-                          <input type="radio" name="quality" value="Blue"/>
-                        </td>
-                        <td>
-                          <input type="radio" name="quality" value="">
-                        </td>
-                        <td>
-                          <input type="radio" name="quality" value="">
-                        </td>
-                        <td>
-                          <input type="radio" name="quality" value="">
-                        </td>
-                        <td>
-                          <input type="radio" name="quality" value="">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Price
-                        </td>
-                        <td>
-                          <input type="radio" name="price" value="">
-                        </td>
-                        <td>
-                          <input type="radio" name="price" value="">
-                        </td>
-                        <td>
-                          <input type="radio" name="price" value="">
-                        </td>
-                        <td>
-                          <input type="radio" name="price" value="">
-                        </td>
-                        <td>
-                          <input type="radio" name="price" value="">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Value
-                        </td>
-                        <td>
-                          <input type="radio" name="value" value="">
-                        </td>
-                        <td>
-                          <input type="radio" name="value" value="">
-                        </td>
-                        <td>
-                          <input type="radio" name="value" value="">
-                        </td>
-                        <td>
-                          <input type="radio" name="value" value="">
-                        </td>
-                        <td>
-                          <input type="radio" name="value" value="">
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
                   <div class="row">
                     <div class="col-md-6 col-sm-6">
                       <div class="form-row">
-                        <label class="lebel-abs">
-                          Your Name 
-                          <strong class="red">
-                            *
-                          </strong>
+                        <label class="review-lable">
+                          Chọn sao cho sản phẩm
                         </label>
-                        <input type="text" name="" class="input namefild">
+                        <div class="rating">
+                            <input class="star" type="radio" hidden id="star1" name="rating" value="1" />
+                            <label for="star1" title="Poor" id="icon-star1">
+                                <i class="fas fa-star"></i>
+                            </label>
+                            <input class="star" type="radio" hidden id="star2" name="rating" value="2" />
+                            <label for="star2" title="Fair" id="icon-star2">
+                                <i class="fas fa-star"></i>
+                            </label>
+                            <input class="star" type="radio" hidden id="star3" name="rating" value="3" />
+                            <label for="star3" title="Good" id="icon-star3">
+                                <i class="fas fa-star"></i>
+                            </label>
+                            <input class="star" type="radio" hidden id="star4" name="rating" value="4" />
+                            <label for="star4" title="Very Good" id="icon-star4">
+                                <i class="fas fa-star"></i>
+                            </label>
+                            <input class="star" type="radio" hidden id="star5" name="rating" value="5" />
+                            <label for="star5" title="Excellent" id="icon-star5">
+                                <i class="fas fa-star"></i>
+                            </label>
+                        </div>
                       </div>
                       <div class="form-row">
-                        <label class="lebel-abs">
-                          Your Email 
-                          <strong class="red">
-                            *
-                          </strong>
+                        <label class="review-lable">
+                          Nội dung đánh giá
                         </label>
-                        <input type="email" name="" class="input emailfild">
-                      </div>
-                      <div class="form-row">
-                        <label class="lebel-abs">
-                          Summary of You Review 
-                          <strong class="red">
-                            *
-                          </strong>
-                        </label>
-                        <input type="text" name="" class="input summeryfild">
-                      </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                      <div class="form-row">
-                        <label class="lebel-abs">
-                          Your Name 
-                          <strong class="red">
-                            *
-                          </strong>
-                        </label>
-                        <textarea class="input textareafild" name="" rows="7" >
+                        <textarea style="width: 100%;" name="" rows="7" >
                         </textarea>
                       </div>
                       <div class="form-row">
-                        <input type="submit" value="Submit" class="button">
+                        <input type="submit" value="Đánh Giá" class="button">
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                      <div class="form-row row">
+                        <div class="col-md-5">
+                          <label class="title-avg-star review-lable">Đánh giá trung bình</label>
+                          <div class="avg-star">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                          </div>
+                          <h4 class="number-avg-star">4.5</h4>
+                        </div>
+                        <div class="col-md-6">
+                          <label class="title-avg-star review-lable">10 Đánh giá</label>
+                          @for ($i = 4; $i >= 0; $i--)
+                            <div class="avg-star">
+                              @for ($j = 0; $j <= 4; $j++)
+                                @if ($j <= $i)
+                                  <i class="fas fa-star"></i>
+                                @else
+                                  <i class="fas fa-star star-none"></i>
+                                @endif
+                              @endfor
+                              <span class="parameter-review">({{ $i }})</span>
+                            </div>
+                          @endfor
+                        </div>
                       </div>
                     </div>
                   </div>
