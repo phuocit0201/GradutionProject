@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Helpers\TextSystemConst;
-use App\Http\Requests\Admin\StoreCategoryRequest;
+use App\Http\Requests\Admin\StoreCommonRequest;
 use App\Models\Brand;
 use App\Repository\Eloquent\BrandRepository;
 use Exception;
@@ -123,7 +123,7 @@ class BrandService
      * @param App\Http\Requests\Admin\StoreCategoryRequest $request
      * @return Illuminate\Http\RedirectResponse
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(StoreCommonRequest $request)
     {
         try {
             $data = $request->validated();
@@ -184,7 +184,7 @@ class BrandService
         
     }
 
-    public function update(StoreCategoryRequest $request, Brand $color)
+    public function update(StoreCommonRequest $request, Brand $color)
     {
         try {
             $data = $request->validated();

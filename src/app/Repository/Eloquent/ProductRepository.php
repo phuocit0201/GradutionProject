@@ -87,6 +87,25 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         ->paginate(Product::PRODUCT_NUMBER_ITEM['search'])
         ->withQueryString();
     }
+
+    public function getProductBySlug($slug, $brand, $minPrice, $maxPrice)
+    {
+        return DB::table('products')
+        ->join('categories', 'products.category_id', '=', 'categories.id')
+        ->selectRaw('products.*')
+        ->where('categories.slug', $slug)
+        ->when($brand, function ($query, $brand) {
+            return $query->where('products.brand_id', $brand);
+        })
+        ->when($minPrice, function ($query, $minPrice) {
+            return $query->where('products.price_sell', '>=', $minPrice);
+        })
+        ->when($maxPrice, function ($query, $maxPrice) {
+            return $query->where('products.price_sell', '<=', $maxPrice);
+        })
+        ->get()
+        ;
+    }
 }
 
 ?>

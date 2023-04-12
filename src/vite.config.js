@@ -27,6 +27,7 @@ export default defineConfig({
                 'resources/client/css/checkout.css',
                 'resources/client/css/product-detail.css',
                 'resources/client/css/search.css',
+                'resources/client/js/show-product.js',
             ],
             refresh: true,
         }),

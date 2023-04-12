@@ -56,7 +56,9 @@
                             </div>
                             <div class="productname">{{ $product->name }}</div>
                             <h4 class="price">{{ format_number_to_money($product->price_sell) }} VNĐ</h4>
-                            <div class="button_group"><a href="{{ route('user.products_detail', $product->id) }}" class="button add-cart" type="button">Xem Chi Tiết</a></div>
+                            <div class="button_group">
+                                <a href="{{ route('user.products_detail', $product->id) }}" class="button add-cart" type="button">Xem Chi Tiết</a>
+                            </div>
                         </div>
                     </div>
                     @endforeach

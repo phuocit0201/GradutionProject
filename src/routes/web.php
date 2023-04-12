@@ -8,14 +8,16 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderHistoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, "index"])->name('user.home');
-Route::get('/product-detail/{product}', [ProductDetailController::class, "show"])->name('user.products_detail');
-Route::get('/search', [SearchController::class, "search"])->name('user.search');
+Route::get('product-detail/{product}', [ProductDetailController::class, "show"])->name('user.products_detail');
+Route::get('search', [SearchController::class, "search"])->name('user.search');
+Route::get('products/{slug}', [ProductController::class, "index"])->name('user.products');
 
 Route::middleware(['auth.user'])->group(function () {
     Route::get('logout', [AuthenticatedSessionController::class, "destroy"])->name('user.logout');

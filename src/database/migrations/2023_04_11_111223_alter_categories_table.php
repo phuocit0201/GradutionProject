@@ -13,9 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->dropForeign('products_origin_id_foreign');
-            $table->dropColumn('origin_id');
+        Schema::table('categories', function (Blueprint $table) {
+            $table->string('slug');
         });
     }
 
@@ -26,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::create('categories', function (Blueprint $table) {
+            $table->dropColumn('slug');
+        });
     }
 };

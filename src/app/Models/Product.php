@@ -37,6 +37,6 @@ class Product extends Model
     ];
 
     const PRODUCT_NUMBER_ITEM = [
-        'search' => 2,
+        'search' => 24,
     ];
 }

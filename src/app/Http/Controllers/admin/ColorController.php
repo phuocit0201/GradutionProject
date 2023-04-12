@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StoreCategoryRequest;
+use App\Http\Requests\Admin\StoreCommonRequest;
 use App\Models\Color;
 use App\Services\ColorService;
 use Illuminate\Http\Request;
@@ -39,7 +39,7 @@ class ColorController extends Controller
         return redirect()->route('admin.colors_index');
     }
 
-    public function store(StoreCategoryRequest $request)
+    public function store(StoreCommonRequest $request)
     {
         return $this->colorService->store($request);
     }
@@ -53,7 +53,7 @@ class ColorController extends Controller
         return redirect()->route('admin.colors_index');
     }
 
-    public function update(StoreCategoryRequest $request, Color $color)
+    public function update(StoreCommonRequest $request, Color $color)
     {
         return $this->colorService->update($request, $color);
     }
