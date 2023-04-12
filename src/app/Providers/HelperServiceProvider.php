@@ -16,6 +16,10 @@ class HelperServiceProvider extends ServiceProvider
         foreach (glob(app_path().'/Helpers/admin/*.php') as $filename) {
             require_once($filename);
         }
+
+        foreach (glob(app_path().'/Helpers/client/*.php') as $filename) {
+            require_once($filename);
+        }
     }
 
     /**

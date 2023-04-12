@@ -112,6 +112,11 @@
                               <li class="active dropdown">
                                  <a href="{{ route('user.home') }}">Trang Chủ</a>
                               </li>
+                              @foreach (category_header() as $category)
+                                 <li class="dropdown">
+                                    <a href="{{ route('user.products', $category->slug) }}">{{ $category->name }}</a>
+                                 </li>
+                              @endforeach
                            </ul>
                         </div>
                      </div>

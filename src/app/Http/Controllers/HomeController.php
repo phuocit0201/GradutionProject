@@ -27,6 +27,7 @@ class HomeController extends Controller
      */
     public function index() 
     {
+        // dd(category_header());
         return view('client.index', $this->homeService->index());
     }
 }

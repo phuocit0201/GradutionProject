@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Helpers\TextSystemConst;
 use App\Http\Requests\Admin\StoreCategoryRequest;
+use App\Http\Requests\Admin\StoreCommonRequest;
 use App\Models\Color;
 use App\Repository\Eloquent\ColorRepository;
 use Exception;
@@ -120,10 +121,10 @@ class ColorService
 
     /** 
      * store the admin in the database.
-     * @param App\Http\Requests\Admin\StoreCategoryRequest $request
+     * @param App\Http\Requests\Admin\StoreCommonRequest $request
      * @return Illuminate\Http\RedirectResponse
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(StoreCommonRequest $request)
     {
         try {
             $data = $request->validated();
@@ -184,7 +185,7 @@ class ColorService
         
     }
 
-    public function update(StoreCategoryRequest $request, Color $color)
+    public function update(StoreCommonRequest $request, Color $color)
     {
         try {
             $data = $request->validated();

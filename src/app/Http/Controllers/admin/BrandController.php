@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreCategoryRequest;
+use App\Http\Requests\Admin\StoreCommonRequest;
 use App\Models\Brand;
 use App\Services\BrandService;
 use Illuminate\Http\Request;
@@ -39,7 +40,7 @@ class BrandController extends Controller
         return redirect()->route('admin.brands_index');
     }
 
-    public function store(StoreCategoryRequest $request)
+    public function store(StoreCommonRequest $request)
     {
         return $this->brandService->store($request);
     }
@@ -53,7 +54,7 @@ class BrandController extends Controller
         return redirect()->route('admin.brands_index');
     }
 
-    public function update(StoreCategoryRequest $request, Brand $brand)
+    public function update(StoreCommonRequest $request, Brand $brand)
     {
         return $this->brandService->update($request, $brand);
     }

@@ -81,12 +81,19 @@ class CategoryService
     public function create()
     {
         try {
+            $categoryParent = Category::select('id as value', 'name as text')->where('parent_id', 0)->get()->toArray();
             // Fields form
             $fields = [
                 [
                     'attribute' => 'name',
                     'label' => 'Tên Danh Mục',
                     'type' => 'text',
+                ],
+                [
+                    'attribute' => 'parent_id',
+                    'label' => 'Thời Trang',
+                    'type' => 'select',
+                    'list' => $categoryParent,
                 ],
             ];
     
@@ -129,11 +136,12 @@ class CategoryService
     {
         try {
             $data = $request->validated();
+            $data['slug'] = $request->name;
             $this->categoryRepository->create($data);
             return redirect()->route('admin.category_index')->with('success', TextSystemConst::CREATE_SUCCESS);
         } catch (Exception $e) {
             Log::error($e);
-            return redirect()->route('admin.staffs_index')->with('error', TextSystemConst::CREATE_FAILED);
+            return redirect()->route('admin.category_index')->with('error', TextSystemConst::CREATE_FAILED);
         }
     }
 
