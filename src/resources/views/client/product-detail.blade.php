@@ -146,7 +146,8 @@
                 
               </div>
               <div class="tab-content" id="Reviews">
-                <form>
+                <form method="POST" action="{{ route('product_review.store', $product->id) }}">
+                  @csrf
                   <div class="row">
                     <div class="col-md-6 col-sm-6">
                       <div class="form-row">
@@ -180,7 +181,7 @@
                         <label class="review-lable">
                           Nội dung đánh giá
                         </label>
-                        <textarea style="width: 100%;" name="" rows="7" >
+                        <textarea style="width: 100%;" name="content" rows="7" >
                         </textarea>
                       </div>
                       <div class="form-row">
