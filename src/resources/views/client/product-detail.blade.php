@@ -27,6 +27,29 @@
     padding-left: 4px;
     font-weight: 600;
   }
+  .title-review ul li a {
+    padding: 15px 20px;
+    font-size: 18px;
+    border: 1px solid #cccccc;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    width: auto;
+    position: relative;
+    background: #f7544a;
+    color: #fff;
+    border: 1px solid #f7544a;
+  }
+
+  .title-review ul li a:hover{
+    cursor: default;
+  }
+  .tab-content{
+    margin: 25px 0px;
+  }
+
+  .tab-content{
+    display: block !important;
+  }
 </style>
 <div class="container_fullwidth">
     <div class="container">
@@ -126,100 +149,110 @@
           </div>
           <div class="clearfix">
           </div>
+          @if ($checkReviewProduct)
+            <div class="tab-box">
+              <div class="title-review">
+                <ul>
+                  <li>
+                    <a href="#Reviews">
+                      Đánh Giá Sản Phẩm
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="tab-content-wrap">
+                <div class="tab-content">
+                  <form method="POST" action="{{ route('product_review.store', $product->id) }}">
+                    @csrf
+                    <div class="row">
+                      <div class="col-md-6 col-sm-6">
+                        <div class="form-row">
+                          <label class="review-lable">
+                            Chọn sao cho sản phẩm
+                          </label>
+                          <div class="rating">
+                              <input class="star" type="radio" hidden id="star1" name="rating" value="1" />
+                              <label for="star1" title="Poor" id="icon-star1">
+                                  <i class="fas fa-star"></i>
+                              </label>
+                              <input class="star" type="radio" hidden id="star2" name="rating" value="2" />
+                              <label for="star2" title="Fair" id="icon-star2">
+                                  <i class="fas fa-star"></i>
+                              </label>
+                              <input class="star" type="radio" hidden id="star3" name="rating" value="3" />
+                              <label for="star3" title="Good" id="icon-star3">
+                                  <i class="fas fa-star"></i>
+                              </label>
+                              <input class="star" type="radio" hidden id="star4" name="rating" value="4" />
+                              <label for="star4" title="Very Good" id="icon-star4">
+                                  <i class="fas fa-star"></i>
+                              </label>
+                              <input class="star" type="radio" hidden id="star5" name="rating" value="5" />
+                              <label for="star5" title="Excellent" id="icon-star5">
+                                  <i class="fas fa-star"></i>
+                              </label>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <label class="review-lable">
+                            Nội dung đánh giá
+                          </label>
+                          <textarea style="width: 100%;" name="content" rows="7" >
+                          </textarea>
+                        </div>
+                        <div class="form-row">
+                          <input type="submit" value="Đánh Giá" class="button">
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-sm-6">
+                        <div class="form-row row">
+                          <div class="col-md-5">
+                            <label class="title-avg-star review-lable">Đánh giá trung bình</label>
+                            <div class="avg-star">
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <h4 class="number-avg-star">4.5</h4>
+                          </div>
+                          <div class="col-md-6">
+                            <label class="title-avg-star review-lable">10 Đánh giá</label>
+                            @for ($i = 4; $i >= 0; $i--)
+                              <div class="avg-star">
+                                @for ($j = 0; $j <= 4; $j++)
+                                  @if ($j <= $i)
+                                    <i class="fas fa-star"></i>
+                                  @else
+                                    <i class="fas fa-star star-none"></i>
+                                  @endif
+                                @endfor
+                                <span class="parameter-review">({{ $i }})</span>
+                              </div>
+                            @endfor
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          @endif
           <div class="tab-box">
-            <div id="tabnav">
+            <div class="title-review">
               <ul>
                 <li>
-                  <a href="#Descraption">
-                    Các Đánh Giá
-                  </a>
-                </li>
-                <li>
                   <a href="#Reviews">
-                    Đánh Giá Sản Phẩm
+                    Các Đánh Giá Sản Phẩm
                   </a>
                 </li>
               </ul>
             </div>
             <div class="tab-content-wrap">
-              <div class="tab-content" id="Descraption">
-                
-              </div>
-              <div class="tab-content" id="Reviews">
-                <form method="POST" action="{{ route('product_review.store', $product->id) }}">
-                  @csrf
-                  <div class="row">
-                    <div class="col-md-6 col-sm-6">
-                      <div class="form-row">
-                        <label class="review-lable">
-                          Chọn sao cho sản phẩm
-                        </label>
-                        <div class="rating">
-                            <input class="star" type="radio" hidden id="star1" name="rating" value="1" />
-                            <label for="star1" title="Poor" id="icon-star1">
-                                <i class="fas fa-star"></i>
-                            </label>
-                            <input class="star" type="radio" hidden id="star2" name="rating" value="2" />
-                            <label for="star2" title="Fair" id="icon-star2">
-                                <i class="fas fa-star"></i>
-                            </label>
-                            <input class="star" type="radio" hidden id="star3" name="rating" value="3" />
-                            <label for="star3" title="Good" id="icon-star3">
-                                <i class="fas fa-star"></i>
-                            </label>
-                            <input class="star" type="radio" hidden id="star4" name="rating" value="4" />
-                            <label for="star4" title="Very Good" id="icon-star4">
-                                <i class="fas fa-star"></i>
-                            </label>
-                            <input class="star" type="radio" hidden id="star5" name="rating" value="5" />
-                            <label for="star5" title="Excellent" id="icon-star5">
-                                <i class="fas fa-star"></i>
-                            </label>
-                        </div>
-                      </div>
-                      <div class="form-row">
-                        <label class="review-lable">
-                          Nội dung đánh giá
-                        </label>
-                        <textarea style="width: 100%;" name="content" rows="7" >
-                        </textarea>
-                      </div>
-                      <div class="form-row">
-                        <input type="submit" value="Đánh Giá" class="button">
-                      </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                      <div class="form-row row">
-                        <div class="col-md-5">
-                          <label class="title-avg-star review-lable">Đánh giá trung bình</label>
-                          <div class="avg-star">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                          </div>
-                          <h4 class="number-avg-star">4.5</h4>
-                        </div>
-                        <div class="col-md-6">
-                          <label class="title-avg-star review-lable">10 Đánh giá</label>
-                          @for ($i = 4; $i >= 0; $i--)
-                            <div class="avg-star">
-                              @for ($j = 0; $j <= 4; $j++)
-                                @if ($j <= $i)
-                                  <i class="fas fa-star"></i>
-                                @else
-                                  <i class="fas fa-star star-none"></i>
-                                @endif
-                              @endfor
-                              <span class="parameter-review">({{ $i }})</span>
-                            </div>
-                          @endfor
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </form>
+              <div class="tab-content">
+                <p>sạccjcjcjcjcjcjcjcjcjcjcjcjcjcjcjcjcjcjcjcj</p>
               </div>
             </div>
           </div>

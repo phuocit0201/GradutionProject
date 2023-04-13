@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Product;
 use App\Repository\Eloquent\ProductRepository;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ProductDetailService 
@@ -14,13 +15,19 @@ class ProductDetailService
     private $productRepository;
 
     /**
+     * @var ProductReviewService
+     */
+    private $productReviewService;
+
+    /**
      * ProductService constructor.
      *
      * @param ProductRepository $productRepository
      */
-    public function __construct(ProductRepository $productRepository)
+    public function __construct(ProductRepository $productRepository, ProductReviewService $productReviewService)
     {
         $this->productRepository = $productRepository;
+        $this->productReviewService = $productReviewService;
     }
 
     /**
@@ -42,12 +49,17 @@ class ProductDetailService
             ->select('sizes.name as size_name', 'products_size.id as product_size_id', 'products_color.id as product_color_id', 'products_size.quantity')
             ->where('products_color.product_id', $product->id)
             ->get();
+        $checkReviewProduct = false;
+        if (! $this->productReviewService->checkProductReview($product)) {
+            $checkReviewProduct = true;
+        }
         return [
             'title' => TextLayoutTitle("payment_method"),
             'productSold' => $productSold,
             'productColor' => $productColor,
             'productSize' => $productsize,
-            'product' => $product
+            'product' => $product,
+            'checkReviewProduct' => $checkReviewProduct
         ];
     }
 }

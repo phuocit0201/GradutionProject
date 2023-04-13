@@ -63,6 +63,9 @@ class ProductReviewService
 
     public function checkProductReview(Product $product)
     {
+        if (! Auth::check()) {
+            return true;
+        }
         $user = Auth::user();
         if (count($this->productReviewReprository->checkUserBuyProduct($product->id, $user->id)) <= 0) {
             return true;
