@@ -27,18 +27,7 @@ class ProductReviewService
     {
         $this->productReviewReprository = $productReviewReprository;
     }
-
-    /**
-     * Display a listing of the users.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        
-    }
-
-
+    
     /** 
      * store the admin in the database.
      * @param App\Http\Requests\Admin\StoreCategoryRequest $request
@@ -54,7 +43,7 @@ class ProductReviewService
             $data['user_id'] = Auth::user()->id;
             $data['product_id'] = $product->id;
             $this->productReviewReprository->create($data);
-            return back();
+            return back()->with('success', "Đánh giá sản phẩm thành công");;
         } catch (Exception $e) {
             Log::error($e);
             return back()->with('error', TextSystemConst::CREATE_FAILED);

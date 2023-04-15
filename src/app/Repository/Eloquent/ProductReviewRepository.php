@@ -38,6 +38,29 @@ class ProductReviewRepository extends BaseRepository
         return $this->model->join('products', 'products.id', '=', 'product_reviews.product_id')
         ->where('product_reviews.product_id', $productId)->where('product_reviews.user_id', $userId)->count();
     }
+
+    public function getRatingByProduct($productId)
+    {
+        return DB::select("
+            select count(*) as sum, product_reviews.product_id, product_reviews.rating from products 
+            join product_reviews on products.id = product_reviews.product_id 
+            where products.id = $productId
+            and product_reviews.deleted_at is null
+            group by product_reviews.product_id, product_reviews.rating
+        ");
+    }
+
+    public function getProductReview($productId)
+    {
+        return DB::select("
+            select users.name as user_name, product_reviews.* from products join product_reviews on products.id = product_reviews.product_id
+            join users on users.id = product_reviews.user_id where products.id = 1 
+            and users.active = $productId
+            and product_reviews.deleted_at is null 
+            and users.deleted_at is null
+            order by id desc;
+        ");
+    }
 }
 
 ?>

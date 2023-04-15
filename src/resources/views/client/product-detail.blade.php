@@ -1,56 +1,5 @@
 @extends('layouts.client')
 @section('content-client')
-<style>
-  .fa-star, .fa-star-half-alt{
-    color: #b1b1b1;
-    font-size: 20px;
-  }
-  .avg-star .fa-star, .fa-star-half-alt {
-    color: #F5A623;
-  }
-
-  .review-lable{
-    padding: 10px 0px;
-    font-size: 16px !important;
-  }
-
-  .number-avg-star{
-    font-weight: 700;
-    padding: 10px 0px;
-    color: #84c52c;
-  }
-  .star-none{
-    color: #b1b1b1 !important;
-  }
-  .parameter-review{
-    font-size: 16px;
-    padding-left: 4px;
-    font-weight: 600;
-  }
-  .title-review ul li a {
-    padding: 15px 20px;
-    font-size: 18px;
-    border: 1px solid #cccccc;
-    -webkit-border-radius: 15px;
-    border-radius: 15px;
-    width: auto;
-    position: relative;
-    background: #f7544a;
-    color: #fff;
-    border: 1px solid #f7544a;
-  }
-
-  .title-review ul li a:hover{
-    cursor: default;
-  }
-  .tab-content{
-    margin: 25px 0px;
-  }
-
-  .tab-content{
-    display: block !important;
-  }
-</style>
 <div class="container_fullwidth">
     <div class="container">
       <div class="row">
@@ -149,22 +98,62 @@
           </div>
           <div class="clearfix">
           </div>
-          @if ($checkReviewProduct)
-            <div class="tab-box">
-              <div class="title-review">
-                <ul>
-                  <li>
-                    <a href="#Reviews">
-                      Đánh Giá Sản Phẩm
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div class="tab-content-wrap">
-                <div class="tab-content">
-                  <form method="POST" action="{{ route('product_review.store', $product->id) }}">
-                    @csrf
-                    <div class="row">
+          <div id="productsDetails" class="hot-products">
+            <h3 class="title">
+              Sản Phẩm Liên Quan
+            </h3>
+            <div class="control">
+              <a id="prev_hot" class="prev" href="#">
+                &lt;
+              </a>
+              <a id="next_hot" class="next" href="#">
+                &gt;
+              </a>
+            </div>
+            <ul id="hot">
+              <li>
+                <div class="row">
+                  @foreach ($relatedProducts as $relatedProduct)
+                    <div class="col-md-3 col-sm-4">
+                      <div class="products">
+                        <div class="thumbnail">
+                          <img src="{{ asset("asset/client/images/products/small/$relatedProduct->img") }}" alt="Product Name">
+                        </div>
+                        <div class="productname">
+                          {{ $relatedProduct->name }}
+                        </div>
+                        <h4 class="price">
+                          {{ format_number_to_money($relatedProduct->price_sell) }} VNĐ
+                        </h4>
+                        <div class="button_group">
+                          <button class="button add-cart" type="button">
+                            Add To Cart
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  @endforeach
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="clearfix">
+          <div class="tab-box">
+            <div class="title-review">
+              <ul>
+                <li>
+                  <a href="#Reviews">
+                    Đánh Giá Sản Phẩm
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="tab-content-wrap">
+              <div class="tab-content">
+                <form method="POST" action="{{ route('product_review.store', $product->id) }}">
+                  @csrf
+                  <div class="row">
+                    @if ($checkReviewProduct)
                       <div class="col-md-6 col-sm-6">
                         <div class="form-row">
                           <label class="review-lable">
@@ -204,42 +193,37 @@
                           <input type="submit" value="Đánh Giá" class="button">
                         </div>
                       </div>
-                      <div class="col-md-6 col-sm-6">
-                        <div class="form-row row">
-                          <div class="col-md-5">
-                            <label class="title-avg-star review-lable">Đánh giá trung bình</label>
-                            <div class="avg-star">
+                    @endif
+                    <div class="col-md-6 col-sm-6">
+                      <div class="form-row row">
+                        <div class="col-md-5">
+                          <label class="title-avg-star review-lable">Đánh giá trung bình</label>
+                          <div class="avg-star">
+                            @for($i = 1; $i <= floor($avgRating); $i++)
                               <i class="fas fa-star"></i>
-                              <i class="fas fa-star"></i>
-                              <i class="fas fa-star"></i>
-                              <i class="fas fa-star"></i>
-                              <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <h4 class="number-avg-star">4.5</h4>
-                          </div>
-                          <div class="col-md-6">
-                            <label class="title-avg-star review-lable">10 Đánh giá</label>
-                            @for ($i = 4; $i >= 0; $i--)
-                              <div class="avg-star">
-                                @for ($j = 0; $j <= 4; $j++)
-                                  @if ($j <= $i)
-                                    <i class="fas fa-star"></i>
-                                  @else
-                                    <i class="fas fa-star star-none"></i>
-                                  @endif
-                                @endfor
-                                <span class="parameter-review">({{ $i }})</span>
-                              </div>
                             @endfor
+                            @if (! is_int($avgRating))
+                              <i class="fas fa-star-half-alt"></i>
+                            @endif
                           </div>
+                          <h4 class="number-avg-star">{{ $avgRating }}</h4>
+                        </div>
+                        <div class="col-md-6">
+                          <label class="title-avg-star review-lable">10 Đánh giá</label>
+                          @for ($i = 5; $i >= 1; $i--)
+                            <div class="avg-star">
+                              <x-stars :number="$i" />
+                              <span class="parameter-review">({{ $ratingStatistics[$i] }})</span>
+                            </div>
+                          @endfor
                         </div>
                       </div>
                     </div>
-                  </form>
-                </div>
+                  </div>
+                </form>
               </div>
             </div>
-          @endif
+          </div>
           <div class="tab-box">
             <div class="title-review">
               <ul>
@@ -251,62 +235,49 @@
               </ul>
             </div>
             <div class="tab-content-wrap">
-              <div class="tab-content">
-                <p>sạccjcjcjcjcjcjcjcjcjcjcjcjcjcjcjcjcjcjcjcj</p>
+              <div class="tab-content row">
+                @if (count($productReviews) > 0)
+                  <div class="review__comment-header">
+                    <div class="row">
+                      <div class="col-sm-4 review__comment-header--title">
+                        Thành viên
+                      </div>
+                      <div class="col-sm-8 review__comment-header--title">
+                        Nội dung đánh giá
+                      </div>
+                    </div>
+                  </div>
+                  <div class="review__comment-list" style="padding-top: 30px;">
+                    <div class="row">
+                      @foreach ($productReviews as $productReview)
+                        <div class="col-sm-4">
+                          <span class="review__comment-author">{{ $productReview->user_name }}</span>
+                          <div class="review__comment-time">
+                            <span>{{ $productReview->created_at }}</span>
+                          </div>
+                        </div>
+                        <div class="col-sm-8">
+                          <div class="review__comment-rating">
+                            <x-stars number="{{ $productReview->rating }}"/>
+                          </div>
+                          <div class="review__comment-content">
+                            <p>
+                              {{ $productReview->content }}
+                            </p>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 review_comment-line"></div>
+                      @endforeach
+                    </div>
+                  </div>
+                @else 
+                  <p class="text-center review-comment-null">Chưa có đánh giá nào</p>
+                @endif
               </div>
             </div>
           </div>
           <div class="clearfix">
           </div>
-          <div id="productsDetails" class="hot-products">
-            <h3 class="title">
-              Sản Phẩm Liên Quan
-            </h3>
-            <div class="control">
-              <a id="prev_hot" class="prev" href="#">
-                &lt;
-              </a>
-              <a id="next_hot" class="next" href="#">
-                &gt;
-              </a>
-            </div>
-            <ul id="hot">
-              <li>
-                <div class="row">
-                  <div class="col-md-4 col-sm-4">
-                    <div class="products">
-                      <div class="offer">
-                        - %20
-                      </div>
-                      <div class="thumbnail">
-                        <img src="{{ asset("asset/client/images/products/small/products-01.png") }}" alt="Product Name">
-                      </div>
-                      <div class="productname">
-                        Iphone 5s Gold 32 Gb 2013
-                      </div>
-                      <h4 class="price">
-                        $451.00
-                      </h4>
-                      <div class="button_group">
-                        <button class="button add-cart" type="button">
-                          Add To Cart
-                        </button>
-                        <button class="button compare" type="button">
-                          <i class="fa fa-exchange">
-                          </i>
-                        </button>
-                        <button class="button wishlist" type="button">
-                          <i class="fa fa-heart-o">
-                          </i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div class="clearfix">
           </div>
         </div>
       </div>
@@ -314,5 +285,5 @@
       </div>
     </div>
 </div>
-@vite(['resources/client/js/product-detail.js', 'resources/client/css/product-detail.css'])
+@vite(['resources/client/js/product-detail.js', 'resources/client/css/product-detail.css', 'resources/client/css/product-review.css'])
 @endsection
