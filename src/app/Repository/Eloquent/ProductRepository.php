@@ -106,6 +106,15 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         ->get()
         ;
     }
+
+    public function getRelatedProducts($product)
+    {
+        return $this->model->where('name', 'LIKE', $product->name)
+        ->where('category_id', $product->category_id)
+        ->orderByDesc('id')
+        ->limit(4)
+        ->get();
+    }
 }
 
 ?>

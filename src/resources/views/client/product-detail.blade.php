@@ -98,171 +98,6 @@
           </div>
           <div class="clearfix">
           </div>
-          <div class="tab-box">
-            <div id="tabnav">
-              <ul>
-                <li>
-                  <a href="#Descraption">
-                    DESCRIPTION
-                  </a>
-                </li>
-                <li>
-                  <a href="#Reviews">
-                    REVIEW
-                  </a>
-                </li>
-                
-              </ul>
-            </div>
-            <div class="tab-content-wrap">
-              <div class="tab-content" id="Descraption">
-                <p>
-                  Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultri ces posuere cubilia curae Aenean eleifend laoreet congue. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibu um ante ipsum primis in faucibus orci luctus et ultri ces posuere cubilia curae Aenean eleifend laoreet congue. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultri ces posuere cubilia curae Aenean eleifend laoreet congue. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultri ces posuere cubilia curae...
-                </p>
-                <p>
-                  Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultri ces posuere cubilia curae Aenean eleifend laoreet congue. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibu um ante ipsum primis in faucibus orci luctus et ultri ces posuere cubilia curae Aenean eleifend laoreet congue. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc...
-                </p>
-              </div>
-              <div class="tab-content" id="Reviews">
-                <form>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>
-                          &nbsp;
-                        </th>
-                        <th>
-                          1 star
-                        </th>
-                        <th>
-                          2 stars
-                        </th>
-                        <th>
-                          3 stars
-                        </th>
-                        <th>
-                          4 stars
-                        </th>
-                        <th>
-                          5 stars
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          Quality
-                        </td>
-                        <td>
-                          <input type="radio" name="quality" value="Blue"/>
-                        </td>
-                        <td>
-                          <input type="radio" name="quality" value="">
-                        </td>
-                        <td>
-                          <input type="radio" name="quality" value="">
-                        </td>
-                        <td>
-                          <input type="radio" name="quality" value="">
-                        </td>
-                        <td>
-                          <input type="radio" name="quality" value="">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Price
-                        </td>
-                        <td>
-                          <input type="radio" name="price" value="">
-                        </td>
-                        <td>
-                          <input type="radio" name="price" value="">
-                        </td>
-                        <td>
-                          <input type="radio" name="price" value="">
-                        </td>
-                        <td>
-                          <input type="radio" name="price" value="">
-                        </td>
-                        <td>
-                          <input type="radio" name="price" value="">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Value
-                        </td>
-                        <td>
-                          <input type="radio" name="value" value="">
-                        </td>
-                        <td>
-                          <input type="radio" name="value" value="">
-                        </td>
-                        <td>
-                          <input type="radio" name="value" value="">
-                        </td>
-                        <td>
-                          <input type="radio" name="value" value="">
-                        </td>
-                        <td>
-                          <input type="radio" name="value" value="">
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <div class="row">
-                    <div class="col-md-6 col-sm-6">
-                      <div class="form-row">
-                        <label class="lebel-abs">
-                          Your Name 
-                          <strong class="red">
-                            *
-                          </strong>
-                        </label>
-                        <input type="text" name="" class="input namefild">
-                      </div>
-                      <div class="form-row">
-                        <label class="lebel-abs">
-                          Your Email 
-                          <strong class="red">
-                            *
-                          </strong>
-                        </label>
-                        <input type="email" name="" class="input emailfild">
-                      </div>
-                      <div class="form-row">
-                        <label class="lebel-abs">
-                          Summary of You Review 
-                          <strong class="red">
-                            *
-                          </strong>
-                        </label>
-                        <input type="text" name="" class="input summeryfild">
-                      </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                      <div class="form-row">
-                        <label class="lebel-abs">
-                          Your Name 
-                          <strong class="red">
-                            *
-                          </strong>
-                        </label>
-                        <textarea class="input textareafild" name="" rows="7" >
-                        </textarea>
-                      </div>
-                      <div class="form-row">
-                        <input type="submit" value="Submit" class="button">
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-          <div class="clearfix">
-          </div>
           <div id="productsDetails" class="hot-products">
             <h3 class="title">
               Sản Phẩm Liên Quan
@@ -278,40 +113,171 @@
             <ul id="hot">
               <li>
                 <div class="row">
-                  <div class="col-md-4 col-sm-4">
-                    <div class="products">
-                      <div class="offer">
-                        - %20
-                      </div>
-                      <div class="thumbnail">
-                        <img src="{{ asset("asset/client/images/products/small/products-01.png") }}" alt="Product Name">
-                      </div>
-                      <div class="productname">
-                        Iphone 5s Gold 32 Gb 2013
-                      </div>
-                      <h4 class="price">
-                        $451.00
-                      </h4>
-                      <div class="button_group">
-                        <button class="button add-cart" type="button">
-                          Add To Cart
-                        </button>
-                        <button class="button compare" type="button">
-                          <i class="fa fa-exchange">
-                          </i>
-                        </button>
-                        <button class="button wishlist" type="button">
-                          <i class="fa fa-heart-o">
-                          </i>
-                        </button>
+                  @foreach ($relatedProducts as $relatedProduct)
+                    <div class="col-md-3 col-sm-4">
+                      <div class="products">
+                        <div class="thumbnail">
+                          <img src="{{ asset("asset/client/images/products/small/$relatedProduct->img") }}" alt="Product Name">
+                        </div>
+                        <div class="productname">
+                          {{ $relatedProduct->name }}
+                        </div>
+                        <h4 class="price">
+                          {{ format_number_to_money($relatedProduct->price_sell) }} VNĐ
+                        </h4>
+                        <div class="button_group">
+                          <button class="button add-cart" type="button">
+                            Add To Cart
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  @endforeach
                 </div>
               </li>
             </ul>
           </div>
           <div class="clearfix">
+          <div class="tab-box">
+            <div class="title-review">
+              <ul>
+                <li>
+                  <a href="#Reviews">
+                    Đánh Giá Sản Phẩm
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="tab-content-wrap">
+              <div class="tab-content">
+                <form method="POST" action="{{ route('product_review.store', $product->id) }}">
+                  @csrf
+                  <div class="row">
+                    @if ($checkReviewProduct)
+                      <div class="col-md-6 col-sm-6">
+                        <div class="form-row">
+                          <label class="review-lable">
+                            Chọn sao cho sản phẩm
+                          </label>
+                          <div class="rating">
+                              <input class="star" type="radio" hidden id="star1" name="rating" value="1" />
+                              <label for="star1" title="Poor" id="icon-star1">
+                                  <i class="fas fa-star"></i>
+                              </label>
+                              <input class="star" type="radio" hidden id="star2" name="rating" value="2" />
+                              <label for="star2" title="Fair" id="icon-star2">
+                                  <i class="fas fa-star"></i>
+                              </label>
+                              <input class="star" type="radio" hidden id="star3" name="rating" value="3" />
+                              <label for="star3" title="Good" id="icon-star3">
+                                  <i class="fas fa-star"></i>
+                              </label>
+                              <input class="star" type="radio" hidden id="star4" name="rating" value="4" />
+                              <label for="star4" title="Very Good" id="icon-star4">
+                                  <i class="fas fa-star"></i>
+                              </label>
+                              <input class="star" type="radio" hidden id="star5" name="rating" value="5" />
+                              <label for="star5" title="Excellent" id="icon-star5">
+                                  <i class="fas fa-star"></i>
+                              </label>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <label class="review-lable">
+                            Nội dung đánh giá
+                          </label>
+                          <textarea style="width: 100%;" name="content" rows="7" >
+                          </textarea>
+                        </div>
+                        <div class="form-row">
+                          <input type="submit" value="Đánh Giá" class="button">
+                        </div>
+                      </div>
+                    @endif
+                    <div class="col-md-6 col-sm-6">
+                      <div class="form-row row">
+                        <div class="col-md-5">
+                          <label class="title-avg-star review-lable">Đánh giá trung bình</label>
+                          <div class="avg-star">
+                            @for($i = 1; $i <= floor($avgRating); $i++)
+                              <i class="fas fa-star"></i>
+                            @endfor
+                            @if (! is_int($avgRating))
+                              <i class="fas fa-star-half-alt"></i>
+                            @endif
+                          </div>
+                          <h4 class="number-avg-star">{{ $avgRating }}</h4>
+                        </div>
+                        <div class="col-md-6">
+                          <label class="title-avg-star review-lable">10 Đánh giá</label>
+                          @for ($i = 5; $i >= 1; $i--)
+                            <div class="avg-star">
+                              <x-stars :number="$i" />
+                              <span class="parameter-review">({{ $ratingStatistics[$i] }})</span>
+                            </div>
+                          @endfor
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="tab-box">
+            <div class="title-review">
+              <ul>
+                <li>
+                  <a href="#Reviews">
+                    Các Đánh Giá Sản Phẩm
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="tab-content-wrap">
+              <div class="tab-content row">
+                @if (count($productReviews) > 0)
+                  <div class="review__comment-header">
+                    <div class="row">
+                      <div class="col-sm-4 review__comment-header--title">
+                        Thành viên
+                      </div>
+                      <div class="col-sm-8 review__comment-header--title">
+                        Nội dung đánh giá
+                      </div>
+                    </div>
+                  </div>
+                  <div class="review__comment-list" style="padding-top: 30px;">
+                    <div class="row">
+                      @foreach ($productReviews as $productReview)
+                        <div class="col-sm-4">
+                          <span class="review__comment-author">{{ $productReview->user_name }}</span>
+                          <div class="review__comment-time">
+                            <span>{{ $productReview->created_at }}</span>
+                          </div>
+                        </div>
+                        <div class="col-sm-8">
+                          <div class="review__comment-rating">
+                            <x-stars number="{{ $productReview->rating }}"/>
+                          </div>
+                          <div class="review__comment-content">
+                            <p>
+                              {{ $productReview->content }}
+                            </p>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 review_comment-line"></div>
+                      @endforeach
+                    </div>
+                  </div>
+                @else 
+                  <p class="text-center review-comment-null">Chưa có đánh giá nào</p>
+                @endif
+              </div>
+            </div>
+          </div>
+          <div class="clearfix">
+          </div>
           </div>
         </div>
       </div>
@@ -319,5 +285,5 @@
       </div>
     </div>
 </div>
-@vite(['resources/client/js/product-detail.js', 'resources/client/css/product-detail.css'])
+@vite(['resources/client/js/product-detail.js', 'resources/client/css/product-detail.css', 'resources/client/css/product-review.css'])
 @endsection

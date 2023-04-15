@@ -69,7 +69,7 @@
                     @foreach ($bellingProducts as $bellingProduct)
                     <div class="col-md-3 col-sm-6">
                         <div class="products">
-                            <div class="offer">Hot</div>
+                            <div class="offer">Yêu thích</div>
                             <div class="thumbnail">
                                 <a href="{{ route('user.products_detail', $bellingProduct->id) }}"><img src="{{ asset("asset/client/images/products/small/$bellingProduct->img") }}" alt="Product Name"></a>
                             </div>

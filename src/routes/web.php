@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderHistoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductDetailController;
+use App\Http\Controllers\ProductReviewController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,7 @@ Route::get('products/{slug}', [ProductController::class, "index"])->name('user.p
 
 Route::middleware(['auth.user'])->group(function () {
     Route::get('logout', [AuthenticatedSessionController::class, "destroy"])->name('user.logout');
+    Route::post('product-review/{product}', [ProductReviewController::class, "store"])->name('product_review.store');
     Route::group(['prefix' => 'cart'], function(){
         Route::get('/', [CartController::class, 'index'])->name('cart.index');
         Route::post('add-to-cart', [CartController::class, 'store'])->name('cart.store');
@@ -46,6 +48,8 @@ Route::middleware(['auth.user'])->group(function () {
         Route::get('/detail/{order}', [OrderHistoryController::class, 'show'])->name('order_history.show');
         Route::get('/update/{order}', [OrderHistoryController::class, 'update'])->name('order_history.update');
     });
+
+
 });
 
 Route::middleware('guest')->group(function () {
