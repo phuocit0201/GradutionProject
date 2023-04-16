@@ -173,7 +173,7 @@
                     $isRouteUser = request()->is('admin/categories*');
                 @endphp
                 <a href="{{ route('admin.category_index') }}" class="nav-link {{ ($isRouteUser) ? 'active' : '' }} next-link__js">
-                  <i class="nav-icon fas fa-inbox"></i>
+                  <i class="nav-icon fas fa-th-list"></i>
                   <p>
                     {{ TextLayoutSidebar("category") }}
                   </p>
@@ -195,7 +195,7 @@
                     $isRouteUser = request()->is('admin/colors*');
                 @endphp
                 <a href="{{ route('admin.colors_index') }}" class="nav-link {{ ($isRouteUser) ? 'active' : '' }} next-link__js">
-                  <i class="nav-icon fas fa-inbox"></i>
+                  <i class="nav-icon fas fa-paint-brush"></i>
                   <p>
                     {{ TextLayoutSidebar("color") }}
                   </p>
@@ -206,7 +206,7 @@
                     $isRouteUser = request()->is('admin/brands*');
                 @endphp
                 <a href="{{ route('admin.brands_index') }}" class="nav-link {{ ($isRouteUser) ? 'active' : '' }} next-link__js">
-                  <i class="nav-icon fas fa-inbox"></i>
+                  <i class="nav-icon fas fa-building"></i>
                   <p>
                     {{ TextLayoutSidebar("brand") }}
                   </p>
@@ -217,7 +217,7 @@
                     $isRouteUser = request()->is('admin/payments*');
                 @endphp
                 <a href="{{ route('admin.payments_index') }}" class="nav-link {{ ($isRouteUser) ? 'active' : '' }} next-link__js">
-                  <i class="nav-icon fas fa-inbox"></i>
+                  <i class="nav-icon fas fa-money-check-alt"></i>
                   <p>
                     {{ TextLayoutSidebar("payment_method") }}
                   </p>
@@ -228,7 +228,7 @@
                     $isRouteUser = request()->is('admin/orders*');
                 @endphp
                 <a href="{{ route('admin.orders_index') }}" class="nav-link {{ ($isRouteUser) ? 'active' : '' }} next-link__js">
-                  <i class="nav-icon fas fa-inbox"></i>
+                  <i class="nav-icon fas fa-shopping-cart"></i>
                   <p>
                     {{ TextLayoutSidebar("order") }}
                   </p>

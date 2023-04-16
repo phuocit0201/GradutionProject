@@ -42,9 +42,6 @@ class StoreStaffRequest extends FormRequest
             'district' => 'required|integer',
             'ward' => 'required|integer',
             'apartment_number' => 'required|string|min:1|max:100',
-            'momo_number' => 'required|string|unique:admins,momo_number,NULL,id,deleted_at,"NULL"',
-            'basic_salary' => 'required|integer',
-            'coefficients_salary' => 'required|integer',
             'role_id' => 'required|integer|in:' . Role::ROLE['admin'] . ',' . Role::ROLE['staff'],
         ];
     }
@@ -73,8 +70,6 @@ class StoreStaffRequest extends FormRequest
             'password.regex' => __('message.password_invalidator', ['attribute' => 'Mật khẩu']),
             'email.unique' => __('message.unique', ['attribute' => 'Email']),
             'email.email' => __('message.email'),
-            'momo_number.in' => 'Tài khoản momo không hợp lệ',
-            'momo_number.unique' => __('message.unique', ['attribute' => 'tài khoản momo']),
         ];
     }
 }
