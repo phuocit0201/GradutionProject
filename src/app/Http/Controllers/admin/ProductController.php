@@ -3,17 +3,25 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
 
+    /**
+     * @var ProductService
+     */
+    private $productService;
+
+    public function __construct(ProductService $productService)
+    {
+        $this->productService =$productService;
+    }
+
     public function index()
     {
-        $data = [
-            'title' => TextLayoutTitle('create_product'),
-        ];
-        return view('admin.product.index', $data);
+        return view('admin.product.index', $this->productService->index());
     }
 
     public function create()

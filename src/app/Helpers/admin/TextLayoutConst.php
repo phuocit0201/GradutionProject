@@ -24,7 +24,6 @@ if (!function_exists('TextLayoutSidebar')) {
             "profile"               => "Hồ Sơ",
             "change_password"       => "Mật Khẩu",
             "administrators"        => "Nhân Sự",
-            "product"               => "Sản Phẩm",
             "category"              => "Danh Mục",
             "color"                 => "Màu Sắc",
             "brand"                 => "Thương Hiệu",

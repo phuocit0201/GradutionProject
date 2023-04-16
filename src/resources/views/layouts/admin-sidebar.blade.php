@@ -183,7 +183,7 @@
                 @php
                     $isRouteUser = request()->is('admin/products*');
                 @endphp
-                <a href="{{ route('admin.staffs_index') }}" class="nav-link {{ ($isRouteUser) ? 'active' : '' }} next-link__js">
+                <a href="{{ route('admin.product_index') }}" class="nav-link {{ ($isRouteUser) ? 'active' : '' }} next-link__js">
                   <i class="nav-icon fas fa-inbox"></i>
                   <p>
                     {{ TextLayoutSidebar("product") }}

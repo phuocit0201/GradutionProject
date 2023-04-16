@@ -5,7 +5,7 @@
     <div class="row">
       <div id="form-data" hidden data-rules="{{ json_encode($rules) }}"
       data-messages="{{ json_encode($messages) }}"></div>
-      <form class="row" action="{{route('admin.product_store')}}" method="POST" id="form__js" enctype="multipart/form-data">
+      <form class="row" action="{{route('admin.products_store')}}" method="POST" id="form__js" enctype="multipart/form-data">
         @csrf
         <div class="col-xl-12 col-lg-12 col-md-12">
           <div class="card card-default">
@@ -48,20 +48,6 @@
                       id="branch"
                       type="text" 
                       name="branch"
-                      class="form-control">
-                  </x-admin-input-prepend>
-                  <x-admin-input-prepend label="Xuất Xứ" width="auto" col="col-6">
-                    <input 
-                      id="origin"
-                      type="text" 
-                      name="origin"
-                      class="form-control">
-                  </x-admin-input-prepend>
-                  <x-admin-input-prepend label="Loại Sản Phẩm" width="auto" col="col-6">
-                    <input 
-                      id="type"
-                      type="text" 
-                      name="type"
                       class="form-control">
                   </x-admin-input-prepend>
                   <x-admin-input-prepend label="Danh Mục" width="auto" col="col-6">

@@ -62,8 +62,8 @@ Route::middleware(['auth.admin', 'admin.verified'])->group(function () {
 
     Route::group(['prefix' => 'products'], function(){
         Route::get('/', [ProductController::class, "index"])->name('admin.product_index');
-        Route::get('create', [ProductController::class, "create"])->name('admin.product_create');
-        Route::post('create', [ProductController::class, "store"])->name('admin.product_store');
+        Route::get('create', [ProductController::class, "create"])->name('admin.products_create');
+        Route::post('create', [ProductController::class, "store"])->name('admin.products_store');
     });
 
     Route::group(['prefix' => 'categories'], function(){
