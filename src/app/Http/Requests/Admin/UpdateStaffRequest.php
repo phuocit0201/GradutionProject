@@ -42,9 +42,6 @@ class UpdateStaffRequest extends FormRequest
             'district' => 'required|integer',
             'ward' => 'required|integer',
             'apartment_number' => 'required|string|min:1|max:100',
-            'momo_number' => 'required|string|unique:admins,momo_number,'. $this->user->admin->id . ',id,deleted_at,"NULL"',
-            'basic_salary' => 'required|integer',
-            'coefficients_salary' => 'required|integer',
             'role_id' => 'required|integer|in:' . Role::ROLE['admin'] . ',' . Role::ROLE['staff'],
             'active' => 'required|integer|in:' . Role::STATUS[0]['value'] . ',' . Role::STATUS[1]['value'],
             'disable_reason' => 'nullable|string',
@@ -75,9 +72,6 @@ class UpdateStaffRequest extends FormRequest
             'password.regex' => __('message.password_invalidator', ['attribute' => 'Mật khẩu']),
             'email.unique' => __('message.unique', ['attribute' => 'Email']),
             'email.email' => __('message.email'),
-            'momo_number.in' => 'Tài khoản momo không hợp lệ',
-            'momo_number.unique' => __('message.unique', ['attribute' => 'tài khoản momo']),
-            'momo_number.required' => __('message.required', ['attribute' => 'tài khoản momo']),
         ];
     }
 }
