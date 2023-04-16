@@ -584,7 +584,7 @@ class AdminService
             ];
     
             return [
-                'title' => TextLayoutTitle("create_staff"),
+                'title' => TextLayoutTitle("edit_staff"),
                 'fields' => $fields,
                 'rules' => $rules,
                 'messages' => $messages,
