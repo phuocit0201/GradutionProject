@@ -203,6 +203,17 @@
               </li>
               <li class="nav-item">
                 @php
+                    $isRouteUser = request()->is('admin/sizes*');
+                @endphp
+                <a href="{{ route('admin.sizes_index') }}" class="nav-link {{ ($isRouteUser) ? 'active' : '' }} next-link__js">
+                  <i class="nav-icon fas fa-tshirt"></i>
+                  <p>
+                    {{ TextLayoutSidebar("size") }}
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                @php
                     $isRouteUser = request()->is('admin/brands*');
                 @endphp
                 <a href="{{ route('admin.brands_index') }}" class="nav-link {{ ($isRouteUser) ? 'active' : '' }} next-link__js">
