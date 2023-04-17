@@ -64,6 +64,10 @@ Route::middleware(['auth.admin', 'admin.verified'])->group(function () {
         Route::get('/', [ProductController::class, "index"])->name('admin.product_index');
         Route::get('create', [ProductController::class, "create"])->name('admin.products_create');
         Route::post('create', [ProductController::class, "store"])->name('admin.products_store');
+
+        Route::get('get-categories-by-parent', [ProductController::class, "getCategoryByParent"])->name('admin.category_by_parent');
+
+        Route::get('color', [ProductController::class, "createColor"])->name('admin.products_color');
     });
 
     Route::group(['prefix' => 'categories'], function(){

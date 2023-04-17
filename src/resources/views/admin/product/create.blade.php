@@ -30,32 +30,37 @@
                   </x-admin-input-prepend>
                   <x-admin-input-prepend label="Giá Nhập" col="col-6" width="auto">
                     <input 
-                      id="price"
+                      id="price_import"
                       type="number"
                       min="1" 
-                      name="price"
+                      name="price_import"
                       class="form-control">
                   </x-admin-input-prepend>
                   <x-admin-input-prepend label="Giá Bán" col="col-6" width="auto">
                     <input 
-                      id="discount"
+                      id="price_sell"
                       type="number" 
-                      name="discount"
+                      name="price_sell"
                       class="form-control">
                   </x-admin-input-prepend>
                   <x-admin-input-prepend label="Thương Hiệu" width="auto" col="col-6">
-                    <input 
-                      id="branch"
-                      type="text" 
-                      name="branch"
-                      class="form-control">
+                    <select class="form-control" name="brand_id" id="brand">
+                      @foreach ($brands as $brand)
+                          <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                      @endforeach
+                    </select>
                   </x-admin-input-prepend>
-                  <x-admin-input-prepend label="Danh Mục" width="auto" col="col-6">
-                    <input 
-                      id="category"
-                      type="text" 
-                      name="category"
-                      class="form-control">
+                  <x-admin-input-prepend label="Thời trang" width="auto" col="col-6">
+                    <select class="form-control" name="parent_id" id="parent_id">
+                      @foreach ($categoriesParent as $categoryParent)
+                          <option value="{{ $categoryParent->id }}">{{ $categoryParent->name }}</option>
+                      @endforeach
+                    </select>
+                  </x-admin-input-prepend>
+                  <x-admin-input-prepend label="Danh Mục" width="auto">
+                    <select class="form-control" name="category" id="category_id" route="{{ route('admin.category_by_parent') }}">
+                      
+                    </select>
                   </x-admin-input-prepend>
                   <div class="card card-outline card-info col-12">
                     <div class="card-header">
@@ -65,7 +70,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                      <textarea id="summernote" name="summernote">
+                      <textarea id="summernote" name="description">
                       </textarea>
                     </div>
                   </div>

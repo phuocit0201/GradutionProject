@@ -26,65 +26,21 @@ class ProductController extends Controller
 
     public function create()
     {
-        //Rules form
-        $rules = [
-            'name' => [
-                'required' => true,
-            ],
-            'price' => [
-                'required' => true,
-            ],
-            'discount' => [
-                'required' => true,
-            ],
-            'branch' => [
-                'required' => true,
-            ],
-            'origin' => [
-                'required' => true,
-            ],
-            'category' => [
-                'required' => true,
-            ],
-            'summernote' => [
-                'required' => true,
-            ],
-        ];
-
-        // Messages eror rules
-        $messages = [
-            'name' => [
-                'required' => __('message.required', ['attribute' => 'tên sản phẩm']),
-            ],
-            'price' => [
-                'required' => __('message.required', ['attribute' => 'giá sản phẩm']),
-            ],
-            'branch' => [
-                'required' => __('message.required', ['attribute' => 'thương hiệu sản phẩm']),
-            ],
-            'origin' => [
-                'required' => __('message.required', ['attribute' => 'xuất xứ']),
-            ],
-            'category' => [
-                'required' => __('message.required', ['attribute' => 'danh mục']),
-            ],
-            'summernote' => [
-                'required' => __('message.required', ['attribute' => 'mô tả']),
-            ],
-            'discount' => [
-                'required' => __('message.required', ['attribute' => 'giảm giá']),
-            ],
-        ];
-        $data = [
-            'rules' => $rules,
-            'messages' => $messages,
-            'title' => TextLayoutTitle('create_product'),
-        ];
-        return view('admin.product.create', $data);
+        return view('admin.product.create', $this->productService->create());
     }
 
     public function store(Request $request)
     {
         dd($request->all());
+    }
+
+    public function getCategoryByParent(Request $request)
+    {
+        return response()->json($this->productService->getCategoryByParent($request), 200);
+    }
+
+    public function createColor()
+    {
+        return view('admin.product.color', $this->productService->createColor());
     }
 }

@@ -2,15 +2,12 @@
 
 namespace App\Services;
 
-use App\Helpers\TextSystemConst;
-use App\Http\Requests\Admin\StoreCommonRequest;
-use App\Models\Brand;
 use App\Repository\Eloquent\BrandRepository;
+use App\Repository\Eloquent\CategoryRepository;
+use App\Repository\Eloquent\ColorRepository;
 use App\Repository\Eloquent\ProductRepository;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class ProductService 
 {
@@ -20,13 +17,36 @@ class ProductService
     private $productRepository;
 
     /**
+     * @var CategoryRepository
+     */
+    private $categoryRepository;
+
+    /**
+     * @var BrandRepository
+     */
+    private $brandRepository;
+
+    /**
+     * @var ColorRepository
+     */
+    private $colorRepository;
+
+    /**
      * ProductService constructor.
      *
      * @param ProductRepository $productRepository
      */
-    public function __construct(ProductRepository $productRepository)
+    public function __construct(
+        ProductRepository $productRepository, 
+        CategoryRepository $categoryRepository,
+        BrandRepository $brandRepository,
+        ColorRepository $colorRepository,
+    )
     {
         $this->productRepository = $productRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->brandRepository = $brandRepository;
+        $this->colorRepository = $colorRepository;
     }
 
     /**
@@ -109,13 +129,91 @@ class ProductService
     public function create()
     {
         try {
+            $categoriesParent = category_header();
+            $brands = $this->brandRepository->all();
+            //Rules form
+            $rules = [
+                'name' => [
+                    'required' => true,
+                ],
+                'price_import' => [
+                    'required' => true,
+                ],
+                'price_sell' => [
+                    'required' => true,
+                ],
+                'branch' => [
+                    'required' => true,
+                ],
+                'origin' => [
+                    'required' => true,
+                ],
+                'category_id' => [
+                    'required' => true,
+                ],
+                'summernote' => [
+                    'required' => true,
+                ],
+                'file-input' => [
+                    'required' => true,
+                ],
+            ];
+
+            // Messages eror rules
+            $messages = [
+                'name' => [
+                    'required' => __('message.required', ['attribute' => 'tên sản phẩm']),
+                ],
+                'price_import' => [
+                    'required' => __('message.required', ['attribute' => 'giá nhập sản phẩm']),
+                ],
+                'price_sell' => [
+                    'required' => __('message.required', ['attribute' => 'giá bán sản phẩm']),
+                ],
+                'branch' => [
+                    'required' => __('message.required', ['attribute' => 'thương hiệu sản phẩm']),
+                ],
+                'origin' => [
+                    'required' => __('message.required', ['attribute' => 'xuất xứ']),
+                ],
+                'category_id' => [
+                    'required' => __('message.required', ['attribute' => 'danh mục']),
+                ],
+                'summernote' => [
+                    'required' => __('message.required', ['attribute' => 'mô tả']),
+                ],
+                'file-input' => [
+                    'required' => __('message.required', ['attribute' => 'hình ảnh']),
+                ],
+            ];
             return [
                 'title' => TextLayoutTitle("create_product"),
+                'categoriesParent' => $categoriesParent,
+                'messages' => $messages,
+                'rules' => $rules,
+                'brands' => $brands,
             ];
         } catch (Exception) {
             return [];
         }
-        
+    }
+
+    public function getCategoryByParent(Request $request)
+    {
+        try {
+            return $this->categoryRepository->where(['parent_id' => $request->parent_id]);
+        } catch (Exception) {
+            return null;
+        }
+    }
+
+    public function createColor()
+    {
+        $colors = $this->colorRepository->all();
+        return [
+            'title' => 'Màu Sản Phẩm',
+            'colors' => $colors
+        ];
     }
 }
 ?>

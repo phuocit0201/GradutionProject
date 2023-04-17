@@ -14,7 +14,7 @@ class ShowProductService
      */
     private $productRepository;
 
-     /**
+    /**
      * @var CategoryRepository
      */
     private $categoryRepository;
