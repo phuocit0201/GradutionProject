@@ -2,12 +2,16 @@
 
 namespace App\Services;
 
+use App\Http\Requests\Admin\StoreProductColorRequest;
+use App\Models\Product;
+use App\Models\ProductColor;
 use App\Repository\Eloquent\BrandRepository;
 use App\Repository\Eloquent\CategoryRepository;
 use App\Repository\Eloquent\ColorRepository;
 use App\Repository\Eloquent\ProductRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ProductService 
 {
@@ -207,13 +211,47 @@ class ProductService
         }
     }
 
-    public function createColor()
+    public function createColor(Product $product)
     {
         $colors = $this->colorRepository->all();
+        $productColors = ProductColor::all();
         return [
             'title' => 'Màu Sản Phẩm',
-            'colors' => $colors
+            'colors' => $colors,
+            'product' => $product,
+            'productColors' => $productColors
         ];
+    }
+
+    public function storeColor(StoreProductColorRequest $request, Product $product)
+    {
+        try {
+            $imageName = time().'.'.request()->img->getClientOriginalExtension();
+            $colorId = $request->color_id;
+            request()->img->move(public_path('asset/client/images/products/small'), $imageName);
+            $checkColorExist = $this->productRepository->checkProductColorExist($product->id, $colorId);
+            if ($checkColorExist > 0) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Màu này đã tồn tại'
+                ], 200);
+            }
+            Session::flash('success', 'Thêm màu thành công');
+            ProductColor::create([
+                'img' => $imageName,
+                'color_id' => $colorId,
+                'product_id' => $product->id
+            ]);
+            return response()->json([
+                'status' => true,
+                'route' => route('admin.products_color', $product->id),
+            ], 200);
+        } catch (Exception) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Có lỗi xảy ra vui lòng thử lại'
+            ], 200);
+        }
     }
 }
 ?>

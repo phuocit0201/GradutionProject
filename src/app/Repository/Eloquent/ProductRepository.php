@@ -115,6 +115,13 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         ->limit(4)
         ->get();
     }
+
+    public function checkProductColorExist($productId, $color)
+    {
+        return $this->model->join('products_color', 'products_color.product_id', '=', 'products.id')
+        ->where('products.id', $productId)->where('products_color.color_id', $color)
+        ->count();
+    }
 }
 
 ?>

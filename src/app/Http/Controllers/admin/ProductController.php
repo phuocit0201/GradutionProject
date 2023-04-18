@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreProductColorRequest;
+use App\Models\Product;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 
@@ -39,8 +41,13 @@ class ProductController extends Controller
         return response()->json($this->productService->getCategoryByParent($request), 200);
     }
 
-    public function createColor()
+    public function createColor(Product $product)
     {
-        return view('admin.product.color', $this->productService->createColor());
+        return view('admin.product.color', $this->productService->createColor($product));
+    }
+
+    public function storeColor(StoreProductColorRequest $request, Product $product)
+    {
+       return $this->productService->storeColor($request, $product);
     }
 }

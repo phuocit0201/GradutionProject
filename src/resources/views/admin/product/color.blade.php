@@ -22,8 +22,55 @@
 					</div>
 					<!-- /.card-header -->
 					<div class="row" id="container-color">
+						@foreach ($productColors as $productColor)
+							<div class="col-12">
+								<form class="form-edit" url-store="{{ route('admin.products_color_store', $product->id) }}" method="POST" enctype="multipart/form-data">
+									@csrf
+									<div class="card-body container-fluid">
+										<div class="card card-default">
+											<!-- /.card-header -->
+											<div class="card-body" >
+												<div class="row item-color">
+													<!-- /.col -->
+													<div class="col-sm-12">
+														<div class="form-group">
+															<x-admin-input-prepend label="Màu" width="auto">
+																<select class="form-control" name="color_id" id="color_id" @disabled(true)>
+																	@foreach ($colors as $color)
+																			<option value="{{ $color->id }}" @if ($color->id == $productColor->color_id) @selected(true) @endif>{{ $color->name }}</option>
+																	@endforeach
+																</select>
+															</x-admin-input-prepend>
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="form-group">
+															<div class="preview">
+																<img id="img-preview" style="width: 60px" src="{{ asset("asset/client/images/products/small/$productColor->img") }}" />
+																<label for="file-input" id="lable-img">Chọn Hình Ảnh</label>
+																<input @disabled(true) class="img-color" hidden accept="image/*" type="file" id="file-input" name="img"/>
+															</div>
+														</div>
+													</div>
+													<!-- /.col -->
+													<div class="col-sm-12 text-center">
+														<div class="form-group">
+															<button class="btn btn-primary">
+																<i class="fas fa-save"></i> Chỉnh Sửa
+															</button>
+														</div>
+													</div>
+												</div>
+												<!-- /.row -->
+											</div>
+										</div>    
+									</div>
+								</form>
+							</div>
+						@endforeach
 						<div class="col-12 hidden" id="box-color">
-							<form action="" method="post">
+							<form class="form-submit" url-store="{{ route('admin.products_color_store', $product->id) }}" method="POST" enctype="multipart/form-data">
+								@csrf
 								<div class="card-body container-fluid">
 									<div class="card card-default">
 										<div class="card-header">
@@ -40,7 +87,7 @@
 												<div class="col-sm-12">
 													<div class="form-group">
 														<x-admin-input-prepend label="Màu" width="auto">
-															<select class="form-control" name="brand_id" id="brand">
+															<select class="form-control" name="color_id" id="color_id">
 																@foreach ($colors as $color)
 																		<option value="{{ $color->id }}">{{ $color->name }}</option>
 																@endforeach
@@ -53,7 +100,7 @@
 														<div class="preview">
 															<img id="img-preview" style="width: 60px" src="" />
 															<label for="file-input" id="lable-img">Chọn Hình Ảnh</label>
-															<input class="img-color" hidden accept="image/*" type="file" id="file-input" name="avatar"/>
+															<input class="img-color" hidden accept="image/*" type="file" id="file-input" name="img"/>
 														</div>
 													</div>
 												</div>
