@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Http\Requests\Admin\StoreProductColorRequest;
+use App\Http\Requests\Admin\UpdateProductColorRequest;
+use App\Models\Color;
 use App\Models\Product;
 use App\Models\ProductColor;
 use App\Repository\Eloquent\BrandRepository;
@@ -11,6 +13,7 @@ use App\Repository\Eloquent\ColorRepository;
 use App\Repository\Eloquent\ProductRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class ProductService 
@@ -213,7 +216,13 @@ class ProductService
 
     public function createColor(Product $product)
     {
-        $colors = $this->colorRepository->all();
+        $colors = Color::whereNotIn('id', function($query) use($product) {
+            $query->select('color_id')
+                  ->from('products_color')
+                  ->where('product_id', '=', $product->id)
+                  ->whereNull('deleted_at');
+        })
+        ->get();
         $productColors = ProductColor::all();
         return [
             'title' => 'Màu Sản Phẩm',
@@ -236,12 +245,12 @@ class ProductService
                     'message' => 'Màu này đã tồn tại'
                 ], 200);
             }
-            Session::flash('success', 'Thêm màu thành công');
             ProductColor::create([
                 'img' => $imageName,
                 'color_id' => $colorId,
                 'product_id' => $product->id
             ]);
+            Session::flash('success', 'Thêm màu thành công');
             return response()->json([
                 'status' => true,
                 'route' => route('admin.products_color', $product->id),
@@ -252,6 +261,63 @@ class ProductService
                 'message' => 'Có lỗi xảy ra vui lòng thử lại'
             ], 200);
         }
+    }
+
+    public function editColor(ProductColor $productColor)
+    {
+        $colors = Color::whereNotIn('id', function($query) use($productColor) {
+            $query->select('color_id')
+                  ->from('products_color')
+                  ->where('product_id', '=', $productColor->product_id)
+                  ->where('color_id', '!=', $productColor->color_id)
+                  ->whereNull('deleted_at');
+        })
+        ->get();
+        return response()->json([
+            'productColor' => $productColor,
+            'colors' => $colors
+        ], 200);
+    }
+
+    public function updateColor(UpdateProductColorRequest $request, ProductColor $productColor)
+    {
+        try {
+            $data = $request->validated();
+            if ($request->img) {
+                $imageName = time().'.'.request()->img->getClientOriginalExtension();
+                request()->img->move(public_path('asset/client/images/products/small'), $imageName);
+                $data['img'] = $imageName;
+            }
+            $productColor->update($data);
+            Session::flash('success', 'Thêm màu thành công');
+            return response()->json([
+                'status' => true,
+                'route' => route('admin.products_color', $productColor->product_id),
+            ], 200);
+        } catch (Exception) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Có lỗi xảy ra vui lòng thử lại'
+            ], 200);
+        }
+    }
+
+    public function deleteColor(ProductColor $productColor)
+    {
+        if ($productColor->delete()) {
+            $data = [
+                'status' => true,
+                'message' => 'Xóa màu thành công'
+            ];
+        } else {
+            $data = [
+                'status' => false,
+                'message' => 'Xóa thất bại vui lòng kiểm tra lại'
+            ];
+        }
+        return response()->json([
+            $data
+        ], 200);
     }
 }
 ?>
