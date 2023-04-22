@@ -1,10 +1,5 @@
 @extends('layouts.admin')
 @section('content')
-<style>
-	.hidden{
-		display: none;
-	}
-</style>
 <section class="content">
   <div class="container-fluid">
 		<div class="row">
@@ -12,7 +7,9 @@
 				<ol class="breadcrumb float-sm-left">
 						<li class="breadcrumb-item"><a href="#">Sản Phẩm</a></li>
 						<li class="breadcrumb-item active">Màu Sản Phẩm</li>
-						<li class="breadcrumb-item"><a href="#">Kích Thước Sản Phẩm</a></li>
+						<li class="breadcrumb-item">
+							<a href="{{ $routeSize }}">Kích Thước Sản Phẩm</a>
+						</li>
 				</ol>
 			</div>
 			<div class="col-12">
@@ -83,7 +80,7 @@
 						<x-admin-input-prepend label="Màu" width="auto">
 							<select class="form-control" name="color_id" id="color_id">
 								@foreach ($colors as $color)
-										<option value="{{ $color->id }}" @if ($color->id == $productColor->color_id) @selected(true) @endif>{{ $color->name }}</option>
+										<option value="{{ $color->id }}">{{ $color->name }}</option>
 								@endforeach
 							</select>
 						</x-admin-input-prepend>

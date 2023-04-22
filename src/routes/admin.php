@@ -72,6 +72,9 @@ Route::middleware(['auth.admin', 'admin.verified'])->group(function () {
         Route::get('color-update/{productColor}', [ProductController::class, "editColor"])->name('admin.products_color_edit');
         Route::post('color-update/{productColor}', [ProductController::class, "updateColor"])->name('admin.products_color_update');
         Route::post('color-delete/{productColor}', [ProductController::class, "deleteColor"])->name('admin.products_color_delete');
+
+        Route::get('size/{product}', [ProductController::class, "createSize"])->name('admin.products_size');
+        
     });
 
     Route::group(['prefix' => 'categories'], function(){

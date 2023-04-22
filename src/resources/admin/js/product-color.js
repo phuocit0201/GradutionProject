@@ -94,9 +94,11 @@ $(document).ready(function () {
         }).done((res) => {
           $('#loading__js').css('display', 'none');
             if (res.status == true) {
+              console.log("true")
               $(this).closest('tr').remove();
               fire1(toast1, 'success', res.message)
             } else {
+              console.log("false");
               fire1(toast1, 'error', res.message)
             }
         }).fail(() => {

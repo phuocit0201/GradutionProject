@@ -68,4 +68,9 @@ class ProductController extends Controller
     {
         return $this->productService->deleteColor($productColor);
     }
+
+    public function createSize(Product $product)
+    {
+        return view('admin.product.size', $this->productService->createSize($product));
+    }
 }

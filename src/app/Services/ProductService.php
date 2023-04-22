@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\UpdateProductColorRequest;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\ProductColor;
+use App\Models\ProductSize;
 use App\Repository\Eloquent\BrandRepository;
 use App\Repository\Eloquent\CategoryRepository;
 use App\Repository\Eloquent\ColorRepository;
@@ -228,7 +229,8 @@ class ProductService
             'title' => 'Màu Sản Phẩm',
             'colors' => $colors,
             'product' => $product,
-            'productColors' => $productColors
+            'productColors' => $productColors,
+            'routeSize' => route('admin.products_size', $product->id),
         ];
     }
 
@@ -315,9 +317,20 @@ class ProductService
                 'message' => 'Xóa thất bại vui lòng kiểm tra lại'
             ];
         }
-        return response()->json([
-            $data
-        ], 200);
+        return response()->json($data, 200);
+    }
+
+    public function createSize(Product $product)
+    {
+        $productSizes = ProductSize::join('products_color', 'products_color.id', '=', 'products_size.product_color_id')
+        ->join('products', 'products.id', '=', 'products_color.product_id')
+        ->where('products.id', $product->id)
+        ->first();
+        dd($productSizes->color->name);
+        return [
+            'title' => 'Kích thước sản phẩm',
+            'routeColor' => route('admin.products_color', $product->id)
+        ];
     }
 }
 ?>
