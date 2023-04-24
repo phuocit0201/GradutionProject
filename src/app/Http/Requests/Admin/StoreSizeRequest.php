@@ -25,7 +25,6 @@ class StoreSizeRequest extends FormRequest
     {
         return [
             'name' => 'required|string|min:1|max:100',
-            'product_type_id' => 'required|integer',
         ];
     }
 
@@ -40,8 +39,6 @@ class StoreSizeRequest extends FormRequest
             'name.required' => __('message.required', ['attribute' => 'Tên kích thước']),
             'name.max' => __('message.max', ['attribute' => 'Tên kích thước']),
             'name.min' => __('message.min', ['attribute' => 'Tên kích thước']),
-            'product_type_id.required' => __('message.required', ['attribute' => 'Tên kích thước']),
-            'product_type_id.integer' => __('message.integer', ['attribute' => 'Tên kích thước']),
         ];
     }
 }
