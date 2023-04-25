@@ -13,15 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('admins', function (Blueprint $table) {
-            $table->id();
-            $table->integer('user_id');
-            $table->string('momo_number');
-            $table->double('basic_salary');
-            $table->double('coefficients_salary');
-            $table->timestamps();
-            $table->softDeletes();
-        });
+        Schema::dropIfExists('personal_access_tokens');
     }
 
     /**
@@ -31,6 +23,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admins');
+        
     }
 };

@@ -23,8 +23,6 @@ return new class extends Migration
             $table->integer('status')->default(1);
             $table->bigInteger('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories');
-            $table->bigInteger('product_type_id')->unsigned();
-            $table->foreign('product_type_id')->references('id')->on('product_type');
             $table->bigInteger('brand_id')->unsigned();
             $table->foreign('brand_id')->references('id')->on('brands');
             $table->timestamps();
