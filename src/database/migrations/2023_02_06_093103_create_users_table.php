@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('password')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phone_number');
-            $table->integer('role_id');
+            $table->bigInteger('role_id')->unsigned();
             $table->integer('active')->default(1);
             $table->string('disable_reason')->nullable();
             $table->integer('created_by')->nullable();
@@ -29,6 +29,7 @@ return new class extends Migration
             $table->rememberToken()->nullable();
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('role_id')->references('id')->on('roles');
         });
     }
 
