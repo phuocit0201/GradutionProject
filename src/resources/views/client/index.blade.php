@@ -93,7 +93,7 @@
                     @foreach ($newProducts as $newProduct)
                         <div class="col-md-3 col-sm-6">
                             <div class="products">
-                                <div class="thumbnail"><a href="{{ route('user.products_detail', $newProduct->id) }}"><img src="{{ asset("asset/client/images/products/small/products-05.png") }}" alt="Product Name"></a></div>
+                                <div class="thumbnail"><a href="{{ route('user.products_detail', $newProduct->id) }}"><img src="{{ asset("asset/client/images/products/small/$newProduct->img") }}" alt="Product Name"></a></div>
                                 <div class="productname">{{ $newProduct->name }}</div>
                                 <h4 class="price">{{ format_number_to_money($newProduct->price_sell) }} VNĐ</h4>
                                 <div class="button_group"><a href="{{ route('user.products_detail', $newProduct->id) }}" class="button add-cart" type="button">Xem Chi Tiết</a></div>

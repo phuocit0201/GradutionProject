@@ -111,10 +111,8 @@ $(document).ready(function () {
       }
     })
   });
-
-
-  
 });
+
 function submitForm(event, element)
 {
   $(document).on(event, element, function (event) {
@@ -143,6 +141,7 @@ function submitForm(event, element)
     });
   });
 }
+
 function toast1() {
   return Swal.mixin({
     toast: true,

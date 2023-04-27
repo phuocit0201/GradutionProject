@@ -74,6 +74,7 @@ if (!function_exists('TextLayoutTitle')) {
             "create_size"           => "Thêm Mới Kích Thước",
             "edit_size"             => "Chỉnh Sửa Kích Thước",
             "edit_staff"            => "Chỉnh Sửa Nhân Sự",
+            "edit_product"            => "Chỉnh Sửa Sản Phẩm",
         ];
         return $const[$index];
     }

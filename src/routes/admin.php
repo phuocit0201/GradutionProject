@@ -64,6 +64,9 @@ Route::middleware(['auth.admin', 'admin.verified'])->group(function () {
         Route::get('/', [ProductController::class, "index"])->name('admin.product_index');
         Route::get('create', [ProductController::class, "create"])->name('admin.products_create');
         Route::post('create', [ProductController::class, "store"])->name('admin.products_store');
+        Route::get('update/{product}', [ProductController::class, "edit"])->name('admin.products_edit');
+        Route::post('update/{product}', [ProductController::class, "update"])->name('admin.products_update');
+        Route::post('delete', [ProductController::class, "delete"])->name('admin.products_delete');
 
         Route::get('get-categories-by-parent', [ProductController::class, "getCategoryByParent"])->name('admin.category_by_parent');
 
@@ -74,6 +77,12 @@ Route::middleware(['auth.admin', 'admin.verified'])->group(function () {
         Route::post('color-delete/{productColor}', [ProductController::class, "deleteColor"])->name('admin.products_color_delete');
 
         Route::get('size/{product}', [ProductController::class, "createSize"])->name('admin.products_size');
+        Route::get('size-by-product-color', [ProductController::class, "getSizeByProductColor"])->name('admin.size_by_product_color');
+        Route::get('size-by-product-color-edit/{productSize}', [ProductController::class, "getSizeByProductColorEdit"])->name('admin.size_by_product_color_edit');
+        Route::post('store-size-product/{product}', [ProductController::class, "storeSizeProduct"])->name('admin.store_size_product');
+        Route::post('delete-size-product/{productSize}', [ProductController::class, "deleteSizeProduct"])->name('admin.delete_size_product');
+        Route::get('update-size-product/{productSize}/{product}', [ProductController::class, "editSizeProduct"])->name('admin.update_size_product');
+        Route::post('update-size-product/{productSize}/{product}', [ProductController::class, "updateSizeProduct"])->name('admin.update_size_product');
         
     });
 

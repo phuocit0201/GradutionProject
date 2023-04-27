@@ -30,6 +30,8 @@ export default defineConfig({
                 'resources/client/js/show-product.js',
                 'resources/client/css/product-review.css',
                 'resources/admin/js/product-color.js',
+                'resources/admin/js/size.js',
+                'resources/admin/js/edit-product.js',
             ],
             refresh: true,
         }),

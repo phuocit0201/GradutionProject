@@ -5,7 +5,7 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<ol class="breadcrumb float-sm-left">
-						<li class="breadcrumb-item"><a href="#">Sản Phẩm</a></li>
+						<li class="breadcrumb-item"><a href="{{ $routeProduct }}">Sản Phẩm</a></li>
 						<li class="breadcrumb-item active">Màu Sản Phẩm</li>
 						<li class="breadcrumb-item">
 							<a href="{{ $routeSize }}">Kích Thước Sản Phẩm</a>
@@ -107,7 +107,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title">Chỉnh sửa màu Mới Màu</h4>
+				<h4 class="modal-title">Chỉnh sửa màu màu</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>

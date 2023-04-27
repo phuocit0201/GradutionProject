@@ -3,9 +3,20 @@
 <section section class="content">
   <div class="container-fluid">
     <div class="row">
+      <div class="col-sm-12">
+				<ol class="breadcrumb float-sm-left">
+						<li class="breadcrumb-item">Sản Phẩm</li>
+						<li class="breadcrumb-item active">
+							<a href="{{ $routeColor }}">Màu Sản Phẩm</a>
+            </li>
+						<li class="breadcrumb-item">
+							<a href="{{ $routeSize }}">Kích Thước Sản Phẩm</a>
+						</li>
+				</ol>
+			</div>
       <div id="form-data" hidden data-rules="{{ json_encode($rules) }}"
       data-messages="{{ json_encode($messages) }}"></div>
-      <form class="row" action="{{route('admin.products_store')}}" method="POST" id="form__js" enctype="multipart/form-data">
+      <form class="row" action="{{route('admin.products_update', $product->id)}}" method="POST" id="form__js" enctype="multipart/form-data">
         @csrf
         <div class="col-xl-12 col-lg-12 col-md-12">
           <div class="card card-default">
@@ -26,6 +37,7 @@
                       id="name"
                       type="text" 
                       name="name"
+                      value="{{ $product->name }}"
                       class="form-control">
                   </x-admin-input-prepend>
                   <x-admin-input-prepend label="Giá Nhập" col="col-6" width="auto">
@@ -34,6 +46,7 @@
                       type="number"
                       min="1" 
                       name="price_import"
+                      value="{{ $product->price_import }}"
                       class="form-control">
                   </x-admin-input-prepend>
                   <x-admin-input-prepend label="Giá Bán" col="col-6" width="auto">
@@ -41,24 +54,33 @@
                       id="price_sell"
                       type="number" 
                       name="price_sell"
+                      value="{{ $product->price_sell }}"
                       class="form-control">
                   </x-admin-input-prepend>
                   <x-admin-input-prepend label="Thương Hiệu" width="auto" col="col-6">
                     <select class="form-control" name="brand_id" id="brand">
                       @foreach ($brands as $brand)
-                          <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                          <option value="{{ $brand->id }}"
+                            @if ($brand->id == $product->brand_id)
+                                @selected(true)
+                            @endif  
+                          >{{ $brand->name }}</option>
                       @endforeach
                     </select>
                   </x-admin-input-prepend>
                   <x-admin-input-prepend label="Thời trang" width="auto" col="col-6">
                     <select class="form-control" name="parent_id" id="parent_id">
                       @foreach ($categoriesParent as $categoryParent)
-                          <option value="{{ $categoryParent->id }}">{{ $categoryParent->name }}</option>
+                          <option value="{{ $categoryParent->id }}"
+                            @if ($categoryParent->id == $product->category->parent_id)
+                              @selected(true)
+                            @endif    
+                          >{{ $categoryParent->name }}</option>
                       @endforeach
                     </select>
                   </x-admin-input-prepend>
                   <x-admin-input-prepend label="Danh Mục" width="auto">
-                    <select class="form-control" name="category_id" id="category_id" route="{{ route('admin.category_by_parent') }}">
+                    <select class="form-control" value="{{ $product->category_id }}" name="category_id" id="category_id" route="{{ route('admin.category_by_parent') }}">
                       
                     </select>
                   </x-admin-input-prepend>
@@ -71,6 +93,7 @@
                     <!-- /.card-header -->
                     <div class="card-body">
                       <textarea id="summernote" name="description">
+                        {{ $product->description }}
                       </textarea>
                     </div>
                   </div>
@@ -80,7 +103,7 @@
                 <div class="card-body">
                   <div class="container">
                     <div class="preview">
-                      <img id="img-preview" src="" />
+                      <img id="img-preview" src="{{ asset("asset/client/images/products/small/$product->img") }}" />
                       <label for="file-input">Chọn Hình Ảnh</label>
                       <input hidden accept="image/*" type="file" id="file-input" name="img"/>
                     </div>
@@ -88,7 +111,7 @@
                 </div>
               </div>
               <div class="col-12 text-center" style="padding-bottom: 10px;">
-                <button class="btn btn-success">THÊM MỚI</button>
+                <button class="btn btn-success">CẬP NHẬT</button>
                 <button class="btn btn-danger">HỦY</button>
               </div>
             </div>
@@ -104,7 +127,7 @@
 @vite(
 [
   'resources/admin/js/user-create.js',
-  'resources/admin/js/product.js',
+  'resources/admin/js/edit-product.js',
   'resources/admin/css/product.css',
   'resources/admin/css/form-edit.css',
   'resources/common/js/form.js',
