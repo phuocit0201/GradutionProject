@@ -41,7 +41,7 @@
                     <tr id="{{ $item->id }}">
                         @foreach ($headers as $header)
                             <td>
-                                @if (! isset($header['status']))
+                                @if (! isset($header['status']) && ! isset($header['img']))
                                     @php
                                         $value = is_array($item_value = data_get($item, $header['key'])) ? nl2br(implode(PHP_EOL, $item_value)) : $item_value 
                                     @endphp
@@ -50,6 +50,11 @@
                                     @else
                                         {{$value}}
                                     @endif
+                                @elseif (isset($header['img']))
+                                    @php
+                                        $value = is_array($item_value = data_get($item, $header['key'])) ? nl2br(implode(PHP_EOL, $item_value)) : $item_value 
+                                    @endphp
+                                    <img style="{{ $header['img']['style'] }}" src="{{ asset($header['img']['url']) . '/' . $value }}" alt="">
                                 @else
                                     @foreach ($header['status'] as $status)
                                         @php

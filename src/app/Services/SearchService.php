@@ -48,6 +48,7 @@ class SearchService
     {
         $categories = $this->categoryRepository->all();
         $brands = $this->brandRepository->all();
+        
         $keyword = $request->keyword ?? null;
         $category = $request->category ?? null;
         $minPrice = $request->min_price ?? null;
