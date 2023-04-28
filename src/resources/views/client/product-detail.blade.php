@@ -7,14 +7,14 @@
           <div class="products-details">
             <div class="preview_image">
               <div class="preview-small">
-                <img id="zoom_03" src="{{ asset("asset/client/images/products/medium/products-01.jpg") }}" data-zoom-image="{{ asset("asset/client/images/products/Large/products-01.jpg") }}" alt="">
+                <img id="zoom_03" src="{{ asset("asset/client/images/products/small/$product->img") }}" data-zoom-image="{{ asset("asset/client/images/products/small/$product->img") }}" alt="">
               </div>
               <div class="thum-image">
                 <ul id="gallery_01" class="prev-thum">
                   @foreach ($productColor as $color)
                     <li class="sub-img">
-                      <a href="#" data-image="{{ asset("asset/client/images/products/medium/$color->img") }}" data-zoom-image="{{ asset("asset/client/images/products/Large/products-01.jpg") }}">
-                        <img src="{{ asset("asset/client/images/products/thum/products-01.png") }}" alt="">
+                      <a href="#" data-image="{{ asset("asset/client/images/products/small/$color->img") }}" data-zoom-image="{{ asset("asset/client/images/products/small/$color->img") }}">
+                        <img src="{{ asset("asset/client/images/products/small/$color->img") }}" alt="">
                       </a>
                     </li>
                   @endforeach

@@ -22,6 +22,7 @@ $(document).ready(function(){
 
 function getCategoties()
 {
+    let curentCategory = $('#category_id').attr('value')
     $('#category_id').html("");
     let parentId = $('#parent_id').val();
     let url = $('#category_id').attr('route');
@@ -31,7 +32,11 @@ function getCategoties()
     }).done((response) => {
         let option = '';
         response.forEach(element => {
-            option += `<option value="${element.id}">${element.name}</option>`
+            if (curentCategory == element.id) {
+                option += `<option value="${element.id}" selected>${element.name}</option>`
+            } else {
+                option += `<option value="${element.id}">${element.name}</option>`
+            }
         });
         $('#category_id').html(option);
     })

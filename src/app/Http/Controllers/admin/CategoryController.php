@@ -47,7 +47,7 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         if (count($this->categoryService->edit($category)) > 0){
-            return view('admin.category.edit',$this->categoryService->edit($category));
+            return view('admin.category.edit', $this->categoryService->edit($category));
         }
 
         return redirect()->route('admin.category_index');

@@ -5,14 +5,13 @@
     justify-content: center;
     flex-direction: column;
     width: 100%;
-    max-width: 350px;
     margin: auto;
     background-color: rgb(255, 255, 255);
     box-shadow: 0 0 20px rgba(170, 170, 170, 0.2);
 }
 
 #img-preview {
-    width: 100%;
+    max-width: 250px;
     object-fit: cover;
     margin-bottom: 20px;
 }

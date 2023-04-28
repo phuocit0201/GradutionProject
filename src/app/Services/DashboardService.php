@@ -44,7 +44,6 @@ class DashboardService
         $users = count($this->userRepository->all());
         $inventory = $products - $productSold;
         $salesStatisticsByDays = $this->orderRepository->salesStatisticsByDay();
-        // dd($salesStatisticsByDay);
 
         // Get the current month and year
         $month = Carbon::now()->month;

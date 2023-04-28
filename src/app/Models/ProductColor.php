@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Product extends Model
+class ProductColor extends Model
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
@@ -17,7 +17,7 @@ class Product extends Model
      *
      * @var string
      */
-    protected $table = 'products';
+    protected $table = 'products_color';
 
     /**
      * The attributes that are mass assignable.
@@ -25,28 +25,13 @@ class Product extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'price_import',
-        'price_sell',
         'img',
-        'description',
-        'status',
-        'category_id',
-        'brand_id',
+        'color_id',
+        'product_id',
     ];
 
-    const PRODUCT_NUMBER_ITEM = [
-        'search' => 24,
-    ];
-
-    public function colors()
+    public function color()
     {
-        return $this->belongsToMany(Color::class, 'products_color');
-    }
-
-    public function category()
-    {
-        return $this->belongsTo(Category::class, 'category_id', 'id')->setEagerLoads([]);
-
+        return $this->belongsTo(Color::class, 'color_id', 'id')->setEagerLoads([]);
     }
 }
