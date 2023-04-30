@@ -5,7 +5,7 @@
       <meta name="description" content="">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="shortcut icon" href="{{ asset('asset/client/images/favicon.png') }}">
-      <title>Welcome to FlatShop</title>
+      <title>{{ setting_website()->name }}</title>
       <link href="{{ asset('asset/client/css/bootstrap.css') }}" rel="stylesheet">
       <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,700,500italic,100italic,100' rel='stylesheet' type='text/css'>
       <link href="{{ asset('asset/client/css/font-awesome.min.css') }}" rel="stylesheet">
@@ -38,19 +38,22 @@
             <div class="container">
                <div class="row">
                   <div class="col-md-2 col-sm-2">
-                     <div class="logo"><a href="index.html"><img src="{{ asset('asset/client/images/logo.png') }}" alt="FlatShop"></a></div>
+                     <div class="logo">
+                        <a href="{{ route('user.home') }}">
+                           <img src="{{ asset("asset/client/images/" . setting_website()->logo) }}" alt="FlatShop">
+                        </a>
+                     </div>
                   </div>
                   <div class="col-md-10 col-sm-10">
                      <div class="header_top">
                         <div class="row">
                            <div class="col-md-6">
                               <ul class="topmenu">
-                                 <li><a href="#">About Us</a></li>
-                                 <li><a href="#">News</a></li>
-                                 <li><a href="#">Service</a></li>
-                                 <li><a href="#">Recruiment</a></li>
-                                 <li><a href="#">Media</a></li>
-                                 <li><a href="#">Support</a></li>
+                                 <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                                 <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                 <li><a href="#"><i class="fab fa-instagram-square"></i></a></li>
+                                 <li><a href="#"><i class="fab fa-telegram-plane"></i></a></li>
+                                 <li><a href="#"><i class="fab fa-twitter"></i></a></li>
                               </ul>
                            </div>
                            <div class="col-md-6">
@@ -89,49 +92,27 @@
                               </form>
                            </li>
                            <li class="option-cart">
-                              <a href="{{ route('cart.index') }}" class="cart-icon">cart <span class="cart_no">02</span></a>
-                              <ul class="option-cart-item">
-                                 <li>
-                                    <div class="cart-item">
-                                       <div class="image"><img src="{{ asset('asset/client/images/products/thum/products-01.png') }}" alt=""></div>
-                                       <div class="item-description">
-                                          <p class="name">Lincoln chair</p>
-                                          <p>Size: <span class="light-red">One size</span><br>Quantity: <span class="light-red">01</span></p>
-                                       </div>
-                                       <div class="right">
-                                          <p class="price">$30.00</p>
-                                          <a href="#" class="remove"><img src="{{ asset('asset/client/images/remove.png') }}" alt="remove"></a>
-                                       </div>
-                                    </div>
-                                 </li>
-                                 <li>
-                                    <div class="cart-item">
-                                       <div class="image"><img src="{{ asset('asset/client/images/products/thum/products-02.png') }}" alt=""></div>
-                                       <div class="item-description">
-                                          <p class="name">Lincoln chair</p>
-                                          <p>Size: <span class="light-red">One size</span><br>Quantity: <span class="light-red">01</span></p>
-                                       </div>
-                                       <div class="right">
-                                          <p class="price">$30.00</p>
-                                          <a href="#" class="remove"><img src="{{ asset('asset/client/images/remove.png') }}" alt="remove"></a>
-                                       </div>
-                                    </div>
-                                 </li>
-                                 <li><span class="total">Total <strong>$60.00</strong></span><button class="checkout" onClick="location.href='checkout.html'">CheckOut</button></li>
-                              </ul>
+                              <a href="{{ route('cart.index') }}" class="cart-icon">cart <span class="cart_no"></span></a>
                            </li>
                         </ul>
                         <div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button></div>
                         <div class="navbar-collapse collapse">
                            <ul class="nav navbar-nav">
-                              <li class="active dropdown">
+                              <li class="dropdown {{ (request()->is('/*')) ? 'active' : '' }}">
                                  <a href="{{ route('user.home') }}">Trang Chủ</a>
                               </li>
                               @foreach (category_header() as $category)
-                                 <li class="dropdown">
+                                 <li class="dropdown @php
+                                    if (isset($request->slug) && $request->slug == $category->slug) {
+                                       echo "active";
+                                    }
+                                 @endphp">
                                     <a href="{{ route('user.products', $category->slug) }}">{{ $category->name }}</a>
                                  </li>
                               @endforeach
+                              <li class="dropdown {{ (request()->is('introduction*')) ? 'active' : '' }}">
+                                 <a href="{{ route('user.introduction') }}">Giới Thiệu</a>
+                              </li>
                            </ul>
                         </div>
                      </div>
@@ -146,35 +127,36 @@
                <div class="container">
                   <div class="row">
                      <div class="col-md-3">
-                        <div class="footer-logo"><a href="#"><img src="{{ asset('asset/client/images/logo.png') }}" alt=""></a></div>
+                        <div class="footer-logo">
+                           <a href="{{ route('user.home') }}">
+                              <img src="{{ asset("asset/client/images/" . setting_website()->logo) }}" alt="">
+                           </a>
+                        </div>
                      </div>
                      <div class="col-md-3 col-sm-6">
-                        <h4 class="title">Contact <strong>Info</strong></h4>
-                        <p>No. 08, Nguyen Trai, Hanoi , Vietnam</p>
-                        <p>Call Us : (084) 1900 1008</p>
-                        <p>Email : michael@leebros.us</p>
+                        <h4 class="title">Thông tin liên hệ</h4>
+                        <p>{{ setting_website()->address }}</p>
+                        <p>Số điện thoại : {{ setting_website()->phone_number }}</p>
+                        <p>Email : {{ setting_website()->email }}</p>
                      </div>
                      <div class="col-md-3 col-sm-6">
-                        <h4 class="title">Customer<strong> Support</strong></h4>
-                        <ul class="support">
-                           <li><a href="#">FAQ</a></li>
-                           <li><a href="#">Payment Option</a></li>
-                           <li><a href="#">Booking Tips</a></li>
-                           <li><a href="#">Infomation</a></li>
-                        </ul>
+                        <h4 class="title">Về chúng tôi</h4>
+                        <p>
+                           Chuyên bán thời trang an toàn. Tin cậy nhanh chóng. Chăm sóc khách hàng 24/24
+                        </p>
                      </div>
                      <div class="col-md-3">
-                        <h4 class="title">Get Our <strong>Newsletter </strong></h4>
-                        <p>Lorem ipsum dolor ipsum dolor.</p>
+                        <h4 class="title">Nhận thông tin từ chúng tôi</h4>
+                        <p>Cảm ơn rất nhiều</p>
                         <form class="newsletter">
-							<input type="text" name="" placeholder="Type your email....">
-							<input type="submit" value="SignUp" class="button">
-						</form>
+                           <input type="text" name="" placeholder="Email của bạn">
+                           <input type="submit" value="Gửi" class="button">
+						      </form>
                      </div>
                   </div>
                </div>
             </div>
-            <div class="copyright-info">
+            {{-- <div class="copyright-info">
                <div class="container">
                   <div class="row">
                      <div class="col-md-6">
@@ -190,7 +172,7 @@
                      </div>
                   </div>
                </div>
-            </div>
+            </div> --}}
          </div>
       </div>
       @if (Session::has('success'))
