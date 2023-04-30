@@ -349,7 +349,7 @@ class ProductService
                   ->whereNull('deleted_at');
         })
         ->get();
-        $productColors = ProductColor::all();
+        $productColors = ProductColor::where('product_id', $product->id)->get();
         return [
             'title' => 'Màu Sản Phẩm',
             'colors' => $colors,

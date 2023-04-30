@@ -40,7 +40,7 @@
                 </span>
               </p>
               <p>
-                {{ $product->description }}
+                {!! $product->description !!}
               </p>
               <hr class="border">
               <div class="price">
