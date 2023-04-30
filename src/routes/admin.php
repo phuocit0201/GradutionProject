@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
@@ -139,6 +140,11 @@ Route::middleware(['auth.admin', 'admin.verified'])->group(function () {
         Route::post('update/{size}', [SizeController::class, "update"])->name('admin.sizes_update');
         Route::post('delete', [SizeController::class, "delete"])->name('admin.sizes_delete');
     });
+
+    Route::group(['prefix' => 'setting'], function(){
+        Route::get('/', [SettingController::class, "index"])->name('admin.setting_index');
+        Route::post('/', [SettingController::class, "store"])->name('admin.setting_index');
+    });    
 });
 
 Route::middleware('guest:admin')->group(function () {
