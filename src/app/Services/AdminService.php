@@ -380,7 +380,7 @@ class AdminService
      */
     public function edit(User $user)
     {
-        try {
+        // try {
             $response = Http::withHeaders([
                 'token' => '24d5b95c-7cde-11ed-be76-3233f989b8f3'
             ])->get('https://online-gateway.ghn.vn/shiip/public-api/master-data/province');
@@ -590,9 +590,9 @@ class AdminService
                 'messages' => $messages,
                 'user' => $user,
             ];
-        } catch (Exception) {
-            return [];
-        }
+        // } catch (Exception) {
+        //     return [];
+        // }
         
     }
 

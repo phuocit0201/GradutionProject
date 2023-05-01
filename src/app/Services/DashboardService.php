@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Repository\Eloquent\OrderRepository;
 use App\Repository\Eloquent\UserRepository;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class DashboardService 
 {
@@ -69,6 +70,24 @@ class DashboardService
             }
         }
 
+        //get best selling product
+        $bestSellProducts = $this->orderRepository->bestSellProducts();
+
+        $labelBestSellProduct = [];
+        $parameterBestSellProduct = [];
+        foreach ($bestSellProducts as $product) {
+            $labelBestSellProduct[] = $product->name;
+            $parameterBestSellProduct[] = $product->sum;
+        }
+
+        // get best products review
+        $bestProductReviews = $this->orderRepository->bestProductReviews();
+        $labelBestProductReview = [];
+        $parameterBestProductReview = [];
+        foreach ($bestProductReviews as $product) {
+            $labelBestProductReview[] = $product->name;
+            $parameterBestProductReview[] = $product->sum;
+        }
         // Get list order
         $list = $this->orderRepository->getNewOrders();
         $tableCrud = [
@@ -153,6 +172,10 @@ class DashboardService
             'year' => $year,
             'month' => $month,
             'tableCrud' => $tableCrud,
+            'labelBestSellProduct' => json_encode($labelBestSellProduct),
+            'parameterBestSellProduct' => json_encode($parameterBestSellProduct),
+            'labelBestProductReview' => json_encode($labelBestProductReview),
+            'parameterBestProductReview' => json_encode($parameterBestProductReview),
         ];
     }
 

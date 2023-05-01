@@ -7,7 +7,7 @@ use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class Authorizations
+class AdminAuthorizations
 {
     /**
      * Handle an incoming request.

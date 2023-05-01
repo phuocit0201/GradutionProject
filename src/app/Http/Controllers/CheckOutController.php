@@ -29,6 +29,9 @@ class CheckOutController extends Controller
      */
     public function index() 
     {
+        if (count(\Cart::getContent()) <= 0) {
+            return back();
+        }
         return view('client.checkout', $this->checkOutService->index());
     }
 
