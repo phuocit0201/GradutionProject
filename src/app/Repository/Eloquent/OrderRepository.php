@@ -181,6 +181,31 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         ->orderByDesc('orders.id')
         ->get();
     }
+
+    public function bestSellProducts()
+    {
+        return DB::select('
+            select sum(order_details.quantity) as sum, products.id, products.name from orders join order_details on orders.id = order_details.order_id
+            join products_size on products_size.id = order_details.product_size_id
+            join products_color on products_color.id = products_size.product_color_id
+            join products on products.id = products_color.product_id
+            where orders.order_status = 3
+            group by products.id, products.name
+            order by sum desc
+            limit 10
+        ;
+    ');
+    }
+
+    public function bestProductReviews()
+    {
+        return DB::select('
+            select count(*) as sum, products.id, products.name from product_reviews join products on products.id = product_reviews.product_id
+            group by products.id, products.name
+            order by sum desc
+            limit 10;
+        ');
+    }
 }
 
 ?>

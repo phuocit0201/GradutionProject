@@ -45,15 +45,6 @@ Route::middleware(['auth.admin', 'admin.verified'])->group(function () {
         Route::post('delete', [UserController::class, "delete"])->name('admin.users_delete');
     });
 
-    Route::group(['prefix' => 'staffs'], function(){
-        Route::get('/', [AdminController::class, "index"])->name('admin.staffs_index');
-        Route::get('create', [AdminController::class, "create"])->name('admin.staffs_create');
-        Route::post('create', [AdminController::class, "store"])->name('admin.staffs_store');
-        Route::get('edit/{user}', [AdminController::class, "edit"])->name('admin.staffs_edit');
-        Route::post('edit/{user}', [AdminController::class, "update"])->name('admin.staffs_update');
-        Route::post('delete', [AdminController::class, "delete"])->name('admin.staffs_delete');
-    });
-
     Route::group(['prefix' => 'profile'], function(){
         Route::get('/change-profile', [ProfileController::class, "changeProfile"])->name('admin.profile_change-profile');
         Route::post('/change-profile', [ProfileController::class, "updateProfile"])->name('admin.profile_update-profile');
@@ -114,15 +105,6 @@ Route::middleware(['auth.admin', 'admin.verified'])->group(function () {
         Route::post('delete', [BrandController::class, "delete"])->name('admin.brands_delete');
     });
 
-    Route::group(['prefix' => 'payments'], function(){
-        Route::get('/', [PaymentMethodController::class, "index"])->name('admin.payments_index');
-        Route::get('create', [PaymentMethodController::class, "create"])->name('admin.payments_create');
-        Route::post('create', [PaymentMethodController::class, "store"])->name('admin.payments_store');
-        Route::get('edit/{brand}', [PaymentMethodController::class, "edit"])->name('admin.payments_edit');
-        Route::post('update/{brand}', [PaymentMethodController::class, "update"])->name('admin.payments_update');
-        Route::post('delete', [PaymentMethodController::class, "delete"])->name('admin.payments_delete');
-    });
-
     Route::group(['prefix' => 'orders'], function(){
         Route::get('/', [OrderController::class, "index"])->name('admin.orders_index');
         Route::get('create', [OrderController::class, "create"])->name('admin.orders_create');
@@ -141,10 +123,32 @@ Route::middleware(['auth.admin', 'admin.verified'])->group(function () {
         Route::post('delete', [SizeController::class, "delete"])->name('admin.sizes_delete');
     });
 
-    Route::group(['prefix' => 'setting'], function(){
-        Route::get('/', [SettingController::class, "index"])->name('admin.setting_index');
-        Route::post('/', [SettingController::class, "store"])->name('admin.setting_index');
-    });    
+    Route::middleware('auth.admin_author:admin')->group(function () {
+
+        Route::group(['prefix' => 'setting'], function(){
+            Route::get('/', [SettingController::class, "index"])->name('admin.setting_index');
+            Route::post('/', [SettingController::class, "store"])->name('admin.setting_index');
+        });
+        
+        Route::group(['prefix' => 'payments'], function(){
+            Route::get('/', [PaymentMethodController::class, "index"])->name('admin.payments_index');
+            Route::get('create', [PaymentMethodController::class, "create"])->name('admin.payments_create');
+            Route::post('create', [PaymentMethodController::class, "store"])->name('admin.payments_store');
+            Route::get('edit/{brand}', [PaymentMethodController::class, "edit"])->name('admin.payments_edit');
+            Route::post('update/{brand}', [PaymentMethodController::class, "update"])->name('admin.payments_update');
+            Route::post('delete', [PaymentMethodController::class, "delete"])->name('admin.payments_delete');
+        });
+
+        Route::group(['prefix' => 'staffs'], function(){
+            Route::get('/', [AdminController::class, "index"])->name('admin.staffs_index');
+            Route::get('create', [AdminController::class, "create"])->name('admin.staffs_create');
+            Route::post('create', [AdminController::class, "store"])->name('admin.staffs_store');
+            Route::get('edit/{user}', [AdminController::class, "edit"])->name('admin.staffs_edit');
+            Route::post('edit/{user}', [AdminController::class, "update"])->name('admin.staffs_update');
+            Route::post('delete', [AdminController::class, "delete"])->name('admin.staffs_delete');
+        });
+
+    });
 });
 
 Route::middleware('guest:admin')->group(function () {

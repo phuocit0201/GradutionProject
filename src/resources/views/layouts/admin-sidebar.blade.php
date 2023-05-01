@@ -157,6 +157,7 @@
                   </p>
                 </a>
               </li>
+              @if (Auth::guard('admin')->user()->role_id == 1)
               <li class="nav-item">
                 @php
                     $isRouteUser = request()->is('admin/staffs*');
@@ -168,6 +169,7 @@
                   </p>
                 </a>
               </li>
+              @endif
               <li class="nav-item">
                 @php
                     $isRouteUser = request()->is('admin/categories*');
@@ -223,6 +225,7 @@
                   </p>
                 </a>
               </li>
+              @if (Auth::guard('admin')->user()->role_id == 1)
               <li class="nav-item">
                 @php
                     $isRouteUser = request()->is('admin/payments*');
@@ -234,6 +237,7 @@
                   </p>
                 </a>
               </li>
+              @endif
               <li class="nav-item">
                 @php
                     $isRouteUser = request()->is('admin/orders*');
@@ -245,17 +249,19 @@
                   </p>
                 </a>
               </li>
-              <li class="nav-item">
-                @php
-                    $isRouteUser = request()->is('admin/setting*');
-                @endphp
-                <a href="{{ route('admin.setting_index') }}" class="nav-link {{ ($isRouteUser) ? 'active' : '' }} next-link__js">
-                  <i class="nav-icon fas fa-cogs"></i>
-                  <p>
-                    {{ TextLayoutSidebar("setting") }}
-                  </p>
-                </a>
-              </li>
+              @if (Auth::guard('admin')->user()->role_id == 1)
+                <li class="nav-item">
+                  @php
+                      $isRouteUser = request()->is('admin/setting*');
+                  @endphp
+                  <a href="{{ route('admin.setting_index') }}" class="nav-link {{ ($isRouteUser) ? 'active' : '' }} next-link__js">
+                    <i class="nav-icon fas fa-cogs"></i>
+                    <p>
+                      {{ TextLayoutSidebar("setting") }}
+                    </p>
+                  </a>
+                </li>
+              @endif
               <li class="nav-header">{{ TextLayoutSidebar("infomations") }}</li>
               <li class="nav-item">
                 <a href="{{route('admin.profile_change-profile')}}" class="nav-link {{ (Route::is('admin.profile_change-profile')) ? 'active' : '' }} next-link__js">

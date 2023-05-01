@@ -54,10 +54,11 @@ class ProductReviewRepository extends BaseRepository
     {
         return DB::select("
             select users.name as user_name, product_reviews.* from products join product_reviews on products.id = product_reviews.product_id
-            join users on users.id = product_reviews.user_id where products.id = 1 
-            and users.active = $productId
+            join users on users.id = product_reviews.user_id
+            and users.active = 1
             and product_reviews.deleted_at is null 
             and users.deleted_at is null
+            and product_reviews.product_id = $productId
             order by id desc;
         ");
     }
