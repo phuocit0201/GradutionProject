@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Http\Requests\CheckOutRequest;
 use App\Models\Order;
+use App\Models\ProductSize;
 use App\Repository\Eloquent\OrderDetailRepository;
 use App\Repository\Eloquent\OrderRepository;
 use Exception;
@@ -123,7 +124,7 @@ class CheckOutService
             $order = $this->orderRepository->create($dataOrder);
 
             // create order detail
-            foreach (\Cart::getContent() as $product){
+            foreach(\Cart::getContent() as $product){
                 // data order detail
                 $orderDetail = [
                     'order_id' => $order->id,
@@ -146,7 +147,22 @@ class CheckOutService
         } catch (Exception $e) {
             Log::error($e);
             DB::rollBack();
-            return redirect()->route('user.home');
+            // check quantity product
+            foreach(\Cart::getContent() as $product){
+                $productSize = ProductSize::where('id', $product->id)->first();
+                if($productSize->quantity < $product->quantity) {
+                    \Cart::update(
+                        $product->id,
+                        [
+                            'quantity' => [
+                                'relative' => false,
+                                'value' => $productSize->quantity
+                            ],
+                        ]
+                    );
+                }
+            }
+            return redirect()->route('cart.index')->with('error', 'Có lỗi xảy ra vui lòng kiểm tra lại');
         }
     }
 

@@ -54,7 +54,7 @@
                         @elseif($orderHistory->order_status == 1)
                           <a class="btn-a" style="margin-left: 20px;" href="{{ route('order_history.update', $orderHistory->id) }}">Xác Nhận</a>
                         @elseif($orderHistory->order_status == 2)
-                          <a class="btn-a" style="margin-left: 20px;" href="{{ route('order_history.update', $orderHistory->id) }}">Đặt Lại</a>
+                        <a class="btn-a" style="margin-left: 20px;" href="{{ route('order_history.update', $orderHistory->id) }}">Xóa Đơn</a>
                         @elseif($orderHistory->order_status == 3)
                           <a class="btn-a" style="margin-left: 20px;" href="{{ route('order_history.update', $orderHistory->id) }}">Xóa Đơn</a>
                         @endif
