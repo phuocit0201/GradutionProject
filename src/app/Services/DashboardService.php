@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Repository\Eloquent\OrderRepository;
 use App\Repository\Eloquent\UserRepository;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 
 class DashboardService 
 {
