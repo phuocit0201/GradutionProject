@@ -76,6 +76,7 @@ if (!function_exists('TextLayoutTitle')) {
             "edit_size"             => "Chỉnh Sửa Kích Thước",
             "edit_staff"            => "Chỉnh Sửa Nhân Sự",
             "edit_product"          => "Chỉnh Sửa Sản Phẩm",
+            "edit_payment"          => "Chỉnh Sửa Phương Thức Thanh Toán"
         ];
         return $const[$index];
     }

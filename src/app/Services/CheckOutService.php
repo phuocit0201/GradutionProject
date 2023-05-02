@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Http\Requests\CheckOutRequest;
 use App\Models\Order;
+use App\Models\Payment;
 use App\Models\ProductSize;
 use App\Repository\Eloquent\OrderDetailRepository;
 use App\Repository\Eloquent\OrderRepository;
@@ -46,22 +47,27 @@ class CheckOutService
         $phoneNumber = old('phone_number') ?? Auth::user()->phone_number;
         $fullName = old('full_name') ?? Auth::user()->name;
         $email = old('email') ?? Auth::user()->email;
+
         $response = Http::withHeaders([
             'token' => '24d5b95c-7cde-11ed-be76-3233f989b8f3'
         ])->get('https://online-gateway.ghn.vn/shiip/public-api/master-data/province');
         $citys = json_decode($response->body(), true);
+
         $response = Http::withHeaders([
             'token' => '24d5b95c-7cde-11ed-be76-3233f989b8f3'
         ])->get('https://online-gateway.ghn.vn/shiip/public-api/master-data/district', [
             'province_id' => $city,
         ]);
         $districts = json_decode($response->body(), true);
+
         $response = Http::withHeaders([
             'token' => '24d5b95c-7cde-11ed-be76-3233f989b8f3'
         ])->get('https://online-gateway.ghn.vn/shiip/public-api/master-data/ward', [
             'district_id' => $district,
         ]);
         $wards = json_decode($response->body(), true);
+
+        $payments = Payment::where('status', Payment::STATUS['active'])-> get();
         return [
             'citys' => $citys['data'],
             'districts' => $districts['data'],
@@ -73,6 +79,7 @@ class CheckOutService
             'phoneNumber' => $phoneNumber,
             'email' => $email,
             'fullName' => $fullName,
+            'payments' => $payments,
         ];
     }
 

@@ -57,6 +57,7 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
             'colors.name as color_name',
             'products.name as product_name',
             'products.id as product_id',
+            'products.img as product_img'
         )
         ->where('orders.id', $id)
         ->get();
@@ -179,7 +180,7 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         ->where('user_id', $id)
         ->whereNull('orders.deleted_at')
         ->orderByDesc('orders.id')
-        ->get();
+        ->paginate(Order::ORDER_NUMBER_ITEM['history']);
     }
 
     public function bestSellProducts()

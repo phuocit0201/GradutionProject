@@ -17,7 +17,7 @@
           <!-- ./col -->
           <div class="col-lg-4 col-6">
             <!-- small box -->
-            <x-box-dashboard :data="$products" title="Tổng Sản Phẩm" route="sanpham" boxtype="info"/>
+            <x-box-dashboard :data="$admins" title="Tổng Nhân Sự" route="sanpham" boxtype="info"/>
           </div>
           <div class="col-lg-4 col-6">
             <!-- small box -->

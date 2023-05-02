@@ -72,6 +72,13 @@
             </tbody>
           </table>
         </div>
+        @if (count($orderHistorys) > 0)
+        <div class="text-center">
+            <ul class="pagination">
+                {{ $orderHistorys->links('vendor.pagination.default') }}
+            </ul>
+        </div>
+        @endif
       </div>
       <div class="clearfix">
       </div>

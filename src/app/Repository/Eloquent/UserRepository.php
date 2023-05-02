@@ -32,6 +32,14 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             ->orderBy('id', 'DESC')
             ->get();
     }
+
+    public function admins()
+    {
+        return $this->model
+            ->where('role_id', '!=', Role::ROLE['user'])
+            ->orderBy('id', 'DESC')
+            ->get();
+    }
 }
 
 ?>

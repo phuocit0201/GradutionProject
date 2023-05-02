@@ -42,6 +42,7 @@ class DashboardService
         $profit =  $this->orderRepository->getProfit();
         $productSold = $this->orderRepository->getTotalProductSold();
         $users = count($this->userRepository->all());
+        $admins = count($this->userRepository->admins());
         $inventory = $products - $productSold;
         $salesStatisticsByDays = $this->orderRepository->salesStatisticsByDay();
 
@@ -175,6 +176,7 @@ class DashboardService
             'parameterBestSellProduct' => json_encode($parameterBestSellProduct),
             'labelBestProductReview' => json_encode($labelBestProductReview),
             'parameterBestProductReview' => json_encode($parameterBestProductReview),
+            'admins' => $admins
         ];
     }
 

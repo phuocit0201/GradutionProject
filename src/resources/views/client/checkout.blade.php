@@ -156,27 +156,19 @@
                               </span>
                             @endif
                           </div>
+                          @foreach ($payments as $payment)
                           <div class="payment-method-select">
                             <label for="momo" class="payment-method-select--check">
                               <div>
-                                <input type="radio" value="1" name="payment_method" id="momo">
+                                <input type="radio" value="{{ $payment->id }}" name="payment_method">
                                 <span  class="label-momo">
-                                  Thanh toán khi nhận hàng
+                                  {{ $payment->name }}
                                 </span>
                               </div>
+                              <img src="{{ asset("asset/imgs/$payment->img") }}" alt="">
                             </label>
                           </div>
-                          <div class="payment-method-select">
-                            <label for="receive" class="payment-method-select--check">
-                              <div>
-                                <input type="radio" value="2" name="payment_method" id="receive">
-                                <span  class="label-momo">
-                                  Ví điện tử momo
-                                </span>
-                              </div>
-                              <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-MoMo-Square.png" alt="">
-                            </label>
-                          </div>
+                          @endforeach
                           <div style="padding-top: 5px;" class="text-center">
                             <button>Thanh Toán Đơn Hàng</button>
                           </div>

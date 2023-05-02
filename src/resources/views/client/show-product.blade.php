@@ -98,6 +98,13 @@
                     <div class="clearfix">
                     </div>
                 </div>
+                @if (count($products) > 0)
+                <div class="text-center">
+                    <ul class="pagination">
+                        {{ $products->links('vendor.pagination.default') }}
+                    </ul>
+                </div>
+                @endif
             </div>
             <div class="clearfix">
             </div>

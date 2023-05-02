@@ -90,7 +90,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
     public function getProductBySlug($slug, $brand, $minPrice, $maxPrice)
     {
-        return DB::table('products')
+        return $this->model
         ->join('categories', 'products.category_id', '=', 'categories.id')
         ->selectRaw('products.*')
         ->where('categories.slug', $slug)
@@ -103,7 +103,8 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         ->when($maxPrice, function ($query, $maxPrice) {
             return $query->where('products.price_sell', '<=', $maxPrice);
         })
-        ->get()
+        ->paginate(Product::PRODUCT_NUMBER_ITEM['show'])
+        ->withQueryString();
         ;
     }
 
