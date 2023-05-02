@@ -43,7 +43,6 @@ class DashboardService
         $productSold = $this->orderRepository->getTotalProductSold();
         $users = count($this->userRepository->all());
         $admins = count($this->userRepository->admins());
-        $inventory = $products - $productSold;
         $salesStatisticsByDays = $this->orderRepository->salesStatisticsByDay();
 
         // Get the current month and year
@@ -165,7 +164,6 @@ class DashboardService
             'orders' => $orders,
             'products' => $products,
             'profit' => $profit,
-            'inventory' => $inventory,
             'users' => $users,
             'days' => json_encode($daysArray),
             'parameters' => json_encode($parameters),
