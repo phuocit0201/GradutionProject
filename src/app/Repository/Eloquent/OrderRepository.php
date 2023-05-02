@@ -105,7 +105,9 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
     {
         return DB::table('products_size')
         ->join('products_color', 'products_color.id', '=', 'products_size.product_color_id')
+        ->join('products', 'products.id', '=', 'products_color.product_id')
         ->where('products_color.deleted_at', null)
+        ->where('products.deleted_at', null)
         ->sum('products_size.quantity');
     }
 

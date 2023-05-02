@@ -30,4 +30,6 @@ class ProductReview extends Model
         'rating',
         'content'
     ];
+    
+    const PRODUCT_REVIEW_NUMBER_ITEM = 10;
 }

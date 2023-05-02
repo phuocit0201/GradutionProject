@@ -89,22 +89,6 @@ class OrderService
                         ],
                     ],
                 ],
-                [
-                    'text' => 'Trạng Thái Thanh Toán',
-                    'key' => 'payment_status',
-                    'status' => [
-                        [
-                            'text' => 'Chưa Thanh Toán',
-                            'value' => Order::PAYMENT_STATUS['unpaid'],
-                            'class' => 'badge badge-warning'
-                        ],
-                        [
-                            'text' => 'Đã Thanh Toán',
-                            'value' => Order::PAYMENT_STATUS['paid'],
-                            'class' => 'badge badge-success'
-                        ],
-                    ],
-                ],
             ],
             'actions' => [
                 'text'          => "Thao Tác",
