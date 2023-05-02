@@ -134,9 +134,8 @@ Route::middleware(['auth.admin', 'admin.verified'])->group(function () {
             Route::get('/', [PaymentMethodController::class, "index"])->name('admin.payments_index');
             Route::get('create', [PaymentMethodController::class, "create"])->name('admin.payments_create');
             Route::post('create', [PaymentMethodController::class, "store"])->name('admin.payments_store');
-            Route::get('edit/{brand}', [PaymentMethodController::class, "edit"])->name('admin.payments_edit');
-            Route::post('update/{brand}', [PaymentMethodController::class, "update"])->name('admin.payments_update');
-            Route::post('delete', [PaymentMethodController::class, "delete"])->name('admin.payments_delete');
+            Route::get('edit/{payment}', [PaymentMethodController::class, "edit"])->name('admin.payments_edit');
+            Route::post('edit/{payment}', [PaymentMethodController::class, "update"])->name('admin.payments_update');
         });
 
         Route::group(['prefix' => 'staffs'], function(){

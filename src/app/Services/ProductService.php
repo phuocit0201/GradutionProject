@@ -84,12 +84,16 @@ class ProductService
                     'key' => 'name',
                 ],
                 [
-                    'text' => 'Hình ảnh',
+                    'text' => 'Hình Ảnh',
                     'key' => 'img',
                     'img' => [
                         'url' => 'asset/client/images/products/small/',
                         'style' => 'width: 100px;'
                     ],
+                ],
+                [
+                    'text' => 'Danh Mục',
+                    'key' => 'category.name',
                 ],
                 [
                     'text' => 'Giá',
