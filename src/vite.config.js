@@ -33,6 +33,7 @@ export default defineConfig({
                 'resources/admin/js/size.js',
                 'resources/admin/js/edit-product.js',
                 'resources/admin/js/setting.js',
+                'resources/client/css/home.css',
             ],
             refresh: true,
         }),

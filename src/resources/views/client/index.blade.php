@@ -1,10 +1,5 @@
 @extends('layouts.client')
 @section('content-client')
-<style>
-    .flat-caption p{
-        font-size: 18px !important;
-    }
-</style>
 <div class="clearfix"></div>
 <div class="hom-slider">
     <div class="container">
@@ -69,6 +64,10 @@
                             </div>
                             <div class="productname">{{ $bellingProduct->name }}</div>
                             <h4 class="price">{{ format_number_to_money($bellingProduct->price_sell) }} VNĐ</h4>
+                            <div class="productname" style="padding-bottom: 10px; padding-top: unset;">
+                                <x-avg-stars :number="$bellingProduct->avg_rating" />
+                                <span style="font-size: 14px;">Đã bán: {{ $bellingProduct->sum }}</span>
+                            </div>
                             <div class="button_group"><a href="{{ route('user.products_detail', $bellingProduct->id) }}" class="button add-cart" type="button">Xem Chi Tiết</a></div>
                         </div>
                     </div>
@@ -91,6 +90,10 @@
                                 <div class="thumbnail"><a href="{{ route('user.products_detail', $newProduct->id) }}"><img src="{{ asset("asset/client/images/products/small/$newProduct->img") }}" alt="Product Name"></a></div>
                                 <div class="productname">{{ $newProduct->name }}</div>
                                 <h4 class="price">{{ format_number_to_money($newProduct->price_sell) }} VNĐ</h4>
+                                <div class="productname" style="padding-bottom: 10px; padding-top: unset;">
+                                    <x-avg-stars :number="$newProduct->avg_rating" />
+                                    <span style="font-size: 14px;">Đã bán: {{ $newProduct->sum }}</span>
+                                </div>
                                 <div class="button_group"><a href="{{ route('user.products_detail', $newProduct->id) }}" class="button add-cart" type="button">Xem Chi Tiết</a></div>
                             </div>
                         </div>
@@ -102,4 +105,5 @@
         <div class="clearfix"></div>
     </div>
 </div>
+@vite(['resources/client/css/home.css'])
 @endsection
