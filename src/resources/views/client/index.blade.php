@@ -62,7 +62,7 @@
                             <div class="thumbnail">
                                 <a href="{{ route('user.products_detail', $bellingProduct->id) }}"><img src="{{ asset("asset/client/images/products/small/$bellingProduct->img") }}" alt="Product Name"></a>
                             </div>
-                            <div class="productname">{{ $bellingProduct->name }}</div>
+                            <div class="productname" style="height: 42px;">{{ $bellingProduct->name }}</div>
                             <h4 class="price">{{ format_number_to_money($bellingProduct->price_sell) }} VNĐ</h4>
                             <div class="productname" style="padding-bottom: 10px; padding-top: unset;">
                                 <x-avg-stars :number="$bellingProduct->avg_rating" />
@@ -88,7 +88,7 @@
                             <div class="products">
                                 <div class="offer">Mới</div>
                                 <div class="thumbnail"><a href="{{ route('user.products_detail', $newProduct->id) }}"><img src="{{ asset("asset/client/images/products/small/$newProduct->img") }}" alt="Product Name"></a></div>
-                                <div class="productname">{{ $newProduct->name }}</div>
+                                <div class="productname" style="height: 42px;">{{ $newProduct->name }}</div>
                                 <h4 class="price">{{ format_number_to_money($newProduct->price_sell) }} VNĐ</h4>
                                 <div class="productname" style="padding-bottom: 10px; padding-top: unset;">
                                     <x-avg-stars :number="$newProduct->avg_rating" />
