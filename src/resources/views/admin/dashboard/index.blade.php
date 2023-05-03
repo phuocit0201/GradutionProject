@@ -55,7 +55,7 @@
             </div>
             <!-- /.card -->
           </div>
-          <div class="col-md-6">
+          <div class="col-md-12">
             <!-- PIE CHART -->
             <div class="card card-success">
               <div class="card-header">
@@ -77,7 +77,7 @@
             <!-- /.card -->
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-12">
             <!-- PIE CHART -->
             <div class="card card-primary">
               <div class="card-header">
