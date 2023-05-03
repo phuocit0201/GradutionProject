@@ -55,6 +55,7 @@ class ProductDetailService
             ->join('colors', 'colors.id', 'products_color.color_id')
             ->select('colors.name as color_name', 'products_color.*')
             ->where('products_color.product_id', $product->id)
+            ->whereNull('products_color.deleted_at')
             ->get();
         // get product size
         $productsize = DB::table('products_color')
