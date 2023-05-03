@@ -35,8 +35,6 @@ class Product extends Model
         'brand_id',
     ];
 
-    
-
     const PRODUCT_NUMBER_ITEM = [
         'search' => 24,
         'show' => 6,
