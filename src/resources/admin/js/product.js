@@ -13,4 +13,26 @@ $(document).ready(function(){
             image.src = src;
         }
     });
+
+    getCategoties();
+    $(document).on('change', '#parent_id', function(){
+        getCategoties();
+    });
 });
+
+function getCategoties()
+{
+    $('#category_id').html("");
+    let parentId = $('#parent_id').val();
+    let url = $('#category_id').attr('route');
+    $.ajax({
+        type: 'GET',
+        url: url + '?parent_id=' + parentId
+    }).done((response) => {
+        let option = '';
+        response.forEach(element => {
+            option += `<option value="${element.id}">${element.name}</option>`
+        });
+        $('#category_id').html(option);
+    })
+}

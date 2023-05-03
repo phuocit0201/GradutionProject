@@ -24,13 +24,13 @@ if (!function_exists('TextLayoutSidebar')) {
             "profile"               => "Hồ Sơ",
             "change_password"       => "Mật Khẩu",
             "administrators"        => "Nhân Sự",
-            "product"               => "Sản Phẩm",
             "category"              => "Danh Mục",
             "color"                 => "Màu Sắc",
             "brand"                 => "Thương Hiệu",
             "payment_method"        => "Cổng Thanh Toán",
             "order"                 => "Đơn Hàng",
             "size"                  => "Kích Thước",
+            "setting"               => "Cấu hình",
         ];
         return $const[$key];
     }
@@ -74,6 +74,9 @@ if (!function_exists('TextLayoutTitle')) {
             "size"                  => "Quản Lý Kích Thước",
             "create_size"           => "Thêm Mới Kích Thước",
             "edit_size"             => "Chỉnh Sửa Kích Thước",
+            "edit_staff"            => "Chỉnh Sửa Nhân Sự",
+            "edit_product"          => "Chỉnh Sửa Sản Phẩm",
+            "edit_payment"          => "Chỉnh Sửa Phương Thức Thanh Toán"
         ];
         return $const[$index];
     }

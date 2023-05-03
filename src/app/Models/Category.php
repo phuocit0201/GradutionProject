@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Str;
 
 class Category extends Model
 {
@@ -26,5 +27,17 @@ class Category extends Model
      */
     protected $fillable = [
         'name',
+        'parent_id',
+        'slug',
     ];
+
+    public function setSlugAttribute($value)
+    {
+        $slug = Str::slug($value);
+        $count = Category::where('slug', $slug)->count();
+        if ($count > 0) {
+            $slug = $slug . '-' . $count;
+        }
+        $this->attributes['slug'] = $slug;
+    }
 }

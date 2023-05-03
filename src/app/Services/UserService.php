@@ -94,9 +94,9 @@ class UserService
                 'create'        => true,
                 'createExcel'   => false,
                 'edit'          => true,
-                'deleteAll'     => true,
+                'deleteAll'     => false,
                 'delete'        => true,
-                'viewDetail'    => true,
+                'viewDetail'    => false,
             ],
             'routes' => [
                 'create' => 'admin.users_create',

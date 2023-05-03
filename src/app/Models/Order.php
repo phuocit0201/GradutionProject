@@ -46,4 +46,8 @@ class Order extends Model
         'unpaid' => 0,
         'paid' => 1,
     ];
+
+    const ORDER_NUMBER_ITEM = [
+        'history' => 10,
+    ];
 }

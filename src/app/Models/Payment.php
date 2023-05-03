@@ -26,5 +26,12 @@ class Payment extends Model
      */
     protected $fillable = [
         'name',
+        'status',
+        'img',
+    ];
+
+    const STATUS = [
+        'active' => 1,
+        'unactive' => 0,
     ];
 }

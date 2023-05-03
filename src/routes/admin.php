@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
@@ -44,15 +45,6 @@ Route::middleware(['auth.admin', 'admin.verified'])->group(function () {
         Route::post('delete', [UserController::class, "delete"])->name('admin.users_delete');
     });
 
-    Route::group(['prefix' => 'staffs'], function(){
-        Route::get('/', [AdminController::class, "index"])->name('admin.staffs_index');
-        Route::get('create', [AdminController::class, "create"])->name('admin.staffs_create');
-        Route::post('create', [AdminController::class, "store"])->name('admin.staffs_store');
-        Route::get('edit/{user}', [AdminController::class, "edit"])->name('admin.staffs_edit');
-        Route::post('edit/{user}', [AdminController::class, "update"])->name('admin.staffs_update');
-        Route::post('delete', [AdminController::class, "delete"])->name('admin.staffs_delete');
-    });
-
     Route::group(['prefix' => 'profile'], function(){
         Route::get('/change-profile', [ProfileController::class, "changeProfile"])->name('admin.profile_change-profile');
         Route::post('/change-profile', [ProfileController::class, "updateProfile"])->name('admin.profile_update-profile');
@@ -62,8 +54,28 @@ Route::middleware(['auth.admin', 'admin.verified'])->group(function () {
 
     Route::group(['prefix' => 'products'], function(){
         Route::get('/', [ProductController::class, "index"])->name('admin.product_index');
-        Route::get('create', [ProductController::class, "create"])->name('admin.product_create');
-        Route::post('create', [ProductController::class, "store"])->name('admin.product_store');
+        Route::get('create', [ProductController::class, "create"])->name('admin.products_create');
+        Route::post('create', [ProductController::class, "store"])->name('admin.products_store');
+        Route::get('update/{product}', [ProductController::class, "edit"])->name('admin.products_edit');
+        Route::post('update/{product}', [ProductController::class, "update"])->name('admin.products_update');
+        Route::post('delete', [ProductController::class, "delete"])->name('admin.products_delete');
+
+        Route::get('get-categories-by-parent', [ProductController::class, "getCategoryByParent"])->name('admin.category_by_parent');
+
+        Route::get('color/{product}', [ProductController::class, "createColor"])->name('admin.products_color');
+        Route::post('color/{product}', [ProductController::class, "storeColor"])->name('admin.products_color_store');
+        Route::get('color-update/{productColor}', [ProductController::class, "editColor"])->name('admin.products_color_edit');
+        Route::post('color-update/{productColor}', [ProductController::class, "updateColor"])->name('admin.products_color_update');
+        Route::post('color-delete/{productColor}', [ProductController::class, "deleteColor"])->name('admin.products_color_delete');
+
+        Route::get('size/{product}', [ProductController::class, "createSize"])->name('admin.products_size');
+        Route::get('size-by-product-color', [ProductController::class, "getSizeByProductColor"])->name('admin.size_by_product_color');
+        Route::get('size-by-product-color-edit/{productSize}', [ProductController::class, "getSizeByProductColorEdit"])->name('admin.size_by_product_color_edit');
+        Route::post('store-size-product/{product}', [ProductController::class, "storeSizeProduct"])->name('admin.store_size_product');
+        Route::post('delete-size-product/{productSize}', [ProductController::class, "deleteSizeProduct"])->name('admin.delete_size_product');
+        Route::get('update-size-product/{productSize}/{product}', [ProductController::class, "editSizeProduct"])->name('admin.update_size_product');
+        Route::post('update-size-product/{productSize}/{product}', [ProductController::class, "updateSizeProduct"])->name('admin.update_size_product');
+        
     });
 
     Route::group(['prefix' => 'categories'], function(){
@@ -93,15 +105,6 @@ Route::middleware(['auth.admin', 'admin.verified'])->group(function () {
         Route::post('delete', [BrandController::class, "delete"])->name('admin.brands_delete');
     });
 
-    Route::group(['prefix' => 'payments'], function(){
-        Route::get('/', [PaymentMethodController::class, "index"])->name('admin.payments_index');
-        Route::get('create', [PaymentMethodController::class, "create"])->name('admin.payments_create');
-        Route::post('create', [PaymentMethodController::class, "store"])->name('admin.payments_store');
-        Route::get('edit/{brand}', [PaymentMethodController::class, "edit"])->name('admin.payments_edit');
-        Route::post('update/{brand}', [PaymentMethodController::class, "update"])->name('admin.payments_update');
-        Route::post('delete', [PaymentMethodController::class, "delete"])->name('admin.payments_delete');
-    });
-
     Route::group(['prefix' => 'orders'], function(){
         Route::get('/', [OrderController::class, "index"])->name('admin.orders_index');
         Route::get('create', [OrderController::class, "create"])->name('admin.orders_create');
@@ -118,6 +121,32 @@ Route::middleware(['auth.admin', 'admin.verified'])->group(function () {
         Route::get('edit/{size}', [SizeController::class, "edit"])->name('admin.sizes_edit');
         Route::post('update/{size}', [SizeController::class, "update"])->name('admin.sizes_update');
         Route::post('delete', [SizeController::class, "delete"])->name('admin.sizes_delete');
+    });
+
+    Route::middleware('auth.admin_author:admin')->group(function () {
+
+        Route::group(['prefix' => 'setting'], function(){
+            Route::get('/', [SettingController::class, "index"])->name('admin.setting_index');
+            Route::post('/', [SettingController::class, "store"])->name('admin.setting_index');
+        });
+        
+        Route::group(['prefix' => 'payments'], function(){
+            Route::get('/', [PaymentMethodController::class, "index"])->name('admin.payments_index');
+            Route::get('create', [PaymentMethodController::class, "create"])->name('admin.payments_create');
+            Route::post('create', [PaymentMethodController::class, "store"])->name('admin.payments_store');
+            Route::get('edit/{payment}', [PaymentMethodController::class, "edit"])->name('admin.payments_edit');
+            Route::post('edit/{payment}', [PaymentMethodController::class, "update"])->name('admin.payments_update');
+        });
+
+        Route::group(['prefix' => 'staffs'], function(){
+            Route::get('/', [AdminController::class, "index"])->name('admin.staffs_index');
+            Route::get('create', [AdminController::class, "create"])->name('admin.staffs_create');
+            Route::post('create', [AdminController::class, "store"])->name('admin.staffs_store');
+            Route::get('edit/{user}', [AdminController::class, "edit"])->name('admin.staffs_edit');
+            Route::post('edit/{user}', [AdminController::class, "update"])->name('admin.staffs_update');
+            Route::post('delete', [AdminController::class, "delete"])->name('admin.staffs_delete');
+        });
+
     });
 });
 

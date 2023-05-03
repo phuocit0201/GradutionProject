@@ -83,15 +83,6 @@ class AdminService
                     'key' => 'email',
                 ],
                 [
-                    'text' => 'Lương',
-                    'key' => 'admin.basic_salary',
-                    'format' => 'true',
-                ],
-                [
-                    'text' => 'Hệ Số Lương',
-                    'key' => 'admin.coefficients_salary',
-                ],
-                [
                     'text' => 'Vai Trò',
                     'key' => 'role.name',
                 ],
@@ -117,9 +108,9 @@ class AdminService
                 'create'        => true,
                 'createExcel'   => false,
                 'edit'          => true,
-                'deleteAll'     => true,
+                'deleteAll'     => false,
                 'delete'        => true,
-                'viewDetail'    => true,
+                'viewDetail'    => false,
             ],
             'routes' => [
                 'create' => 'admin.staffs_create',
@@ -205,21 +196,6 @@ class AdminService
                     'format_phone' => true,
                 ],
                 [
-                    'attribute' => 'basic_salary',
-                    'label' => 'Lương Cơ Bản',
-                    'type' => 'text',
-                ],
-                [
-                    'attribute' => 'coefficients_salary',
-                    'label' => 'Hệ Số Lương',
-                    'type' => 'text',
-                ],
-                [
-                    'attribute' => 'momo_number',
-                    'label' => 'Tài Khoản Momo',
-                    'type' => 'text',
-                ],
-                [
                     'attribute' => 'role_id',
                     'label' => 'Vai Trò',
                     'type' => 'select',
@@ -287,16 +263,7 @@ class AdminService
                     'minlength' => 12,
                     'maxlength' => 12,
                 ],
-                'basic_salary' => [
-                    'required' => true,
-                ],
-                'momo_number' => [
-                    'required' => true,
-                ],
                 'role_id' => [
-                    'required' => true,
-                ],
-                'coefficients_salary' => [
                     'required' => true,
                 ],
             ];
@@ -337,15 +304,6 @@ class AdminService
                 ],
                 'apartment_number' => [
                     'required' =>  __('message.required', ['attribute' => 'số nhà']),
-                ],
-                'coefficients_salary' => [
-                    'required' => __('message.required', ['attribute' => 'hệ số lương']),
-                ],
-                'basic_salary' => [
-                    'required' => __('message.required', ['attribute' => 'lương cơ bản']),
-                ],
-                'momo_number' => [
-                    'required' => __('message.required', ['attribute' => 'tài khoản momo']),
                 ],
                 'role_id' => [
                     'required' => __('message.required', ['attribute' => 'vai trò']),
@@ -391,13 +349,6 @@ class AdminService
                 'apartment_number' => $data['apartment_number'],
             ];
 
-            // admins data request
-            $adminData = [
-                'momo_number' => $data['momo_number'],
-                'basic_salary' => $data['basic_salary'],
-                'coefficients_salary' => $data['coefficients_salary'],
-            ];
-            
             $token = Str::random(64);
             $time = Config::get('auth.verification.expire.resend', 60);
             DB::beginTransaction();
@@ -413,7 +364,6 @@ class AdminService
             $addressData['user_id'] = $user->id;
             $adminData['user_id'] = $user->id;
             $this->addressRepository->updateOrCreate($addressData);
-            $this->adminRepository->create($adminData);
             DB::commit();
             return redirect()->route('admin.staffs_index')->with('success', TextSystemConst::CREATE_SUCCESS);
         } catch (Exception $e) {
@@ -430,7 +380,7 @@ class AdminService
      */
     public function edit(User $user)
     {
-        try {
+        // try {
             $response = Http::withHeaders([
                 'token' => '24d5b95c-7cde-11ed-be76-3233f989b8f3'
             ])->get('https://online-gateway.ghn.vn/shiip/public-api/master-data/province');
@@ -494,24 +444,6 @@ class AdminService
                     'type' => 'text',
                     'format_phone' => true,
                     'value' => $user->phone_number,
-                ],
-                [
-                    'attribute' => 'basic_salary',
-                    'label' => 'Lương Cơ Bản',
-                    'type' => 'text',
-                    'value' => $user->admin->basic_salary,
-                ],
-                [
-                    'attribute' => 'coefficients_salary',
-                    'label' => 'Hệ Số Lương',
-                    'type' => 'text',
-                    'value' => $user->admin->coefficients_salary,
-                ],
-                [
-                    'attribute' => 'momo_number',
-                    'label' => 'Tài Khoản Momo',
-                    'type' => 'text',
-                    'value' => $user->admin->momo_number,
                 ],
                 [
                     'attribute' => 'role_id',
@@ -598,16 +530,7 @@ class AdminService
                     'minlength' => 12,
                     'maxlength' => 12,
                 ],
-                'basic_salary' => [
-                    'required' => true,
-                ],
-                'momo_number' => [
-                    'required' => true,
-                ],
                 'role_id' => [
-                    'required' => true,
-                ],
-                'coefficients_salary' => [
                     'required' => true,
                 ],
                 'active' => [
@@ -652,15 +575,6 @@ class AdminService
                 'apartment_number' => [
                     'required' =>  __('message.required', ['attribute' => 'số nhà']),
                 ],
-                'coefficients_salary' => [
-                    'required' => __('message.required', ['attribute' => 'hệ số lương']),
-                ],
-                'basic_salary' => [
-                    'required' => __('message.required', ['attribute' => 'lương cơ bản']),
-                ],
-                'momo_number' => [
-                    'required' => __('message.required', ['attribute' => 'tài khoản momo']),
-                ],
                 'role_id' => [
                     'required' => __('message.required', ['attribute' => 'vai trò']),
                 ],
@@ -670,15 +584,15 @@ class AdminService
             ];
     
             return [
-                'title' => TextLayoutTitle("create_staff"),
+                'title' => TextLayoutTitle("edit_staff"),
                 'fields' => $fields,
                 'rules' => $rules,
                 'messages' => $messages,
                 'user' => $user,
             ];
-        } catch (Exception) {
-            return [];
-        }
+        // } catch (Exception) {
+        //     return [];
+        // }
         
     }
 
@@ -709,16 +623,9 @@ class AdminService
                 'apartment_number' => $data['apartment_number'],
             ];
 
-            // admins data request
-            $adminData = [
-                'momo_number' => $data['momo_number'],
-                'basic_salary' => $data['basic_salary'],
-                'coefficients_salary' => $data['coefficients_salary'],
-            ];
             $addressData['user_id'] = $user->id;
             $adminData['user_id'] = $user->id;
             $this->addressRepository->update($user->address, $addressData);
-            $this->adminRepository->update($user->admin, $adminData);
             if (!isset($userData['password'])) {
                 unset($userData['password']);
             } elseif (!isset($userData['disable_reason'])) {

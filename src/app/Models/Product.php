@@ -32,7 +32,22 @@ class Product extends Model
         'description',
         'status',
         'category_id',
-        'product_type_id',
         'brand_id',
     ];
+
+    const PRODUCT_NUMBER_ITEM = [
+        'search' => 24,
+        'show' => 6,
+    ];
+
+    public function colors()
+    {
+        return $this->belongsToMany(Color::class, 'products_color');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id')->setEagerLoads([]);
+
+    }
 }

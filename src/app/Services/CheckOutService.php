@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Http\Requests\CheckOutRequest;
 use App\Models\Order;
+use App\Models\Payment;
+use App\Models\ProductSize;
 use App\Repository\Eloquent\OrderDetailRepository;
 use App\Repository\Eloquent\OrderRepository;
 use Exception;
@@ -45,22 +47,27 @@ class CheckOutService
         $phoneNumber = old('phone_number') ?? Auth::user()->phone_number;
         $fullName = old('full_name') ?? Auth::user()->name;
         $email = old('email') ?? Auth::user()->email;
+
         $response = Http::withHeaders([
             'token' => '24d5b95c-7cde-11ed-be76-3233f989b8f3'
         ])->get('https://online-gateway.ghn.vn/shiip/public-api/master-data/province');
         $citys = json_decode($response->body(), true);
+
         $response = Http::withHeaders([
             'token' => '24d5b95c-7cde-11ed-be76-3233f989b8f3'
         ])->get('https://online-gateway.ghn.vn/shiip/public-api/master-data/district', [
             'province_id' => $city,
         ]);
         $districts = json_decode($response->body(), true);
+
         $response = Http::withHeaders([
             'token' => '24d5b95c-7cde-11ed-be76-3233f989b8f3'
         ])->get('https://online-gateway.ghn.vn/shiip/public-api/master-data/ward', [
             'district_id' => $district,
         ]);
         $wards = json_decode($response->body(), true);
+
+        $payments = Payment::where('status', Payment::STATUS['active'])-> get();
         return [
             'citys' => $citys['data'],
             'districts' => $districts['data'],
@@ -72,6 +79,7 @@ class CheckOutService
             'phoneNumber' => $phoneNumber,
             'email' => $email,
             'fullName' => $fullName,
+            'payments' => $payments,
         ];
     }
 
@@ -123,7 +131,7 @@ class CheckOutService
             $order = $this->orderRepository->create($dataOrder);
 
             // create order detail
-            foreach (\Cart::getContent() as $product){
+            foreach(\Cart::getContent() as $product){
                 // data order detail
                 $orderDetail = [
                     'order_id' => $order->id,
@@ -137,25 +145,129 @@ class CheckOutService
             // remove cart
             \Cart::clear();
 
-            // check payment method is momo
-            if ($request->payment_method == 2) {
-                return $this->payWithMoMo($order->id."", $order->total_money."", route('checkout.callback_momo'), route('cart.index'));
+            return redirect()->route('order_history.index');
+        } catch (Exception $e) {
+            Log::error($e);
+            DB::rollBack();
+            // check quantity product
+            foreach(\Cart::getContent() as $product){
+                $productSize = ProductSize::where('id', $product->id)->first();
+                if($productSize->quantity < $product->quantity) {
+                    \Cart::update(
+                        $product->id,
+                        [
+                            'quantity' => [
+                                'relative' => false,
+                                'value' => $productSize->quantity
+                            ],
+                        ]
+                    );
+                }
             }
+            return redirect()->route('cart.index')->with('error', 'Có lỗi xảy ra vui lòng kiểm tra lại');
+        }
+    }
+
+    public function paymentMomo() 
+    {
+        return $this->payWithMoMo(time() . mt_rand(111, 999)."", \Cart::getTotal() + $this->getTransportFee()."", route('checkout.callback_momo'), route('cart.index'));
+    }
+
+    public function getTransportFee()
+    {
+        //get service id
+        $fromDistrict = "1530";
+        $shopId = "3577591";
+        $toDistrict = Auth::user()->address->district;
+        $response = Http::withHeaders([
+            'token' => '24d5b95c-7cde-11ed-be76-3233f989b8f3'
+        ])->get('https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/available-services', [
+            "shop_id" => $shopId,
+            "from_district" => $fromDistrict,
+            "to_district" => $toDistrict,
+        ]);
+        $serviceId = $response['data'][0]['service_id'];
+        
+        //data get fee
+        $dataGetFee = [
+            "service_id" => $serviceId,
+            "insurance_value" => 500000,
+            "coupon" => null,
+            "from_district_id" => $fromDistrict,
+            "to_district_id" => Auth::user()->address->district,
+            "to_ward_code" => Auth::user()->address->ward,
+            "height" => 15,
+            "length" => 15,
+            "weight" => 1000,
+            "width" => 15
+        ];
+        $response = Http::withHeaders([
+            'token' => '24d5b95c-7cde-11ed-be76-3233f989b8f3'
+        ])->get('https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee', $dataGetFee);
+
+        return $response['data']['total'];
+    }
+
+    public function callbackMomo(Request $request)
+    {
+        try {
+            if (! $this->checkSignature($request)) {
+                return redirect()->route('user.home');
+            }
+            //data order
+            $dataOrder = [
+                'id' => $request->orderId,
+                'payment_id' => 2,
+                'user_id' => Auth::user()->id,
+                'total_money' => $request->amount,
+                'order_status' => Order::STATUS_ORDER['wait'],
+                'transport_fee' => $this->getTransportFee(),
+                'note' => null,
+            ];
+            DB::beginTransaction();
+            // create order
+            $order = $this->orderRepository->create($dataOrder);
+
+            // create order detail
+            foreach(\Cart::getContent() as $product){
+                // data order detail
+                $orderDetail = [
+                    'order_id' => $order->id,
+                    'product_size_id' => $product->id,
+                    'unit_price' => $product->price,
+                    'quantity' => $product->quantity,
+                ];
+                $this->orderDetailRepository->create($orderDetail);
+            }
+            DB::commit();
+            // remove cart
+            \Cart::clear();
 
             return redirect()->route('order_history.index');
         } catch (Exception $e) {
             Log::error($e);
             DB::rollBack();
-            return redirect()->route('user.home');
+            // check quantity product
+            foreach(\Cart::getContent() as $product){
+                $productSize = ProductSize::where('id', $product->id)->first();
+                if($productSize->quantity < $product->quantity) {
+                    \Cart::update(
+                        $product->id,
+                        [
+                            'quantity' => [
+                                'relative' => false,
+                                'value' => $productSize->quantity
+                            ],
+                        ]
+                    );
+                }
+            }
+            return redirect()->route('cart.index')->with('error', 'Có lỗi xảy ra vui lòng kiểm tra lại');
         }
     }
 
-    public function callbackMomo(Request $request)
+    public function checkSignature(Request $request)
     {
-        $order = $this->orderRepository->find($request->orderId);
-        if (! $order) {
-            return redirect()->route('user.home');
-        }
         $partnerCode = $request->partnerCode;
         $accessKey = $request->accessKey;
         $requestId = $request->requestId."";
@@ -190,10 +302,10 @@ class CheckOutService
         $signature = hash_hmac("sha256", $rawHash, $secretKey);
         
         if (hash_equals($signature, $request->signature)) {
-            $this->orderRepository->update($order, ['payment_status' => Order::PAYMENT_STATUS['paid']]);
+            return true;
         }
         
-        return redirect()->route('order_history.index');
+        return false;
     }
 
     public function payWithMoMo($orderId, $amount, $returnUrl, $notifyurl)

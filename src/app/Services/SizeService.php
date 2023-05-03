@@ -51,10 +51,6 @@ class SizeService
                     'text' => 'Tên Kích Thước',
                     'key' => 'name',
                 ],
-                [
-                    'text' => 'Loại Sản Phẩm',
-                    'key' => 'type.name',
-                ],
             ],
             'actions' => [
                 'text'          => "Thao Tác",
@@ -88,19 +84,13 @@ class SizeService
     {
         try {
             // Fields form
-            $productsType = ProductType::select('id as value', 'name as text')->get();
             $fields = [
                 [
                     'attribute' => 'name',
                     'label' => 'Tên Kích Thước',
                     'type' => 'text',
                 ],
-                [
-                    'attribute' => 'product_type_id',
-                    'label' => 'Loại Sản Phẩm',
-                    'type' => 'select',
-                    'list' => $productsType,
-                ],
+                
             ];
     
             //Rules form
@@ -110,9 +100,6 @@ class SizeService
                     'minlength' => 1,
                     'maxlength' => 100,
                 ],
-                'product_type_id' => [
-                    'required' => true,
-                ],
             ];
     
             // Messages eror rules
@@ -121,9 +108,6 @@ class SizeService
                     'required' => __('message.required', ['attribute' => 'Tên kích thước']),
                     'minlength' => __('message.min', ['min' => 1, 'attribute' => 'Tên kích thước']),
                     'maxlength' => __('message.max', ['max' => 100, 'attribute' => 'Tên kích thước']),
-                ],
-                'product_type_id' => [
-                    'required' => __('message.required', ['attribute' => 'Loại sản phẩm']),
                 ],
             ];
     

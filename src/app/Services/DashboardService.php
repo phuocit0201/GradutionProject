@@ -42,9 +42,8 @@ class DashboardService
         $profit =  $this->orderRepository->getProfit();
         $productSold = $this->orderRepository->getTotalProductSold();
         $users = count($this->userRepository->all());
-        $inventory = $products - $productSold;
+        $admins = count($this->userRepository->admins());
         $salesStatisticsByDays = $this->orderRepository->salesStatisticsByDay();
-        // dd($salesStatisticsByDay);
 
         // Get the current month and year
         $month = Carbon::now()->month;
@@ -70,6 +69,24 @@ class DashboardService
             }
         }
 
+        //get best selling product
+        $bestSellProducts = $this->orderRepository->bestSellProducts();
+
+        $labelBestSellProduct = [];
+        $parameterBestSellProduct = [];
+        foreach ($bestSellProducts as $product) {
+            $labelBestSellProduct[] = $product->name;
+            $parameterBestSellProduct[] = $product->sum;
+        }
+
+        // get best products review
+        $bestProductReviews = $this->orderRepository->bestProductReviews();
+        $labelBestProductReview = [];
+        $parameterBestProductReview = [];
+        foreach ($bestProductReviews as $product) {
+            $labelBestProductReview[] = $product->name;
+            $parameterBestProductReview[] = $product->sum;
+        }
         // Get list order
         $list = $this->orderRepository->getNewOrders();
         $tableCrud = [
@@ -147,13 +164,17 @@ class DashboardService
             'orders' => $orders,
             'products' => $products,
             'profit' => $profit,
-            'inventory' => $inventory,
             'users' => $users,
             'days' => json_encode($daysArray),
             'parameters' => json_encode($parameters),
             'year' => $year,
             'month' => $month,
             'tableCrud' => $tableCrud,
+            'labelBestSellProduct' => json_encode($labelBestSellProduct),
+            'parameterBestSellProduct' => json_encode($parameterBestSellProduct),
+            'labelBestProductReview' => json_encode($labelBestProductReview),
+            'parameterBestProductReview' => json_encode($parameterBestProductReview),
+            'admins' => $admins
         ];
     }
 

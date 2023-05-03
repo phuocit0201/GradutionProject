@@ -17,7 +17,7 @@
           <!-- ./col -->
           <div class="col-lg-4 col-6">
             <!-- small box -->
-            <x-box-dashboard :data="$products" title="Tổng Sản Phẩm" route="sanpham" boxtype="info"/>
+            <x-box-dashboard :data="$admins" title="Tổng Nhân Sự" route="sanpham" boxtype="info"/>
           </div>
           <div class="col-lg-4 col-6">
             <!-- small box -->
@@ -25,33 +25,12 @@
           </div>
           <div class="col-lg-4 col-6">
             <!-- small box -->
-            <x-box-dashboard :data="$inventory" title="Tổng Sản Phẩm Tồn Kho" route="tonkho" boxtype="primary"/>
+            <x-box-dashboard :data="$products" title="Tổng Sản Phẩm Tồn Kho" route="tonkho" boxtype="primary"/>
           </div>
           <div class="col-lg-4 col-6">
             <!-- small box -->
             <x-box-dashboard :data="$users" title="Tổng Khách Hàng" route="khachhang" boxtype="warning"/>
           </div>
-          {{-- <div class="col-md-6"> --}}
-            <!-- PIE CHART -->
-            {{-- <div class="card card-success">
-              <div class="card-header">
-                <h3 class="card-title">Doanh số 10 sản phẩm bán chạy nhất</h3>
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-body">
-                <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div> --}}
           <div class="col-md-12">
              <!-- STACKED BAR CHART -->
              <div class="card card-success">
@@ -76,6 +55,49 @@
             </div>
             <!-- /.card -->
           </div>
+          <div class="col-md-12">
+            <!-- PIE CHART -->
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">Sản phẩm bán chạy nhất</h3>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <canvas id="pieChart" label="{{ $labelBestSellProduct }}" data="{{ $parameterBestSellProduct }}" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+
+          <div class="col-md-12">
+            <!-- PIE CHART -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Sản phẩm có nhiều lượt đánh giá nhất</h3>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <canvas id="bestReview" label="{{ $labelBestProductReview }}" data="{{ $parameterBestProductReview }}" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
           <div class="col-12">
             <div class="card">
               <div class="card-header">
@@ -90,6 +112,7 @@
             </div>
             <!-- /.card -->
           </div>
+          
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->

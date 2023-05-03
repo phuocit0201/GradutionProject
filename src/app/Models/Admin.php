@@ -17,7 +17,7 @@ class Admin extends Authenticatable
      *
      * @var string
      */
-    protected $table = 'admins';
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
@@ -49,4 +49,9 @@ class Admin extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    public function address()
+    {
+        return $this->belongsTo(Address::class, 'id', 'user_id')->setEagerLoads([]);
+    }
 }

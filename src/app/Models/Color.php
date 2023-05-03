@@ -27,4 +27,14 @@ class Color extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function productSize()
+    {
+        return $this->hasManyThrough(ProductColor::class, ProductSize::class, 'product_color_id', 'color_id','id', 'id');
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'products_color');
+    }
 }

@@ -162,6 +162,6 @@
       </div>
     </div>
   </div>
-@vite(['resources/client/css/checkout.css'])
+@vite(['resources/client/css/checkout.css', 'resources/client/js/profile.js'])
 
 @endsection

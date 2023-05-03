@@ -36,9 +36,11 @@
                 <?php $totalProductMoney +=  $order_detail->unit_price *  $order_detail->quantity;?>
                 <tr>
                     <td>{{ $order_detail->product_id }}</td>
-                    <td>{{ $order_detail->product_name }}</td>
+                    <td>
+                      <a href="{{ route('user.products_detail', $order_detail->product_id) }}">{{ $order_detail->product_name }}</a>
+                    </td>
                     <td class="text-center">
-                      <img style="width: 70px; height:auto; object-fit: cover;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKezP5MQdLov1HSB7bVd5zNfsxdnGaFzrYQQ&usqp=CAU" alt="">
+                      <img style="width: 70px; height:auto; object-fit: cover;" src="{{ asset("asset/client/images/products/small/$order_detail->product_img") }}" alt="">
                     </td>
                     <td>{{ $order_detail->color_name }}</td>
                     <td>{{ $order_detail->size_name }}</td>
