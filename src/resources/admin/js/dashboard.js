@@ -57,7 +57,7 @@ $(document).ready(function(){
     datasets: [
       {
         data: dataBestSellProduct,
-        backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+        backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de', '#CC6699', '#00DD00', '#001100', '#FFFF33'],
       }
     ]
   }
@@ -85,7 +85,7 @@ $(document).ready(function(){
     datasets: [
       {
         data: dataBestSellProduct,
-        backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+        backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de', '#CC6699', '#00DD00', '#001100', '#FFFF33'],
       }
     ]
   }
