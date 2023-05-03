@@ -7,6 +7,15 @@
   .preview-small{
     margin-top: unset !important;
   }
+
+  .quantyti_sold{
+    font-size: 14px !important;
+  }
+
+  .products-description div{
+    font-size: 14px;
+    line-height: 20px;
+  }
 </style>
 <div class="container_fullwidth">
     <div class="container">
@@ -41,7 +50,7 @@
               <h5 class="name">
                 {{ $product->name }}
               </h5>
-              <p>
+              <p class="quantyti_sold">
                 Số lượng đã bán: 
                 <span class=" light-red">
                   {{ $productSold->sum ?? 0}}
@@ -118,7 +127,7 @@
                 &gt;
               </a>
             </div>
-            <ul id="hot">
+            <ul>
               <li>
                 <div class="row">
                   @foreach ($relatedProducts as $relatedProduct)

@@ -1,10 +1,6 @@
 @extends('layouts.client')
 @section('content-client')
 <style>
-.content-page {
-  min-height: calc(100vh - 389px);
-  padding-top: 50px;
-}
 .title-steps{
   padding: 15px 25px;
   font-weight: bold !important;

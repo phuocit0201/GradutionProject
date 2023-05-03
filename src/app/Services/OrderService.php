@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Helpers\TextSystemConst;
 use App\Models\Order;
+use App\Models\OrderDetail;
+use App\Models\ProductSize;
 use App\Repository\Eloquent\OrderRepository;
 use Exception;
 use Illuminate\Http\Request;
@@ -166,6 +168,13 @@ class OrderService
     {
         try {
             $data = $request->all();
+            if ($request->order_status == 2) {
+                $orderDetails = OrderDetail::where('order_id', $order->id)->get();
+                foreach($orderDetails as $orderDetail) {
+                    $productSize = ProductSize::where('id', $orderDetail->product_size_id)->first();
+                    $productSize->update(['quantity' => $productSize->quantity + $orderDetail->quantity]);
+                }
+            }
             $this->orderRepository->update($order, $data);
             return redirect()->route('admin.orders_index')->with('success', TextSystemConst::ORDER_PROCESSING);
         } catch (Exception $e) {

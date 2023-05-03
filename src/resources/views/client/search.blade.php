@@ -17,7 +17,9 @@
                         <select class="form-control form-select" name="category">
                             <option disabled selected>Chọn danh mục</option>
                             <option value="" >Tất cả</option>
-                            <option value="1" >Áo thun</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}" >{{ $category->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>

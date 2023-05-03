@@ -56,39 +56,39 @@ class ProfileService
             $response = Http::withHeaders([
                 'token' => '24d5b95c-7cde-11ed-be76-3233f989b8f3'
                 ])->get('https://online-gateway.ghn.vn/shiip/public-api/master-data/province');
+            $data = json_decode($response->body(), true);
+            foreach ($data['data'] as $item) {
+                $provinces[] = [
+                    'value' => $item['ProvinceID'],
+                    'text' => $item['NameExtension'][1],
+                ];
+            }
+            
+            $response = Http::withHeaders([
+                'token' => '24d5b95c-7cde-11ed-be76-3233f989b8f3'
+                ])->get('https://online-gateway.ghn.vn/shiip/public-api/master-data/district', [
+                    'province_id' => old('city') ?? $user->address->city,
+                ]);
                 $data = json_decode($response->body(), true);
                 foreach ($data['data'] as $item) {
-                    $provinces[] = [
-                        'value' => $item['ProvinceID'],
-                        'text' => $item['NameExtension'][1],
+                    $districts[] = [
+                        'value' => $item['DistrictID'],
+                        'text' => $item['DistrictName'],
                     ];
                 }
                 
                 $response = Http::withHeaders([
                     'token' => '24d5b95c-7cde-11ed-be76-3233f989b8f3'
-                    ])->get('https://online-gateway.ghn.vn/shiip/public-api/master-data/district', [
-                        'province_id' => old('city') ?? $user->address->city,
+                    ])->get('https://online-gateway.ghn.vn/shiip/public-api/master-data/ward', [
+                        'district_id' => old('district') ?? $user->address->district,
                     ]);
                     $data = json_decode($response->body(), true);
                     foreach ($data['data'] as $item) {
-                        $districts[] = [
-                            'value' => $item['DistrictID'],
-                            'text' => $item['DistrictName'],
+                        $wards[] = [
+                            'value' => $item['WardCode'],
+                            'text' => $item['NameExtension'][0],
                         ];
                     }
-                    
-                    $response = Http::withHeaders([
-                        'token' => '24d5b95c-7cde-11ed-be76-3233f989b8f3'
-                        ])->get('https://online-gateway.ghn.vn/shiip/public-api/master-data/ward', [
-                            'district_id' => old('district') ?? $user->address->district,
-                        ]);
-                        $data = json_decode($response->body(), true);
-                        foreach ($data['data'] as $item) {
-                            $wards[] = [
-                                'value' => $item['WardCode'],
-                                'text' => $item['NameExtension'][0],
-                            ];
-                        }
             // Fields form
             $fields = [
                 [
