@@ -117,6 +117,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         ->when($maxPrice, function ($query, $maxPrice) {
             return $query->where('products.price_sell', '<=', $maxPrice);
         })
+        ->orderByDesc('products.id')
         ->paginate(Product::PRODUCT_NUMBER_ITEM['show'])
         ->withQueryString();
         ;

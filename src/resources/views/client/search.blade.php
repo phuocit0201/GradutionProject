@@ -50,12 +50,15 @@
                     @foreach ($products as $product)
                         <div class="col-md-3 col-sm-6">
                             <div class="products">
-                                <div class="offer">Hot</div>
                                 <div class="thumbnail">
                                     <a href="{{ route('user.products_detail', $product->id) }}"><img src="{{ asset("asset/client/images/products/small/$product->img") }}" alt="Product Name"></a>
                                 </div>
                                 <div class="productname">{{ $product->name }}</div>
                                 <h4 class="price">{{ format_number_to_money($product->price_sell) }} VNĐ</h4>
+                                <div class="productname" style="padding-bottom: 10px; padding-top: unset;">
+                                    <x-avg-stars :number="$product->avg_rating" />
+                                    <span style="font-size: 14px;">Đã bán: {{ $product->sum }}</span>
+                                </div>
                                 <div class="button_group">
                                     <a href="{{ route('user.products_detail', $product->id) }}" class="button add-cart" type="button">Xem Chi Tiết</a>
                                 </div>

@@ -51,8 +51,8 @@
     <div class="container">
         <div class="hot-products">
             <h3 class="title">Sản Phẩm Bán Chạy</h3>
-            <div class="control"><a id="prev_hot" class="prev" href="#">&lt;</a><a id="next_hot" class="next" href="#">&gt;</a></div>
-            <ul id="hot">
+            <div class="control"></div>
+            <ul>
                 <li>
                 <div class="row">
                     @foreach ($bellingProducts as $bellingProduct)
@@ -79,8 +79,8 @@
         <div class="clearfix"></div>
         <div class="featured-products">
             <h3 class="title">Sản Phẩm Mới Nhất</h3>
-            <div class="control"><a id="prev_featured" class="prev" href="#">&lt;</a><a id="next_featured" class="next" href="#">&gt;</a></div>
-            <ul id="featured">
+            <div class="control"></div>
+            <ul>
                 <li>
                 <div class="row">
                     @foreach ($newProducts as $newProduct)
@@ -105,5 +105,4 @@
         <div class="clearfix"></div>
     </div>
 </div>
-@vite(['resources/client/css/home.css'])
 @endsection

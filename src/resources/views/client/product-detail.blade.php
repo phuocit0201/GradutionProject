@@ -4,6 +4,9 @@
   .rating .fa-star{
     color: #b1b1b1;
   }
+  .preview-small{
+    margin-top: unset !important;
+  }
 </style>
 <div class="container_fullwidth">
     <div class="container">
@@ -121,7 +124,7 @@
                   @foreach ($relatedProducts as $relatedProduct)
                     <div class="col-md-3 col-sm-4">
                       <div class="products">
-                        <div class="thumbnail">
+                        <div class="thumbnail text-center">
                           <img src="{{ asset("asset/client/images/products/small/$relatedProduct->img") }}" alt="Product Name">
                         </div>
                         <div class="productname">
