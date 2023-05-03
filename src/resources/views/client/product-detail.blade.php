@@ -14,7 +14,7 @@
         <div class="col-md-12">
           <div class="products-details">
             <div class="preview_image">
-              <div class="preview-small">
+              <div class="preview-small text-center">
                 <img id="zoom_03" src="{{ asset("asset/client/images/products/small/$product->img") }}" data-zoom-image="{{ asset("asset/client/images/products/small/$product->img") }}" alt="">
               </div>
               <div class="thum-image">
