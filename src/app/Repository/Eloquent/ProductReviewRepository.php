@@ -75,6 +75,15 @@ class ProductReviewRepository extends BaseRepository
         //     order by id desc;
         // ");
     }
+
+    public function avgRatingProduct($productId)
+    {
+        return DB::table('product_reviews')
+        ->join('products', 'products.id', '=', 'product_reviews.product_id')
+        ->select(DB::raw('sum(product_reviews.rating) / count(*) as avg_rating'))
+        ->where('products.id', $productId)
+        ->first();
+    }
 }
 
 ?>

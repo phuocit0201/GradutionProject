@@ -4,6 +4,9 @@
   .rating .fa-star{
     color: #b1b1b1;
   }
+  .preview-small{
+    margin-top: unset !important;
+  }
 </style>
 <div class="container_fullwidth">
     <div class="container">
@@ -11,7 +14,7 @@
         <div class="col-md-12">
           <div class="products-details">
             <div class="preview_image">
-              <div class="preview-small">
+              <div class="preview-small text-center">
                 <img id="zoom_03" src="{{ asset("asset/client/images/products/small/$product->img") }}" data-zoom-image="{{ asset("asset/client/images/products/small/$product->img") }}" alt="">
               </div>
               <div class="thum-image">
@@ -121,7 +124,7 @@
                   @foreach ($relatedProducts as $relatedProduct)
                     <div class="col-md-3 col-sm-4">
                       <div class="products">
-                        <div class="thumbnail">
+                        <div class="thumbnail text-center">
                           <img src="{{ asset("asset/client/images/products/small/$relatedProduct->img") }}" alt="Product Name">
                         </div>
                         <div class="productname">
@@ -130,10 +133,12 @@
                         <h4 class="price">
                           {{ format_number_to_money($relatedProduct->price_sell) }} VNĐ
                         </h4>
+                        <div class="productname" style="padding-bottom: 10px; padding-top: unset;">
+                          <x-avg-stars :number="$relatedProduct->avg_rating" />
+                          <span style="font-size: 14px;">Đã bán: {{ $relatedProduct->sum }}</span>
+                        </div>
                         <div class="button_group">
-                          <button class="button add-cart" type="button">
-                            Add To Cart
-                          </button>
+                          <a href="{{ route('user.products_detail', $relatedProduct->id) }}" class="button add-cart" type="button">Xem Chi Tiết</a>
                         </div>
                       </div>
                     </div>

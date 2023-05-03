@@ -48,6 +48,20 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         return $this->model->orderBy("id", "desc")->limit(10)->get();
     }
 
+    public function getQuantityBuyProduct($productId)
+    {
+        return DB::select("
+            select sum(order_details.quantity) as sum from products 
+            join products_color on products.id = products_color.product_id
+            join products_size on products_color.id = products_size.product_color_id
+            join order_details on products_size.id = order_details.product_size_id
+            join orders on orders.id = order_details.order_id
+            where orders.order_status = 3 
+            and products.deleted_at is null
+            and products.id = $productId
+        ")[0]->sum ?? 0;
+    }
+
     /**
      * Get total product sold by id
      * @param int $id
@@ -103,6 +117,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         ->when($maxPrice, function ($query, $maxPrice) {
             return $query->where('products.price_sell', '<=', $maxPrice);
         })
+        ->orderByDesc('products.id')
         ->paginate(Product::PRODUCT_NUMBER_ITEM['show'])
         ->withQueryString();
         ;

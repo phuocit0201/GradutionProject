@@ -114,14 +114,14 @@
                     </h4>
                     <div class="step-description">
                       <div class="your-details row">
-                        <div class="info-order">
+                        {{-- <div class="info-order">
                           <div class="discount">
                               <input type="text" name="discount_code" placeholder="Nhập mã giảm giá nếu có">
                               <div>
                                 <button>Áp dụng</button>
                               </div>
                           </div>
-                        </div>
+                        </div> --}}
                         <div class="info-order">
                           <div class="info__order-box">
                             <span>Tổng tiền sản phẩm</span>
@@ -169,7 +169,7 @@
                             </label>
                           </div>
                           @endforeach
-                          <div style="padding-top: 5px;" class="text-center">
+                          <div style="padding-top: 40px;" class="text-center">
                             <button>Thanh Toán Đơn Hàng</button>
                           </div>
                         </div>
