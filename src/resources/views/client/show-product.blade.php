@@ -79,7 +79,7 @@
                                                 <img src="{{ asset("asset/client/images/products/small/$product->img") }}" alt="Product Name">
                                             </a>
                                         </div>
-                                        <div class="productname">
+                                        <div class="productname" style="height: 42px;">
                                             {{ $product->name }}
                                         </div>
                                         <h4 class="price">
