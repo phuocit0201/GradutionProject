@@ -53,7 +53,7 @@
                                 <div class="thumbnail">
                                     <a href="{{ route('user.products_detail', $product->id) }}"><img src="{{ asset("asset/client/images/products/small/$product->img") }}" alt="Product Name"></a>
                                 </div>
-                                <div class="productname">{{ $product->name }}</div>
+                                <div class="productname" style="height: 42px;">{{ $product->name }}</div>
                                 <h4 class="price">{{ format_number_to_money($product->price_sell) }} VNĐ</h4>
                                 <div class="productname" style="padding-bottom: 10px; padding-top: unset;">
                                     <x-avg-stars :number="$product->avg_rating" />
