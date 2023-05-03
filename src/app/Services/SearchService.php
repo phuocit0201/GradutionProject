@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Category;
 use App\Repository\Eloquent\BrandRepository;
 use App\Repository\Eloquent\CategoryRepository;
 use App\Repository\Eloquent\ProductRepository;
@@ -54,7 +55,7 @@ class SearchService
      */
     public function search(Request $request)
     {
-        $categories = $this->categoryRepository->all();
+        $categories = Category::where('parent_id', '!=', 0)->get();
         $brands = $this->brandRepository->all();
         
         $keyword = $request->keyword ?? null;
