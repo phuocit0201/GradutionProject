@@ -1,5 +1,10 @@
 @extends('layouts.client')
 @section('content-client')
+<style>
+  .rating .fa-star{
+    color: #b1b1b1;
+  }
+</style>
 <div class="container_fullwidth">
     <div class="container">
       <div class="row">
@@ -276,6 +281,13 @@
               </div>
             </div>
           </div>
+          @if (count($productReviews) > 0)
+          <div class="text-center">
+              <ul class="pagination">
+                  {{ $productReviews->links('vendor.pagination.default') }}
+              </ul>
+          </div>
+          @endif
           <div class="clearfix">
           </div>
           </div>

@@ -74,7 +74,7 @@
                         <td>{{ $order_detail->product_id }}</td>
                         <td>{{ $order_detail->product_name }}</td>
                         <td class="text-center">
-                          <img style="width: 70px; height:auto; object-fit: cover;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKezP5MQdLov1HSB7bVd5zNfsxdnGaFzrYQQ&usqp=CAU" alt="">
+                          <img style="width: 70px; height:auto; object-fit: cover;" src="{{ asset("asset/client/images/products/small/$order_detail->product_img") }}" alt="">
                         </td>
                         <td>{{ $order_detail->color_name }}</td>
                         <td>{{ $order_detail->size_name }}</td>
@@ -106,9 +106,11 @@
             </div>
             <!-- /.card -->
           </div>
+          @if ($order->order_status != 3)
           <div class="action col-md-12 pb-3">
             <button class="btn btn-success" data-toggle="modal" data-target="#modal-lg">Xử Lý Đơn Hàng</button>
           </div>
+          @endif
         </div>
       </div>
     </div>

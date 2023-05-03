@@ -33,7 +33,7 @@
                     <td>{{ $orderHistory->id }}</td>
                     <td>{{ format_number_to_money($orderHistory->total_money) }}</td>
                     <td>{{ $orderHistory->created_at }}</td>
-                    <td>{{ $orderHistory->payment_name }}</td>
+                    <td><span class="badge badge-info">{{ $orderHistory->payment_name }}</span></td>
                     <td>
                       @if ($orderHistory->order_status == 0)
                           <span class="badge badge-warning">Chờ xử lý</span>

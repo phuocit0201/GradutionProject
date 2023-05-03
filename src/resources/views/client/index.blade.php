@@ -87,6 +87,7 @@
                     @foreach ($newProducts as $newProduct)
                         <div class="col-md-3 col-sm-6">
                             <div class="products">
+                                <div class="offer">Mới</div>
                                 <div class="thumbnail"><a href="{{ route('user.products_detail', $newProduct->id) }}"><img src="{{ asset("asset/client/images/products/small/$newProduct->img") }}" alt="Product Name"></a></div>
                                 <div class="productname">{{ $newProduct->name }}</div>
                                 <h4 class="price">{{ format_number_to_money($newProduct->price_sell) }} VNĐ</h4>
