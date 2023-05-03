@@ -133,10 +133,12 @@
                         <h4 class="price">
                           {{ format_number_to_money($relatedProduct->price_sell) }} VNĐ
                         </h4>
+                        <div class="productname" style="padding-bottom: 10px; padding-top: unset;">
+                          <x-avg-stars :number="$relatedProduct->avg_rating" />
+                          <span style="font-size: 14px;">Đã bán: {{ $relatedProduct->sum }}</span>
+                        </div>
                         <div class="button_group">
-                          <button class="button add-cart" type="button">
-                            Add To Cart
-                          </button>
+                          <a href="{{ route('user.products_detail', $relatedProduct->id) }}" class="button add-cart" type="button">Xem Chi Tiết</a>
                         </div>
                       </div>
                     </div>

@@ -30,6 +30,7 @@ class ProductDetailService
      *
      * @param ProductRepository $productRepository
      */
+    
     public function __construct(
         ProductRepository $productRepository,
         ProductReviewService $productReviewService,
@@ -95,6 +96,11 @@ class ProductDetailService
 
         //get related products
         $relatedProducts = $this->productRepository->getRelatedProducts($product);
+
+        foreach($relatedProducts as $key => $relatedProduct) {
+            $relatedProducts[$key]->avg_rating = $this->productReviewReprository->avgRatingProduct($relatedProduct->id)->avg_rating ?? 0;
+            $relatedProducts[$key]->sum = $this->productRepository->getQuantityBuyProduct($relatedProduct->id);
+        }
         return [
             'title' => TextLayoutTitle("payment_method"),
             'productSold' => $productSold,
