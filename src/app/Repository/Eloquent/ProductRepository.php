@@ -45,7 +45,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
      */
     public function getNewProducts()
     {
-        return $this->model->orderBy("id", "desc")->limit(10)->get();
+        return $this->model->orderBy("id", "desc")->limit(12)->get();
     }
 
     public function getQuantityBuyProduct($productId)
