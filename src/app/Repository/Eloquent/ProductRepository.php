@@ -127,6 +127,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     {
         return $this->model
         ->where('category_id', $product->category_id)
+        ->where('id', '!=', $product->id)
         ->orderByDesc('id')
         ->limit(4)
         ->get();
