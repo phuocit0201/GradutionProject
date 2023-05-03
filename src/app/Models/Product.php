@@ -35,9 +35,11 @@ class Product extends Model
         'brand_id',
     ];
 
+    
+
     const PRODUCT_NUMBER_ITEM = [
         'search' => 24,
-        'show' => 24,
+        'show' => 6,
     ];
 
     public function colors()
