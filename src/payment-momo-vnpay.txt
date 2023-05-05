@@ -1,26 +1,3 @@
------------------------------------------TEST MOMO---------------------------------------------------
-1. Card Successful
-    Name: NGUYEN VAN A
-    Card number: 9704 0000 0000 0018
-    Time: 03/07
-    OTP: OTP
-2. Card lock
-    Name: NGUYEN VAN A
-    Card number: 9704 0000 0000 0026
-    Time: 03/07
-    OTP: OTP
-3. Not Sufficient funds
-    Name: NGUYEN VAN A
-    Card number: 9704 0000 0000 0034
-    Time: 03/07
-    OTP: OTP
-4. Card Limit
-    Name: NGUYEN VAN A
-    Card number: 9704 0000 0000 0042
-    Time: 03/07
-    OTP: OTP
-
------------------------------------------TEST VNPAY---------------------------------------------------
 Bank: NCB
 Card number: 9704198526191432198
 Name: NGUYEN VAN A
