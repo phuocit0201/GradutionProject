@@ -9,64 +9,104 @@
         font-weight: 700;
         color: #bfbfbf;
     }
+    .checkboxx {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border: 1px solid #ccc;
+        border-radius: 0;
+        width: 14px;
+        height: 14px;
+        outline: none;
+        cursor: pointer;
+    }
+
+    .checkboxx:checked::before {
+    content: "\2713";
+    display: inline-block;
+    text-align: center;
+    font-size: 12px;
+    width: 14px;
+    height: 14px;
+    line-height: 14px;
+    color: #fff;
+    background-color: #007bff;
+    border: 2px solid #007bff;
+    }
+
+    .name-filter{
+        display: inline !important;
+        margin-top: 1px;
+    }
+
+    .checkboxx:focus{
+        outline: none !important;
+        outline: none !important;
+        outline-offset: unset !important;
+    }
 </style>
 <div class="container_fullwidth">
     <div class="container">
         <div class="row">
-            <div class="col-md-3">
-                <div class="category leftbar">
-                <h3 class="title">
-                    Danh Mục Sản Phẩm
-                </h3>
-                <ul>
-                    @foreach ($categories as $category)
-                        <li>
-                            <a href="{{ $request->fullUrlWithQuery(['category_slug' => $category->slug]) }}" class="{{ ($categorySlug == $category->slug) ? 'active' : '' }}">
-                                {{ $category->name }}
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
-                </div>
-                <div class="clearfix">
-                </div>
-                <div class="branch leftbar">
+            <form method="get">
+                <div class="col-md-3">
+                    <div class="category leftbar">
                     <h3 class="title">
-                        Thương hiệu
+                        Danh Mục Sản Phẩm
                     </h3>
                     <ul>
-                        <li>
-                            <a href="{{ $request->fullUrlWithQuery(['brand_id' => null]) }}" class="{{ ($request->brand_id == null) ? 'active' : '' }}">
-                                Tất cả
-                            </a>
-                        </li>
-                        @foreach ($brands as $brand)
+                        @foreach ($categories as $category)
                             <li>
-                                <a href="{{ $request->fullUrlWithQuery(['brand_id' => $brand->id]) }}" class="{{ ($request->brand_id == $brand->id) ? 'active' : '' }}">
-                                    {{ $brand->name }}
+                                <input type="radio" class="checkboxx" value="{{ $category->slug }}" {{ ($categorySlug == $category->slug) ? 'checked' : '' }} name="category_slug">
+                                <a class="name-filter">
+                                    {{ $category->name }}
                                 </a>
                             </li>
                         @endforeach
                     </ul>
-                </div>
-                <div class="clearfix">
-                </div>
-                <div class="price-filter leftbar" style="width:100%;">
-                    <h3 class="title">
-                        Khoảng Giá
-                    </h3>
-                    <div style="display: flex; width: 100%;">
-                        <input id="min-price" type="text" value="{{ $request->min_price ?? '' }}" class="form-control price-filter" placeholder="Giá từ" name="min_price">
-                        <span class="separate">-</span>
-                        <input id="max-price" type="text" value="{{ $request->max_price ?? '' }}" class="form-control price-filter" placeholder="Giá đến" name="max_price">
+                    </div>
+                    <div class="clearfix">
+                    </div>
+                    <div class="branch leftbar">
+                        <h3 class="title">
+                            Thương hiệu
+                        </h3>
+                        <ul>
+                            <li>
+                                <input type="radio" class="checkboxx" value="" name="brand_id" {{ ($request->brand_id == '') ? 'checked' : '' }}>
+                                <a class="name-filter">
+                                    Tất cả
+                                </a>
+                            </li>
+                            @foreach ($brands as $brand)
+                                <li>
+                                    <input type="radio" class="checkboxx" value="{{ $brand->id }}" {{ ($request->brand_id == $brand->id) ? 'checked' : '' }} name="brand_id">
+                                    <a class="name-filter">
+                                        {{ $brand->name }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div class="clearfix">
+                    </div>
+                    <div class="price-filter leftbar" style="width:100%;">
+                        <h3 class="title">
+                            Khoảng Giá
+                        </h3>
+                        <div style="display: flex; width: 100%;">
+                            <input id="min-price" type="text" value="{{ $request->min_price ?? '' }}" class="form-control price-filter" placeholder="Giá từ" name="min_price">
+                            <span class="separate">-</span>
+                            <input id="max-price" type="text" value="{{ $request->max_price ?? '' }}" class="form-control price-filter" placeholder="Giá đến" name="max_price">
+                        </div>
                     </div>
                     <div style="display: flex; width: 100%; margin-top: 10px; justify-content: center;">
-                        <button id="filter-price" url="{{ $request->fullUrl() }}">Áp Dụng</button>
+                        <button id="filter-price" url="{{ $request->fullUrl() }}">Lọc Sản Phẩm</button>
+                    </div>
+                    <div class="clearfix">
                     </div>
                 </div>
-                <div class="clearfix">
-                </div>
-            </div>
+            </form>
             <div class="col-md-9">
                 <div class="products-grid">
                     <div class="row">
@@ -115,5 +155,5 @@
         </div>
     </div>
 </div>
-@vite(['resources/client/js/show-product.js'])
+{{-- @vite(['resources/client/js/show-product.js']) --}}
 @endsection
