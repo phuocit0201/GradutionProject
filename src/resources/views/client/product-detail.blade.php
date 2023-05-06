@@ -225,7 +225,7 @@
                               <i class="fas fa-star-half-alt"></i>
                             @endif
                           </div>
-                          <h4 class="number-avg-star">{{ $avgRating }}</h4>
+                          <h4 class="number-avg-star">{{ number_format($avgRating, 1) }}</h4>
                         </div>
                         <div class="col-md-6">
                           <label class="title-avg-star review-lable">10 Đánh giá</label>

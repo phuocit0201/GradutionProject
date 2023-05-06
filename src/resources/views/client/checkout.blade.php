@@ -158,10 +158,10 @@
                           </div>
                           @foreach ($payments as $payment)
                           <div class="payment-method-select">
-                            <label for="momo" class="payment-method-select--check">
+                            <label for="{{ $payment->id }}" class="payment-method-select--check">
                               <div>
-                                <input type="radio" value="{{ $payment->id }}" name="payment_method">
-                                <span  class="label-momo">
+                                <input type="radio" value="{{ $payment->id }}" name="payment_method" id="{{ $payment->id }}">
+                                <span class="label-momo">
                                   {{ $payment->name }}
                                 </span>
                               </div>
