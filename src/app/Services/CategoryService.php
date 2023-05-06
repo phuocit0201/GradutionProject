@@ -38,7 +38,7 @@ class CategoryService
     public function index()
     {
         // Get list category
-        $list = $this->categoryRepository->all();
+        $list = Category::where('parent_id', '!=', 0)->get();
         $tableCrud = [
             'headers' => [
                 [
